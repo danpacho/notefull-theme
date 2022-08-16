@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@src/*": ["/src*"],
+            "@components/*": ["src/components/*"],
+            "@constants/*": ["src/constants/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@utils/*": ["src/utils/*"],
+            "@styles/*": ["src/styles/*"],
+            "@typing/*": ["src/types/*"],
+            "@lib/*": ["src/lib/*"],
+            "@atom/*": ["src/atom/*"]
+        },
+        "importHelpers": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true
+    }
+}
