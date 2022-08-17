@@ -40,7 +40,7 @@ Specific category pagination page
 
 ## `[category]/[pageNumber]/[postTitle].tsx`
 
-Specific category post page
+Specific post page
 
 > **https://DEPLOY_URL/{category}/{page-number}/{post-title}**
 
