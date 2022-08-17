@@ -1,19 +1,12 @@
-import getAuthorContactHref, {
-    ContactPlatformType,
-} from "@utils/function/contact/getContactHref"
+import getAuthorContactHref, { ContactPlatformType } from "@core/contact"
 
-export interface UserPalleteType {
-    primary1: string
-    primary2: string
-    primary3: string
-    primary4: string
-}
-const userPallete: UserPalleteType = {
+const userPallete = {
     primary1: "#F2E2CE",
     primary2: "#D9BD9C",
     primary3: "#A68A68",
     primary4: "#776350",
 }
+export type UserPalleteType = typeof userPallete
 
 export interface AuthorInfoType {
     name: string
@@ -42,7 +35,7 @@ const authorInfo: AuthorInfoType = {
     logoImageUrl: "/logo.png",
     bannerImageUrl: "/banner.png",
     faviconUrl: "/favicon.png",
-}
+} as const
 
 interface BlogInfoType {
     url: string
@@ -60,7 +53,7 @@ const blogInfo: BlogInfoType = {
         authorInfo.name
     }© All rights reserved ${new Date().getFullYear()}.`,
     language: "ko",
-}
+} as const
 
 const blogContentsDirectoryName = "blog" as const
 interface ConfigType extends BlogInfoType {
@@ -87,6 +80,6 @@ const config: ConfigType = {
         ...authorInfo,
     },
     ...blogInfo,
-}
+} as const
 
 export { config }
