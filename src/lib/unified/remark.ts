@@ -5,10 +5,7 @@ import { remark } from "remark"
 import { findMarkdownElment, MarkdownNodeType } from "."
 import { promisify } from "util"
 import imageSize from "image-size"
-import {
-    BlogErrorAdditionalInfo,
-    BlogFileExtractionError,
-} from "@utils/function/blog-error-handler"
+import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "@core/error"
 
 //* ------------------------------ remark automatic image size ------------------------------
 const sizeOf = promisify(imageSize)

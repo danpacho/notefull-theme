@@ -1,3 +1,5 @@
+import matter from "gray-matter"
+
 import { readdir, readFile } from "fs/promises"
 
 import { POST_DIRECTORY_NAME } from "@constants/blog.contents.directory"
@@ -5,12 +7,7 @@ import { MAC_OS_FILE_EXCEPTION } from "@constants/blog.file.exception"
 
 import { MDXPostMetaType } from "@typing/post/meta"
 
-import {
-    blogContentsDirectory,
-    removeFileFormat,
-} from "@utils/function/blog-contents-loader/util"
-
-import matter from "gray-matter"
+import { blogContentsDirectory, removeFileFormat } from "@core/loader/util"
 
 import { config } from "blog.config"
 
