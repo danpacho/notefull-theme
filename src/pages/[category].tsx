@@ -2,20 +2,20 @@ import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
 import { PageType } from "@typing/page/type"
-import { CategoryInfoType } from "@typing/category/info"
-import { PostMetaType } from "@typing/post/meta"
-import { SeriesInfoType } from "@typing/post/series"
+import { CategoryInfoType } from "@typing/category"
+import { MetaType } from "@typing/post/meta"
+import { SeriesType } from "@typing/post/series"
 
 import {
     getAllCategoryPath,
-    getLatestCategoryTagArray,
-    getSpecificCategoryInfo,
+    getSingleCategoryInfo,
 } from "@core/loader/category"
 
 import {
-    getCategorySeriesInfo,
-    getCategoryLatestPostMeta,
-    getCategoryAllPostMeta,
+    getAllSeries,
+    getSpecificCategoryMeta,
+    getSpecificCategoryLatestMeta,
+    getUniqueTagFromMeta,
 } from "@core/loader/post"
 
 import { config } from "blog.config"
@@ -30,40 +30,40 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
 }) => {
     const { category } = params as ParamQuery
 
-    const categoryPostMeta = await getCategoryAllPostMeta(category)
+    const specificCategoryMeta = await getSpecificCategoryMeta(category)
+    const latestCategoryPostMeta =
+        getSpecificCategoryLatestMeta(specificCategoryMeta)
+    const categorySeries = getAllSeries(specificCategoryMeta)
 
-    const specificCategoryInfo = await getSpecificCategoryInfo({
+    const latestCategoryTag = getUniqueTagFromMeta(latestCategoryPostMeta)
+
+    const categoryInfo = await getSingleCategoryInfo({
         category,
         useTXT: config.useTXT,
     })
-    const latestCategoryPostArray = getCategoryLatestPostMeta(categoryPostMeta)
-    const latestCategoryTagArray = getLatestCategoryTagArray(
-        latestCategoryPostArray
-    )
-    const categorySeriesInfoArray = getCategorySeriesInfo(categoryPostMeta)
 
     return {
         props: {
-            categoryPostArray: latestCategoryPostArray,
-            categoryTagArray: latestCategoryTagArray,
-            categorySeriesInfoArray,
-            ...specificCategoryInfo,
+            latestCategoryPostMeta,
+            latestCategoryTag,
+            categorySeries,
+            ...categoryInfo,
         },
     }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const categoryPaths = await getAllCategoryPath()
+    const allCategoryPath = await getAllCategoryPath()
     return {
-        paths: categoryPaths,
+        paths: allCategoryPath,
         fallback: false,
     }
 }
 
 interface CategoryProps extends CategoryInfoType {
-    categoryPostArray: PostMetaType[]
-    categoryTagArray: string[]
-    categorySeriesInfoArray: SeriesInfoType[]
+    latestCategoryPostMeta: MetaType[]
+    latestCategoryTag: string[]
+    categorySeries: SeriesType[]
 }
 
 function Category(categoryProps: CategoryProps) {

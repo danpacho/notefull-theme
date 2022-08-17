@@ -3,17 +3,17 @@ import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
 import { PageType } from "@typing/page/type"
-import { PostMetaType } from "@typing/post/meta"
-import { CategoryInfoType } from "@typing/category/info"
+import { MetaType } from "@typing/post/meta"
+import { CategoryInfoType } from "@typing/category"
 
 import {
-    getSpecificPostMeta,
-    getTagOfSpecificCategoryPage,
-    getPageNumberOfCategory,
-    getAllCategoryPaginationPath,
+    getCategoryPaginationPostMeta,
+    getTotalPageNumberOfCategory,
+    getAllPostPaginationPath,
+    getUniqueTagFromMeta,
 } from "@core/loader/post"
 
-import { getSpecificCategoryInfo } from "@core/loader/category"
+import { getSingleCategoryInfo } from "@core/loader/category"
 
 import { config } from "blog.config"
 
@@ -27,35 +27,33 @@ export const getStaticProps: GetStaticProps<CategoryPostPerPageProps> = async ({
 }) => {
     const { category, pageNumber } = params as ParamQuery
 
-    const specificCategoryInfo = await getSpecificCategoryInfo({
+    const categoryInfo = await getSingleCategoryInfo({
         category,
         useTXT: config.useTXT,
     })
 
-    const specificPageCategoryPostMeta = await getSpecificPostMeta({
+    const paginatedPostMeta = await getCategoryPaginationPostMeta({
         category,
         pageNumber: Number(pageNumber),
     })
 
-    const spcificPageCategoryPostTagArray = getTagOfSpecificCategoryPage(
-        specificPageCategoryPostMeta
-    )
+    const categoryTag = getUniqueTagFromMeta(paginatedPostMeta)
 
-    const endPageNumber = await getPageNumberOfCategory(category)
+    const endPageNumber = await getTotalPageNumberOfCategory(category)
 
     return {
         props: {
-            categoryPostArray: specificPageCategoryPostMeta,
-            categoryTagArray: spcificPageCategoryPostTagArray,
-            isLast: Number(pageNumber) === endPageNumber,
+            paginatedPostMeta,
+            paginatedTag: categoryTag,
             pageNumber,
-            ...specificCategoryInfo,
+            isLast: Number(pageNumber) === endPageNumber,
+            ...categoryInfo,
         },
     }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const specificPagePostContentPath = await getAllCategoryPaginationPath()
+    const specificPagePostContentPath = await getAllPostPaginationPath()
 
     return {
         paths: specificPagePostContentPath,
@@ -64,16 +62,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 interface CategoryPostPerPageProps extends CategoryInfoType {
-    categoryPostArray: PostMetaType[]
-    categoryTagArray: string[]
-    pageNumber: string
     category: string
+    pageNumber: string
+    paginatedTag: string[]
+    paginatedPostMeta: MetaType[]
     isLast: boolean
 }
 
-function CategoryPostPerPage(props: CategoryPostPerPageProps) {
+function PaginatedPostPage(props: CategoryPostPerPageProps) {
     return <></>
 }
-CategoryPostPerPage.displayName = "Category" as PageType
+PaginatedPostPage.displayName = "Category" as PageType
 
-export default CategoryPostPerPage
+export default PaginatedPostPage

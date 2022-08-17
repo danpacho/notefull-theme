@@ -45,7 +45,7 @@ interface ProfileProps {
 function Profile({ profileSource }: ProfileProps) {
     return (
         <>
-            <MDXBundler mdxSource={profileSource} />
+            <MDXBundler source={profileSource} />
             <a href="https://github.com/danpa725/only-core">
                 {config.copyright} Blog Core Battery 🔋
             </a>

@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next"
 
 import { PageType } from "@typing/page/type"
-import { CategoryInfoType } from "@typing/category/info"
+import { CategoryInfoType } from "@typing/category"
 
 import { getAllCategoryInfo } from "@core/loader/category"
 
@@ -13,15 +13,15 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async () => {
     })
     return {
         props: {
-            allCategory: allCategoryInfo,
+            allCategoryInfo,
         },
     }
 }
 
 interface CategoryProps {
-    allCategory: CategoryInfoType[]
+    allCategoryInfo: CategoryInfoType[]
 }
-function Category({ allCategory }: CategoryProps) {
+function Category({ allCategoryInfo }: CategoryProps) {
     return <></>
 }
 Category.displayName = "Category" as PageType

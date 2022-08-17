@@ -1,35 +1,35 @@
 import { GetStaticProps } from "next"
 import { NextSeo } from "next-seo"
 
-import { CategoryInfoType } from "@typing/category/info"
-import { PostMetaType } from "@typing/post/meta"
+import { CategoryInfoType } from "@typing/category"
+import { MetaType } from "@typing/post/meta"
 import { PageType } from "@typing/page/type"
 
-import { getLatestCategoryInfo } from "@core/loader/category"
+import { getMainCategoryInfo } from "@core/loader/category"
 import { getLatestPostMeta } from "@core/loader/post"
 
 import { config } from "blog.config"
 
 export const getStaticProps: GetStaticProps<MainPageProps> = async () => {
-    const latestPostMetaArray = await getLatestPostMeta()
-    const latestCategoryInfoArray = await getLatestCategoryInfo({
+    const latestPostMeta = await getLatestPostMeta()
+    const mainCategoryInfo = await getMainCategoryInfo({
         useTXT: config.useTXT,
     })
 
     return {
         props: {
-            latestPostArray: latestPostMetaArray,
-            categoryInfoArray: latestCategoryInfoArray,
+            latestPostMeta: latestPostMeta,
+            mainCategoryInfo: mainCategoryInfo,
         },
     }
 }
 
 interface MainPageProps {
-    latestPostArray: PostMetaType[]
-    categoryInfoArray: CategoryInfoType[]
+    latestPostMeta: MetaType[]
+    mainCategoryInfo: CategoryInfoType[]
 }
 
-function MainPage({ latestPostArray, categoryInfoArray }: MainPageProps) {
+function MainPage({ latestPostMeta, mainCategoryInfo }: MainPageProps) {
     return (
         <>
             <NextSeo
