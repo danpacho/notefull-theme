@@ -6,14 +6,12 @@ import { MDXComponents } from "mdx/types"
 import MDXAtoms from "@components/MDXAtoms"
 
 interface MDXBundlerProp {
-    mdxSource: string
+    source: string
 }
 
-function MDXBundler({ mdxSource }: MDXBundlerProp) {
-    const BundledComponent = useMemo(
-        () => getMDXComponent(mdxSource),
-        [mdxSource]
-    )
+function MDXBundler({ source }: MDXBundlerProp) {
+    const BundledComponent = useMemo(() => getMDXComponent(source), [source])
+
     return <BundledComponent components={MDXAtoms as MDXComponents} />
 }
 

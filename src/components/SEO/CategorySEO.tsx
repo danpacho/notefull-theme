@@ -1,6 +1,6 @@
 import { NextSeo } from "next-seo"
 
-import { CategoryInfoType } from "@typing/category/info"
+import { CategoryInfoType } from "@typing/category"
 
 import { config } from "blog.config"
 

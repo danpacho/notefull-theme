@@ -1,6 +1,6 @@
 import { ArticleJsonLd, NextSeo } from "next-seo"
 
-import { PostMetaType } from "@typing/post/meta"
+import { MetaType } from "@typing/post/meta"
 
 import { config } from "blog.config"
 
@@ -12,7 +12,7 @@ function PostSEO({
     preview,
     tags,
     title,
-}: PostMetaType) {
+}: MetaType) {
     const publishedTime = new Date(update).toISOString()
     const fullPostUrl = `${config.url}${postUrl}`
     return (
