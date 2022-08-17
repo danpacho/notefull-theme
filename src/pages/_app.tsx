@@ -1,4 +1,4 @@
-import "../styles/codeStyle.css"
+import "../styles/code.css"
 
 import { useEffect, useRef } from "react"
 
@@ -6,13 +6,9 @@ import type { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import Head from "next/head"
 
-import { Provider } from "jotai"
-
-import { GlobalStyle } from "@styles/global/GlobalStyle"
 import { PageType } from "@typing/page/type"
 
-import { DefaultSEO } from "@components/Next/SEO"
-import { Layout } from "@components/Next/Layout"
+import { DefaultSEO } from "@components/SEO"
 
 import { GoogleAnalytics } from "@lib/GoogleAnalytics"
 import { config } from "blog.config"
@@ -53,7 +49,7 @@ const useRestorePageScroll = () => {
 }
 
 function App({ Component, pageProps }: AppProps) {
-    const pageType = Component?.displayName as PageType
+    const pageType = Component?.displayName as PageType // page type
 
     useRestorePageScroll()
 
@@ -72,13 +68,7 @@ function App({ Component, pageProps }: AppProps) {
 
             <DefaultSEO />
 
-            <GlobalStyle />
-
-            <Provider>
-                <Layout pageType={pageType}>
-                    <Component {...pageProps} />
-                </Layout>
-            </Provider>
+            <Component {...pageProps} />
         </>
     )
 }

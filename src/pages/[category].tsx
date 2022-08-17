@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
@@ -11,18 +10,16 @@ import {
     getAllCategoryPath,
     getLatestCategoryTagArray,
     getSpecificCategoryInfo,
-} from "@utils/function/blog-contents-loader/contents/getCategory"
+} from "@core/loader/category"
+
 import {
     getCategorySeriesInfo,
     getCategoryLatestPostMeta,
     getCategoryAllPostMeta,
-} from "@utils/function/blog-contents-loader/contents/getCategoryPost"
-
-import { NextIcon, PrevIcon } from "@components/UI/Atoms/Icons"
-import { Button } from "@components/UI/Atoms/Button"
-import { CategoryCommonLayout } from "@components/Blog/Category"
+} from "@core/loader/post"
 
 import { config } from "blog.config"
+import { CategorySEO } from "@components/SEO"
 
 interface ParamQuery extends ParsedUrlQuery {
     category: string
@@ -71,27 +68,9 @@ interface CategoryProps extends CategoryInfoType {
 
 function Category(categoryProps: CategoryProps) {
     return (
-        <CategoryCommonLayout
-            {...categoryProps}
-            prevPageComponent={
-                <Link href={"/"} passHref>
-                    <Button ariaLabel="back to home">
-                        <PrevIcon width="1.15rem" height="1.15rem" />
-                        <p>🏠 Back</p>
-                    </Button>
-                </Link>
-            }
-            nextPageComponent={
-                <Link href={`${categoryProps.categoryUrl}/1`} passHref>
-                    <Button
-                        ariaLabel={`read all post about ${categoryProps.category}`}
-                    >
-                        <p>All post</p>
-                        <NextIcon width="1.15rem" height="1.15rem" />
-                    </Button>
-                </Link>
-            }
-        />
+        <>
+            <CategorySEO {...categoryProps} />
+        </>
     )
 }
 Category.displayName = "Category" as PageType

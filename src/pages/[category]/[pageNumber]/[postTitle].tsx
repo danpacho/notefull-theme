@@ -1,35 +1,20 @@
-import styled from "styled-components"
-import media from "@styles/utils/media"
-
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
-import { IsLight } from "@typing/theme"
 import { PageType } from "@typing/page/type"
 import { SeriesInfoType } from "@typing/post/series"
 import { SpecificPostContentType } from "@typing/post/content"
-
-import { useSetFocusingPageColor, useWindowWidth } from "@hooks/index"
 
 import {
     getSpecificCategoryPost,
     getAllCategoryPostPath,
     getSpecificCategorySeriesInfo,
     getCategoryAllPostMeta,
-} from "@utils/function/blog-contents-loader/contents/getCategoryPost"
+} from "@core/loader/post"
 
-import { PostSEO } from "@components/Next/SEO"
-import {
-    PostController,
-    PostFooter,
-    PostHeader,
-    PostTableOfContentDesktop,
-    PostTableOfContentMobile,
-} from "@components/Blog/Post"
-import KatexStyleLoader from "@components/Blog/Post/KatexStyleLoader"
+import { PostSEO } from "@components/SEO"
 import MDXBundler from "@components/MDXBundler"
-
-import { useStore, $ } from "@atom/index"
+import KatexStyleLoader from "@components/KatexStyleLoader"
 
 import { config } from "blog.config"
 
@@ -73,78 +58,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
         fallback: false,
     }
 }
-
-const PostContainer = styled.div<IsLight>`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-
-    width: 70%;
-
-    background-color: ${({ theme, isLight }) =>
-        isLight
-            ? `${theme.containerBackgroundColor}${theme.opacity70}`
-            : `${theme.containerBackgroundColor}${theme.opacity90}`};
-
-    box-shadow: ${(p) =>
-        p.isLight ? p.theme.shadowSm : `0px 0px 0.1rem 0px ${p.theme.gray7}`};
-
-    border-radius: ${(p) => p.theme.bsm};
-
-    padding: 0.25rem 0.5rem;
-
-    margin-bottom: 1.5rem;
-
-    ${media.mediumTablet} {
-        width: 85%;
-
-        padding: 0;
-
-        justify-content: center;
-    }
-
-    ${media.widePhone} {
-        width: 100%;
-
-        background-color: transparent;
-
-        box-shadow: none;
-    }
-`
-
-const PostContentContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-direction: column;
-
-    width: 65%;
-    min-width: 65%;
-    min-height: max-content;
-
-    margin: 2.5rem 2rem;
-
-    ${media.wideTablet} {
-        max-width: 55%;
-    }
-
-    ${media.mediumTablet} {
-        width: 85%;
-        min-width: unset;
-        max-width: unset;
-    }
-
-    ${media.widePhone} {
-        width: 100%;
-
-        flex: none;
-
-        margin-top: 1.5rem;
-        margin-bottom: 3.5rem;
-    }
-`
-
 interface PostSeriesInfo {
     postSeriesInfo: SeriesInfoType | null
 }
@@ -156,36 +69,11 @@ function Post({
     postSeriesInfo,
     toc,
 }: PostProps) {
-    useSetFocusingPageColor(postMeta.color)
-
-    const { IsLight } = useStore($("isLight"))
-    const { mediaWidth } = useWindowWidth()
-    const tocMobileRender =
-        mediaWidth === "widePhone" ||
-        mediaWidth === "mediumPhone" ||
-        mediaWidth === "mediumTablet"
     return (
         <>
-            <PostContainer isLight={IsLight}>
-                <PostSEO {...postMeta} />
+            <PostSEO {...postMeta} />
 
-                <PostContentContainer>
-                    <PostHeader {...postMeta} postSeriesInfo={postSeriesInfo} />
-                    {config.useMobileTOC && tocMobileRender && (
-                        <PostTableOfContentMobile toc={toc} />
-                    )}
-                    <MDXBundler mdxSource={postSource} />
-                    <PostFooter {...postMeta} />
-                </PostContentContainer>
-
-                {!tocMobileRender && <PostTableOfContentDesktop toc={toc} />}
-
-                <PostController
-                    categoryURL={`/${postMeta.category}`}
-                    nextPost={postController.nextPost}
-                    prevPost={postController.prevPost}
-                />
-            </PostContainer>
+            <MDXBundler mdxSource={postSource} />
 
             {config.useKatex && <KatexStyleLoader />}
         </>
