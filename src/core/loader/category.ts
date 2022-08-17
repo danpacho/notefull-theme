@@ -1,14 +1,17 @@
 import { readdir, readFile } from "fs/promises"
 
-import { CategoryInfoType } from "@typing/category/info"
-import { PostMetaType } from "@typing/post/meta"
+import { CategoryInfoType } from "@typing/category"
 
-import { MAC_OS_FILE_EXCEPTION } from "@constants/index"
 import {
+    DESCRIPTION_FILE_NAME,
+    FILE_FORMAT,
+    MAC_OS_FILE_EXCEPTION,
+} from "@constants/index"
+
+import {
+    blogContentsDir,
     addPathNotation,
-    blogContentsDirectory,
     getValidateColor,
-    memo,
 } from "@core/loader/util"
 
 import {
@@ -19,12 +22,10 @@ import {
 
 import { config } from "blog.config"
 
-/**
- * category name = category file name, extract all category file names
- */
+//* ----------------------------- 🔥 extract categoru name 🔥 -----------------------------
 const getAllCategoryName = async () => {
     try {
-        return (await readdir(blogContentsDirectory, "utf-8"))
+        return (await readdir(blogContentsDir, "utf-8"))
             .filter((category) => category !== MAC_OS_FILE_EXCEPTION)
             .map((category) => category.trim())
     } catch (err) {
@@ -33,7 +34,7 @@ const getAllCategoryName = async () => {
             errorNameDescription:
                 "blog-contents directory name 📝 incorrection",
             message: `Check ${config.blogContentsDirectoryName} and "${config.blogContentsDirectoryName}/contens" file name 🔎`,
-            customeErrorMessage: `directory structure should match with following path ⬇️\n\n      ${blogContentsDirectory}\n\n      🔒 Check Post Directory Structure:\n 
+            customeErrorMessage: `directory structure should match with following path ⬇️\n\n      ${blogContentsDir}\n\n      🔒 Check Post Directory Structure:\n 
             📦"${config.blogContentsDirectoryName}"
             ┃
             ┗ 📂"content"                                      blog content
@@ -51,31 +52,25 @@ const getAllCategoryName = async () => {
         })
     }
 }
-
+//* ----------------------------- 🔥 path, getStaticPath 🔥 -----------------------------
 /**
  * add URL notaition to category names
  * @returns `/{category}`
  */
-const getAllCategoryPath = memo(config.useMemo, async (): Promise<string[]> => {
-    const categoryPathArray: string[] = await (
-        await await getAllCategoryName()
-    ).map((path) => addPathNotation(path))
+const getAllCategoryPath = async (): Promise<string[]> => {
+    const categoryPathArray: string[] = (await getAllCategoryName()).map(
+        (path) => addPathNotation(path)
+    )
     return categoryPathArray
-})
-
-const DESCRIPTION_FILE_NAME = "description" as const
-const FILE_FORMAT = {
-    TXT: ".txt",
-    JSON: ".json",
-} as const
-
+}
+//* ----------------------------- 🔥 category info - TXT 🔥 -----------------------------
 /**
  * Read category `description.txt` files
  */
-const readCategoryTXTFileArray = async (pureCategoryArray: string[]) => {
-    const descriptionArray = await Promise.all(
+const readAllCategoryTXTFile = async (pureCategoryArray: string[]) => {
+    const allCategoryTXTFile = await Promise.all(
         pureCategoryArray.map(async (category) => {
-            const descriptionFilePath = `${blogContentsDirectory}/${category}/${DESCRIPTION_FILE_NAME}${FILE_FORMAT.TXT}`
+            const descriptionFilePath = `${blogContentsDir}/${category}/${DESCRIPTION_FILE_NAME}${FILE_FORMAT.TXT}`
             try {
                 const description = await readFile(descriptionFilePath, "utf-8")
                 if (!description)
@@ -99,14 +94,14 @@ const readCategoryTXTFileArray = async (pureCategoryArray: string[]) => {
         })
     )
 
-    return descriptionArray
+    return allCategoryTXTFile
 }
 
 const SPLIT_COLOR_REGEX = /color:/
 const SPLIT_EMOJI_REGEX = /emoji:/
 const EMOJI_REGEX = /\p{Emoji}/u
 
-interface ExtractCategoryInfo {
+interface ExtractedCategoryInfoType {
     description: string
     color: string
     emoji: string
@@ -120,9 +115,9 @@ const NOT_FOUND = "NOT_FOUND" as const
  * @returns `emoji`: Only one emoji
  * @param categoryTXTFile `description.txt` file
  */
-const extractCategoryDescriptionAndColorAndEmoji = (
+const extractCategoryInfo = (
     categoryTXTFile: string
-): ExtractCategoryInfo => {
+): ExtractedCategoryInfoType => {
     const HEX_REGEX = /^#[a-z|A-Z|0-9]{5}[a-z|A-Z|0-9]{1}$/g
     const isColor = (color: string) => HEX_REGEX.test(color)
     const isEmoji = (text: string) => EMOJI_REGEX.test(text)
@@ -137,7 +132,7 @@ const extractCategoryDescriptionAndColorAndEmoji = (
 
     const extractedStringArray = firstSplit.concat(secondSplit)
 
-    const categoryInfo = extractedStringArray.reduce<ExtractCategoryInfo>(
+    const categoryInfo = extractedStringArray.reduce<ExtractedCategoryInfoType>(
         (accCategoryInfo, currValue) => {
             if (isColor(currValue))
                 return {
@@ -225,14 +220,13 @@ const extractCategoryDescriptionAndColorAndEmoji = (
  */
 const getAllCategoryInfoByTXT = async (): Promise<CategoryInfoType[]> => {
     const categoryArray = await getAllCategoryName()
-    const categoryTXTFileArray = await readCategoryTXTFileArray(categoryArray)
+    const categoryTXTFileArray = await readAllCategoryTXTFile(categoryArray)
     const allCategoryInfo = new Array(categoryArray.length)
         .fill(0)
         .map((_, idx) => {
-            const { description, color, emoji } =
-                extractCategoryDescriptionAndColorAndEmoji(
-                    categoryTXTFileArray[idx]
-                )
+            const { description, color, emoji } = extractCategoryInfo(
+                categoryTXTFileArray[idx]
+            )
 
             return {
                 category: categoryArray[idx],
@@ -245,17 +239,17 @@ const getAllCategoryInfoByTXT = async (): Promise<CategoryInfoType[]> => {
 
     return allCategoryInfo
 }
-
+//* ----------------------------- 🔥 category info - JSON 🔥 -----------------------------
 const readAllCategoryJSONFile = async (
     allCategoryName: string[]
 ): Promise<CategoryInfoType[]> => {
     const categoryInfoArray = await Promise.all(
         allCategoryName.map(async (category) => {
-            const descriptionFilePath = `${blogContentsDirectory}/${category}/${DESCRIPTION_FILE_NAME}${FILE_FORMAT.JSON}`
+            const descriptionFilePath = `${blogContentsDir}/${category}/${DESCRIPTION_FILE_NAME}${FILE_FORMAT.JSON}`
             try {
                 const { description, color, emoji } = JSON.parse(
                     await readFile(descriptionFilePath, "utf-8")
-                ) as ExtractCategoryInfo
+                ) as ExtractedCategoryInfoType
 
                 const isDescriptionError =
                     description === undefined || description === ""
@@ -320,44 +314,28 @@ const readAllCategoryJSONFile = async (
 const getAllCategoryInfoByJSON = async () =>
     await readAllCategoryJSONFile(await getAllCategoryName())
 
-const LATEST_CATEGORY_NUMBER = 3
-/**
- * @param useTXT true ? `description.txt` : `description.json`, default false
- * @returns `LATEST_CATEGORY_NUMBER(=3)` category
- */
-const getLatestCategoryInfo = memo(
-    config.useMemo,
-    async ({ useTXT }: { useTXT: boolean }) =>
-        await (useTXT
-            ? await getAllCategoryInfoByTXT()
-            : await getAllCategoryInfoByJSON()
-        )
-            .sort()
-            .slice(0, LATEST_CATEGORY_NUMBER)
-)
-
-/**
- * tag list of latest category's posts
- */
-const getLatestCategoryTagArray = memo(
-    config.useMemo,
-    (latestCategoryPostMetaArray: PostMetaType[]) => {
-        const deduplicatedCategoryTagArray = [
-            ...new Set(latestCategoryPostMetaArray.flatMap(({ tags }) => tags)),
-        ].sort()
-
-        return deduplicatedCategoryTagArray
-    }
-)
+//* ----------------------------- 🔥 category - main 🔥 -----------------------------
 /**
  * @param useTXT if `true` extract description from `description.txt`
  */
-const getAllCategoryInfo = async ({ useTXT }: { useTXT: boolean }) => {
+const getAllCategoryInfo = async ({ useTXT = false }: { useTXT: boolean }) => {
     const allCategoryInfo = useTXT
         ? await getAllCategoryInfoByTXT()
         : await getAllCategoryInfoByJSON()
     return allCategoryInfo
 }
+
+/**
+ * set number of main category in `blog.config` at `config.numberOfMainPageCategory`
+ */
+const getMainCategoryInfo = async ({ useTXT }: { useTXT: boolean }) =>
+    (
+        await getAllCategoryInfo({
+            useTXT,
+        })
+    )
+        .sort()
+        .slice(0, config.numberOfMainPageCategory)
 
 /**
  * @returns `category`: category name
@@ -366,36 +344,33 @@ const getAllCategoryInfo = async ({ useTXT }: { useTXT: boolean }) => {
  * @returns `color`: category color
  * @returns `emoji`: category emoji
  */
-const getSpecificCategoryInfo = memo(
-    config.useMemo,
-    async ({
-        category,
+const getSingleCategoryInfo = async ({
+    category,
+    useTXT = false,
+}: {
+    category: string
+    useTXT: boolean
+}): Promise<CategoryInfoType> => {
+    const allCategoryInfo = await getAllCategoryInfo({
         useTXT,
-    }: {
-        category: string
-        useTXT: boolean
-    }): Promise<CategoryInfoType> => {
-        const allCategoryInfo = await getAllCategoryInfo({
-            useTXT,
-        })
-        const specificCategoryInfo = allCategoryInfo.find(
-            ({ category: categoryName }) => categoryName === category
-        )!
+    })
+    const specificCategoryInfo = allCategoryInfo.find(
+        ({ category: categoryName }) => categoryName === category
+    )!
 
-        return {
-            ...specificCategoryInfo,
-        }
+    return {
+        ...specificCategoryInfo,
     }
-)
+}
 
+//* ----------------------------- 🔥 export 🔥 -----------------------------
 export {
-    //* path | name
-    getAllCategoryPath,
+    //* name
     getAllCategoryName,
     //* info
     getAllCategoryInfo,
-    getLatestCategoryInfo,
-    getSpecificCategoryInfo,
-    //* tag
-    getLatestCategoryTagArray,
+    getMainCategoryInfo,
+    getSingleCategoryInfo,
+    //* getStaticPath
+    getAllCategoryPath,
 }
