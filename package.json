@@ -27,7 +27,6 @@
     "dependencies": {
         "@builder.io/partytown": "^0.6.4",
         "esbuild": "^0.14.54",
-        "fast-memoize": "^2.5.2",
         "gray-matter": "^4.0.3",
         "image-size": "^1.0.2",
         "mdx-bundler": "^9.0.1",
