@@ -64,6 +64,7 @@ interface ConfigType extends BlogInfoType {
     author: AuthorInfoType
     postPerCategoryPage: number
     numberOfLatestPost: number
+    numberOfMainPageCategory: number
 }
 const config: ConfigType = {
     useTXT: false,
@@ -72,6 +73,7 @@ const config: ConfigType = {
     blogContentsDirectoryName,
     postPerCategoryPage: 4,
     numberOfLatestPost: 5,
+    numberOfMainPageCategory: 5,
     author: {
         ...authorInfo,
     },
