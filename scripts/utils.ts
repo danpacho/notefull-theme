@@ -2,12 +2,11 @@ import matter from "gray-matter"
 
 import { readdir, readFile } from "fs/promises"
 
-import { POST_DIRECTORY_NAME } from "@constants/blog.contents.directory"
-import { MAC_OS_FILE_EXCEPTION } from "@constants/blog.file.exception"
+import { POST_FILE_NAME, MAC_OS_FILE_EXCEPTION } from "@constants/index"
 
-import { MDXPostMetaType } from "@typing/post/meta"
+import { MDXMetaType } from "@typing/post/meta"
 
-import { blogContentsDirectory, removeFileFormat } from "@core/loader/util"
+import { blogContentsDir, removeFileFormat } from "@core/loader/util"
 
 import { config } from "blog.config"
 
@@ -23,7 +22,7 @@ const sortByDate = (currDate: string, nextDate: string) => {
 const replaceSpaceToEncode = (text: string) => text.replace(/ /g, "%20")
 
 const getAllCategoryPath = async () =>
-    (await readdir(blogContentsDirectory, "utf-8"))
+    (await readdir(blogContentsDir, "utf-8"))
         .filter((category) => category !== MAC_OS_FILE_EXCEPTION)
         .map((category) => `/${category}`)
 
@@ -40,9 +39,9 @@ const getPostUrl = (postPaginationUrl: string, postFileName: string) =>
 const extractAllCategoryPostFileName = async (categoryNameArray: string[]) => {
     const dirPostInfo = await Promise.all(
         categoryNameArray.map(async (categoryName) => {
-            const categoryPostFilePath = `${blogContentsDirectory}/${categoryName}/${POST_DIRECTORY_NAME}`
+            const postDir = `${blogContentsDir}/${categoryName}/${POST_FILE_NAME}`
             const categoryPostFileNameArray = (
-                await readdir(categoryPostFilePath, "utf-8")
+                await readdir(postDir, "utf-8")
             ).filter((postFileName) => postFileName !== MAC_OS_FILE_EXCEPTION)
             return {
                 category: categoryName,
@@ -69,17 +68,17 @@ export interface TempMetaType {
     paginationUrl: string
     postUrl: string
 }
-const extractPostMeta = async ({
+const extractMeta = async ({
     category,
     postFileName,
 }: {
     category: string
     postFileName: string
 }): Promise<TempMetaType | undefined> => {
-    const postUrl = `${blogContentsDirectory}/${category}/${POST_DIRECTORY_NAME}/${postFileName}`
+    const postUrl = `${blogContentsDir}/${category}/${POST_FILE_NAME}/${postFileName}`
     const postSource = await readFile(postUrl, "utf-8")
 
-    const extractedMeta = matter(postSource).data as MDXPostMetaType
+    const extractedMeta = matter(postSource).data as MDXMetaType
     if (Boolean(extractedMeta.postpone)) return
     return {
         update: extractedMeta.update,
@@ -94,7 +93,7 @@ const extractPostMeta = async ({
     }
 }
 
-const extractAllPostMeta = async (
+const extractAllMeta = async (
     categoryPostFileNameArray: CategoryPostFileNameType[]
 ): Promise<TempMetaType[]> =>
     (
@@ -103,7 +102,7 @@ const extractAllPostMeta = async (
                 ({ category, categoryPostFileNameArray }) =>
                     categoryPostFileNameArray.reduce<Promise<TempMetaType[]>>(
                         async (acc, postFileName) => {
-                            const postMeta = await extractPostMeta({
+                            const postMeta = await extractMeta({
                                 category,
                                 postFileName,
                             })
@@ -132,7 +131,7 @@ const extractAllPostMeta = async (
         )
         .flat()
 
-const getAllPostMeta = async (category: string[]) =>
-    await extractAllPostMeta(await extractAllCategoryPostFileName(category))
+const getAllMeta = async (category: string[]) =>
+    await extractAllMeta(await extractAllCategoryPostFileName(category))
 
-export { getAllPostMeta, getAllCategoryPath, replaceSpaceToEncode }
+export { getAllMeta, getAllCategoryPath, replaceSpaceToEncode }

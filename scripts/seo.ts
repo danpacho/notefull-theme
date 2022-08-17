@@ -1,13 +1,13 @@
 import { generateRSS } from "./generateRSS"
 import { generateSitemap } from "./generateSitemap"
-import { getAllCategoryPath, getAllPostMeta } from "./utils"
+import { getAllCategoryPath, getAllMeta } from "./utils"
 
 async function seo() {
-    const categoryNameArray = await getAllCategoryPath()
-    const allPostMeta = await getAllPostMeta(categoryNameArray)
+    const allCategoryPath = await getAllCategoryPath()
+    const allMeta = await getAllMeta(allCategoryPath)
 
-    await generateSitemap(categoryNameArray, allPostMeta)
-    await generateRSS(allPostMeta)
+    await generateSitemap(allCategoryPath, allMeta)
+    await generateRSS(allMeta)
 }
 
 seo()

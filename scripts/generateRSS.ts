@@ -22,7 +22,7 @@ const generateRSSItem = ({
     </item>
     `
 
-async function generateRSS(posts: TempMetaType[], rssFileName = "rss.xml") {
+async function generateRSS(meta: TempMetaType[], rssFileName = "rss.xml") {
     const rss = `
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -30,14 +30,14 @@ async function generateRSS(posts: TempMetaType[], rssFileName = "rss.xml") {
     <link>${config.url}</link>
     <description>${config.subtitle}</description>
     <language>${config.language}</language>
-    <lastBuildDate>${new Date(posts[0].update).toUTCString()}</lastBuildDate>
+    <lastBuildDate>${new Date(meta[0].update).toUTCString()}</lastBuildDate>
     <webMaster>${email} (${config.author.name})</webMaster>
     <managingEditor>${email} (${config.author.name})</managingEditor>
     <atom:link href="${
         config.url
     }/${rssFileName}" rel="self" type="application/rss+xml"/>
 
-    ${posts.map(generateRSSItem).join("")}
+    ${meta.map(generateRSSItem).join("")}
   </channel>
 </rss>
 `

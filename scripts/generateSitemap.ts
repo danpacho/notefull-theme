@@ -9,7 +9,7 @@ const URL_PRIORITY = {
 }
 
 async function generateSitemap(
-    categoryNameArray: string[],
+    allCategoryPath: string[],
     allPostMeta: TempMetaType[]
 ) {
     const addSiteUrlNotation = (relativePath: string) =>
@@ -41,26 +41,28 @@ async function generateSitemap(
                 : ""
         }</url>`
 
-    const categoryPathArray = categoryNameArray
+    const modifiedAllCategoryPath = allCategoryPath
         .map(addSiteUrlNotation)
         .map(replaceSpaceToEncode)
-    const categoryUrlSetArray = categoryPathArray.map((categoryPath) =>
+
+    const allCategoryUrlSet = modifiedAllCategoryPath.map((categoryPath) =>
         generateUrlSet(categoryPath, {
             changefreq: "monthly",
             priority: URL_PRIORITY.category,
         })
     )
-    const categoryPaginationPathArray = allPostMeta
+    const allCategoryPaginationPath = allPostMeta
         .map(({ paginationUrl }) => paginationUrl)
         .map(addSiteUrlNotation)
-    const categoryPaginationUrlSetArray = categoryPaginationPathArray.map(
+
+    const allCategoryPaginationUrlSet = allCategoryPaginationPath.map(
         (postPath) =>
             generateUrlSet(postPath, {
                 changefreq: "daily",
                 priority: URL_PRIORITY.categoryPagination,
             })
     )
-    const postUrlSetArray = allPostMeta.map(({ postUrl, update }) =>
+    const allPostUrlSet = allPostMeta.map(({ postUrl, update }) =>
         generateUrlSet(addSiteUrlNotation(postUrl), {
             changefreq: "daily",
             priority: URL_PRIORITY.post,
@@ -80,9 +82,9 @@ xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 <url><loc>${config.url}/category</loc></url>
 <url><loc>${config.url}/profile</loc></url>
 
-${categoryUrlSetArray.join("\n")}
-${categoryPaginationUrlSetArray.join("\n")}
-${postUrlSetArray.join("\n")}
+${allCategoryUrlSet.join("\n")}
+${allCategoryPaginationUrlSet.join("\n")}
+${allPostUrlSet.join("\n")}
 </urlset>`
 
     await writeFile("public/sitemap.xml", sitemap, {
