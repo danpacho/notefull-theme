@@ -1,7 +1,7 @@
 /**
  * meta of pure mdx string
  */
-export interface MDXPostMetaType {
+export interface MDXMetaType {
     title: string
     preview: string
     author: string
@@ -13,14 +13,14 @@ export interface MDXPostMetaType {
     series?: string
 }
 
-export interface PostSeriesMetaType {
+export interface SeriesMetaType {
     seriesTitle: string
     order: number
 }
 /**
- * total post meta property with {@link MDXPostMetaType} and {@link PostSeriesMetaType}
+ * total post meta property with {@link MDXMetaType} and {@link SeriesMetaType}
  */
-export interface PostMetaType {
+export interface MetaType {
     title: string
     preview: string
     author: string
@@ -30,8 +30,8 @@ export interface PostMetaType {
     category: string
     postUrl: string
     postFileName: string
+    postOrder: number
     postpone: boolean
     reference: string[] | null
-    postOrder: number
-    series: PostSeriesMetaType | null
+    series: SeriesMetaType | null
 }

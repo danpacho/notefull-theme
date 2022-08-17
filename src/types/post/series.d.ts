@@ -1,14 +1,14 @@
-import { PostSeriesMetaType } from "./meta"
+import { SeriesMetaType } from "./meta"
 
-export interface SeriesInfoObjectType extends PostSeriesMetaType {
+export interface SeriesInfoType extends SeriesMetaType {
     postTitle: string
     color: string
     url: string
-    prevUrl: string | null
-    nextUrl: string | null
+    prevLink: string | null
+    nextLink: string | null
 }
 
-export interface SeriesInfoType {
+export interface SeriesType {
     seriesTitle: string
-    seriesInfo: SeriesInfoObjectType[]
+    seriesInfo: SeriesInfoType[]
 }
