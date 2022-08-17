@@ -1,9 +1,9 @@
 import { GetStaticProps } from "next"
 import { NextSeo } from "next-seo"
 
-import { CategoryInfoType } from "@typing/category"
+import { PageType } from "@typing/page"
 import { MetaType } from "@typing/post/meta"
-import { PageType } from "@typing/page/type"
+import { CategoryInfoType } from "@typing/category"
 
 import { getMainCategoryInfo } from "@core/loader/category"
 import { getLatestPostMeta } from "@core/loader/post"

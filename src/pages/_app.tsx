@@ -6,7 +6,7 @@ import type { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import Head from "next/head"
 
-import { PageType } from "@typing/page/type"
+import { PageType } from "@typing/page"
 
 import { DefaultSEO } from "@components/SEO"
 

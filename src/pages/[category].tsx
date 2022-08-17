@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
-import { PageType } from "@typing/page/type"
+import { PageType } from "@typing/page"
 import { CategoryInfoType } from "@typing/category"
 import { MetaType } from "@typing/post/meta"
 import { SeriesType } from "@typing/post/series"

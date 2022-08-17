@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next"
 
-import { PageType } from "@typing/page/type"
+import { PageType } from "@typing/page"
 
 import { getProfileSource } from "@core/loader/profile"
 

@@ -1,4 +1,4 @@
-import { PageType } from "@typing/page/type"
+import { PageType } from "@typing/page"
 
 function ErrorPage() {
     return <div>500</div>
