@@ -9,6 +9,17 @@ interface BlogErrorConstructorProps {
 
 class BlogError extends Error {
     protected errorType: ErrorType
+    protected messageDivider =
+        "\n\n----------------------------------------------------------------------------------------\n\n"
+    protected messageTab = "      "
+
+    protected makeErrorMessage = (
+        mainErrorMessage: string,
+        customeErrorMessage?: string
+    ) =>
+        !customeErrorMessage
+            ? `${this.messageDivider}${this.messageTab}❎ Error Occured, ${mainErrorMessage}${this.messageDivider}`
+            : `${this.messageDivider}${this.messageTab}❎ Error Occured, ${mainErrorMessage}\n${this.messageTab}❎ Check ${customeErrorMessage}${this.messageDivider}`
 
     constructor({
         errorType,
@@ -21,18 +32,6 @@ class BlogError extends Error {
         this.name = `${this.messageDivider}[ 🛠 ERROR_OCCURED: ${this.errorType} -> ${errorNameDescription} 🛠 ]`
         this.message = this.makeErrorMessage(message, customeErrorMessage)
     }
-
-    protected messageDivider =
-        "\n\n----------------------------------------------------------------------------------------\n\n"
-    protected messageTab = "      "
-
-    protected makeErrorMessage = (
-        mainErrorMessage: string,
-        customeErrorMessage?: string
-    ) =>
-        !customeErrorMessage
-            ? `${this.messageDivider}${this.messageTab}❎ Error Occured, ${mainErrorMessage}${this.messageDivider}`
-            : `${this.messageDivider}${this.messageTab}❎ Error Occured, ${mainErrorMessage}\n${this.messageTab}❎ Check ${customeErrorMessage}${this.messageDivider}`
 }
 
 type PropertyType =

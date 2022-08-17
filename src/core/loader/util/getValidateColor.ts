@@ -1,4 +1,4 @@
-import { BlogPropertyError } from "@utils/function/blog-error-handler/blogError"
+import { BlogPropertyError } from "@core/error"
 
 const isColorHEX = (testColor: string) => {
     const HEX_REGEX = /^#[a-z|A-Z|0-9]{5}[a-z|A-Z|0-9]{1}$/g

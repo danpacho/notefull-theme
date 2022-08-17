@@ -25,15 +25,15 @@ import {
     getValidateColor,
     removeFileFormat,
     memo,
-} from "@utils/function/blog-contents-loader/util"
+} from "@core/loader/util"
 
-import { getAllCategoryName } from "@utils/function/blog-contents-loader/contents/getCategory"
+import { getAllCategoryName } from "@core/loader/category"
 
 import {
     BlogErrorAdditionalInfo,
     BlogFileExtractionError,
     BlogPropertyError,
-} from "@utils/function/blog-error-handler"
+} from "@core/error"
 
 import matter from "gray-matter"
 
@@ -55,9 +55,9 @@ import { config } from "blog.config"
 
 //* ----------------------------- 🔥 utils 🔥 -----------------------------
 /**
+ * sort dates in descending order
  * @param currDate `YYYY/MM/DD`
  * @param nextDate `YYYY/MM/DD`
- * @returns sort ascending
  */
 const sortByDate = (currDate: string, nextDate: string) => {
     const nextDateNumber = Number(nextDate.replace(/\//g, ""))
@@ -91,7 +91,10 @@ const getTagArray = (tags: string, postFileName: string): string[] => {
 
 //* ----------------------------- 🔥 serializer 🔥 -----------------------------
 
-const updatePostUrlForPagination = (postMeta: PostMetaType, order: number) => ({
+const updatePostUrlForPagination = (
+    postMeta: PostMetaType,
+    order: number
+): PostMetaType => ({
     ...postMeta,
     postUrl: `/${postMeta.category}/${Math.floor(
         order / config.postPerCategoryPage + 1
@@ -102,78 +105,6 @@ const updatePostOrder = (
     postMeta: PostMetaType,
     order: number
 ): PostMetaType => ({ ...postMeta, postOrder: order })
-
-/**
- * serialize by date
- * serialize by pagination
- * check `config.postPerCategoryPage` option for pagination
- * @param categoryPostFileNameArray `extractCategoryPostFileArray()`
- */
-const serializeAllPost = async (
-    categoryPostFileNameArray: CategoryPostFileNameType[]
-): Promise<PostType[]> => {
-    const serializeAllPost: PostType[] = await Promise.all(
-        categoryPostFileNameArray.map(
-            async ({ category, categoryPostFileNameArray }) => {
-                const extractedAllPost = (
-                    await categoryPostFileNameArray.reduce<
-                        Promise<PostContentType[]>
-                    >(async (acc, postFileName) => {
-                        const postPath = `${blogContentsDirectory}/${category}/${POST_DIRECTORY_NAME}/${postFileName}`
-
-                        try {
-                            const { bundledSource, meta, toc } =
-                                await getPostInfo({
-                                    category,
-                                    path: postPath,
-                                    fileName: postFileName,
-                                })
-                            if (meta)
-                                return [
-                                    ...(await acc),
-                                    {
-                                        postMeta: meta,
-                                        postSource: bundledSource,
-                                        toc,
-                                    },
-                                ]
-
-                            return await acc
-                        } catch (err) {
-                            throw new BlogErrorAdditionalInfo({
-                                passedError: err,
-                                errorNameDescription:
-                                    "Might be post meta info 🔎 incorrections",
-                                message:
-                                    "Post Should include\n\n      🔒 All Value Common RULE: [ NOT empty string: '' ]\n\n      ✅ title   : Post's Title\n      ✅ preview : Post's Preview\n      ✅ author  : Post author name\n      ✅ update  : [ yyyy/mm/dd ]\n                 : [🚨WARNING: SHOULD FOLLOW FORMAT]\n      ✅ color   : Post main color, HEX | RGB | RGBA\n                 : [🚨WARNING: WRAP YOUR COLOR WITH colon or semi-colon]\n      ✅ tags    : tag1, tag2, tag3, ...\n                 : [🚨WARNING: DIVIDE TAG WITH comma ,]\n",
-                                customeErrorMessage: `your post meta info at:\n\n   ${postPath}`,
-                            })
-                        }
-                    }, Promise.resolve([] as PostContentType[]))
-                )
-                    .sort(
-                        (
-                            { postMeta: { update: currDate } },
-                            { postMeta: { update: nextDate } }
-                        ) => sortByDate(currDate, nextDate)
-                    )
-                    .map(({ postMeta, postSource, toc }, order) => ({
-                        postMeta: updatePostUrlForPagination(postMeta, order), //* update property for pagination
-                        postSource,
-                        toc,
-                    }))
-
-                return {
-                    category,
-                    postContentArray: extractedAllPost,
-                    postNumber: extractedAllPost.length,
-                }
-            }
-        )
-    )
-
-    return serializeAllPost
-}
 
 //* ----------------------------- 🔥 extract file 🔥 -----------------------------
 
@@ -337,6 +268,78 @@ const getPostInfo = async ({
 }
 
 /**
+ * 1. serialize by date
+ * 2. serialize by pagination
+ * 3. check `config.postPerCategoryPage` option for pagination
+ * @param categoryPostFileNameArray {@link CategoryPostFileNameType}
+ */
+const serializeAllPost = async (
+    categoryPostFileNameArray: CategoryPostFileNameType[]
+): Promise<PostType[]> => {
+    const serializeAllPost: PostType[] = await Promise.all(
+        categoryPostFileNameArray.map(
+            async ({ category, categoryPostFileNameArray }) => {
+                const extractedAllPost = (
+                    await categoryPostFileNameArray.reduce<
+                        Promise<PostContentType[]>
+                    >(async (acc, postFileName) => {
+                        const postPath = `${blogContentsDirectory}/${category}/${POST_DIRECTORY_NAME}/${postFileName}`
+
+                        try {
+                            const { bundledSource, meta, toc } =
+                                await getPostInfo({
+                                    category,
+                                    path: postPath,
+                                    fileName: postFileName,
+                                })
+                            if (meta)
+                                return [
+                                    ...(await acc),
+                                    {
+                                        postMeta: meta,
+                                        postSource: bundledSource,
+                                        toc,
+                                    },
+                                ]
+
+                            return await acc
+                        } catch (err) {
+                            throw new BlogErrorAdditionalInfo({
+                                passedError: err,
+                                errorNameDescription:
+                                    "Might be post meta info 🔎 incorrections",
+                                message:
+                                    "Post Should include\n\n      🔒 All Value Common RULE: [ NOT empty string: '' ]\n\n      ✅ title   : Post's Title\n      ✅ preview : Post's Preview\n      ✅ author  : Post author name\n      ✅ update  : [ yyyy/mm/dd ]\n                 : [🚨WARNING: SHOULD FOLLOW FORMAT]\n      ✅ color   : Post main color, HEX | RGB | RGBA\n                 : [🚨WARNING: WRAP YOUR COLOR WITH colon or semi-colon]\n      ✅ tags    : tag1, tag2, tag3, ...\n                 : [🚨WARNING: DIVIDE TAG WITH comma ,]\n",
+                                customeErrorMessage: `your post meta info at:\n\n   ${postPath}`,
+                            })
+                        }
+                    }, Promise.resolve([] as PostContentType[]))
+                )
+                    .sort(
+                        (
+                            { postMeta: { update: currDate } },
+                            { postMeta: { update: nextDate } }
+                        ) => sortByDate(currDate, nextDate)
+                    )
+                    .map(({ postMeta, postSource, toc }, order) => ({
+                        postMeta: updatePostUrlForPagination(postMeta, order), //* update property for pagination
+                        postSource,
+                        toc,
+                    }))
+
+                return {
+                    category,
+                    postContentArray: extractedAllPost,
+                    postNumber: extractedAllPost.length,
+                }
+            }
+        )
+    )
+
+    return serializeAllPost
+}
+
+/**
  * get specific post {@link SpecificPostContentType}
  */
 const getSpecificCategoryPost = async ({
@@ -400,7 +403,7 @@ const getAllCategoryPost = async (): Promise<PostType[]> =>
         await extractAllCategoryPostFileName(await getAllCategoryName())
     )
 
-//* ----------------------------- 🔥 path 🔥 -----------------------------
+//* ----------------------------- 🔥 path, getStaticPath 🔥 -----------------------------
 
 const getAllCategoryPostPath = memo(config.useMemo, async () =>
     (await getAllPostMeta()).map(({ postUrl }) => postUrl)
@@ -667,8 +670,7 @@ const generatePostMeta = ({
     return postMeta
 }
 /**
- * @returns 모든 포스트 `meta` 데이터
- * @note `postpone` 포스트 제거
+ * if `postpone` to true, post will not included
  */
 const extractAllPostMeta = async (
     categoryPostFileNameArray: CategoryPostFileNameType[]

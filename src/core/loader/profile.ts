@@ -2,13 +2,10 @@ import { BLOG_PROFILE_CONTENTS_LOCATION } from "@constants/blog.contents.directo
 
 import { readFile } from "fs/promises"
 
-import {
-    BlogErrorAdditionalInfo,
-    BlogFileExtractionError,
-} from "@utils/function/blog-error-handler"
+import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "@core/error"
 
-import { memo } from "@utils/function/blog-contents-loader/util"
-import { bundlePost } from "@utils/function/blog-contents-loader/contents/getCategoryPost"
+import { memo } from "@core/loader/util"
+import { bundlePost } from "@core/loader/post"
 
 import { config } from "blog.config"
 

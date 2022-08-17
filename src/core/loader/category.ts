@@ -9,13 +9,13 @@ import {
     blogContentsDirectory,
     getValidateColor,
     memo,
-} from "@utils/function/blog-contents-loader/util"
+} from "@core/loader/util"
 
 import {
     BlogErrorAdditionalInfo,
     BlogFileExtractionError,
     BlogPropertyError,
-} from "@utils/function/blog-error-handler"
+} from "@core/error"
 
 import { config } from "blog.config"
 
