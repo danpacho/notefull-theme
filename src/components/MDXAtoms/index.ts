@@ -1,5 +1,5 @@
 import {
-    P,
+    Paragraph,
     Bold,
     Italic,
     H1,
@@ -22,7 +22,7 @@ import {
 import { MDXComponents } from "mdx/types"
 
 const MDXAtoms = {
-    p: P,
+    p: Paragraph,
     strong: Bold,
     em: Italic,
 
@@ -49,9 +49,6 @@ const MDXAtoms = {
     th: TH,
     td: TD,
     tr: TR,
-
-    // thematicBreak,
-    // wrapper,
 }
 
 export default MDXAtoms
