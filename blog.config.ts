@@ -59,8 +59,6 @@ const blogContentsDirectoryName = "blog" as const
 interface ConfigType extends BlogInfoType {
     useTXT: boolean // description file format to .txt, not .json
     useKatex: boolean // katex option
-    useMemo: boolean // improves dev speed, but require manual refresh except posts
-    useMobileTOC: boolean // table of content on mobile
     userPallete: UserPalleteType // personal pallete
     blogContentsDirectoryName: `${typeof blogContentsDirectoryName}` // blog contents directory name
     author: AuthorInfoType
@@ -70,8 +68,6 @@ interface ConfigType extends BlogInfoType {
 const config: ConfigType = {
     useTXT: false,
     useKatex: false,
-    useMemo: true,
-    useMobileTOC: true,
     userPallete,
     blogContentsDirectoryName,
     postPerCategoryPage: 4,
