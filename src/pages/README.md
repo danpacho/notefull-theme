@@ -1,49 +1,49 @@
 # Pages 📄
 
-1.  `_document.tsx`
+## `_document.tsx`
 
-    **SSR** setting for using `styled-components` in nextJs, and common **SEO**
+common **SEO**
 
-2.  `_app.tsx`
+## `_app.tsx`
 
-    Configure the default common **layout** of the page and set the `jotai` global status provider
+Configure the default common **layout** of the page
 
-3.  `index.tsx`
+## `index.tsx`
 
-    Main page
+Main page
 
-    > **https://DEPLOY_URL**
+> **https://DEPLOY_URL**
 
-4.  `category.tsx`
+## `category.tsx`
 
-    All category page
+All category page
 
-    > **https://DEPLOY_URL/category**
+> **https://DEPLOY_URL/category**
 
-5.  `profile.tsx`
+## `profile.tsx`
 
-    Writer profile page
+Writer profile page
 
-    > **https://DEPLOY_URL/profile**
+> **https://DEPLOY_URL/profile**
 
-6.  `[category]/index.tsx`
+## `[category]/index.tsx`
 
-    Specific category main page
+Specific category main page
 
-    > **https://DEPLOY_URL/{category}**
+> **https://DEPLOY_URL/{category}**
 
-7.  `[category]/[pageNumber]/index.tsx`
+## `[category]/[pageNumber]/index.tsx`
 
-    Specific category pagination page
+Specific category pagination page
 
-    > **https://DEPLOY_URL/{category}/{page-number}**
+> **https://DEPLOY_URL/{category}/{page-number}**
 
-8.  `[category]/[pageNumber]/[postTitle].tsx`
+## `[category]/[pageNumber]/[postTitle].tsx`
 
-    Specific category post page
+Specific category post page
 
-    > **https://DEPLOY_URL/{category}/{page-number}/{post-title}**
+> **https://DEPLOY_URL/{category}/{page-number}/{post-title}**
 
-9.  `404.tsx, 505.tsx`
+##`404.tsx, 505.tsx`
 
-    404, 505 error page
+404, 505 error page
