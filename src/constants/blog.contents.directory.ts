@@ -1,15 +1,10 @@
 import { config } from "blog.config"
 
-const BLOG_CONTENTS_LOCATION = config.blogContentsDirectoryName
-const BLOG_POST_CONTENTS_LOCATION =
-    `${BLOG_CONTENTS_LOCATION}/contents` as const
-const BLOG_PROFILE_CONTENTS_LOCATION =
-    `${BLOG_CONTENTS_LOCATION}/profile/description.mdx` as const
+const POST_DIR_NAME = "posts" as const
 
-const POST_DIRECTORY_NAME = "posts"
+const BLOG_CONTENTS_DIR =
+    `${config.blogContentsDirectoryName}/contents` as const
+const BLOG_PROFILE_DIR =
+    `${config.blogContentsDirectoryName}/profile/description.mdx` as const
 
-export {
-    BLOG_POST_CONTENTS_LOCATION,
-    BLOG_PROFILE_CONTENTS_LOCATION,
-    POST_DIRECTORY_NAME,
-}
+export { BLOG_CONTENTS_DIR, BLOG_PROFILE_DIR, POST_DIR_NAME }
