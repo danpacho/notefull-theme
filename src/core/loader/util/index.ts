@@ -1,6 +1,5 @@
 export { default as addPathNotation } from "./addPathNotation"
-export { default as blogContentsDirectory } from "./blogContentsDirectory"
+export { default as blogContentsDir } from "./blogContentsDir"
 export { default as getValidateColor } from "./getValidateColor"
 export { default as removeFileFormat } from "./removeFileFormat"
 export { default as definePlugins } from "./definePlugins"
-export { default as memo } from "./memoize"
