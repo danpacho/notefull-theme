@@ -122,10 +122,40 @@ interface HeaderInfo {
 
 interface H2Children extends Omit<HeaderInfo, "type"> {}
 
-export interface TableOfContents extends Omit<HeaderInfo, "type"> {
+/**
+ * - table of contents of post
+ * - `H1 ➡️ H2` nesting support
+ * - generated at server, resolving `CLS` problem
+ * @example
+ * const toc = [
+ * {
+ *      href: "#This is First H1",
+ *      title: "This is First H1",
+ *      children:
+ *          [{
+ *              href: "#child 1",
+ *              title:"child 1"
+ *          },
+ *          {
+ *              href: "#child 2",
+ *              title: "child 2"
+ *          }]
+ *  },{
+ *      href: "#This is Second H1",
+ *      title: "This is Second H1",
+ *      children:
+ *          [{
+ *              href: "#child 1",
+ *              title:"child 1"
+ *          }]
+ *  }]
+ */
+export interface TableOfContentsType extends Omit<HeaderInfo, "type"> {
     children: H2Children[] | null
 }
-function transformTableOfContents(source: MarkdownHeader[]): TableOfContents[] {
+function transformTableOfContents(
+    source: MarkdownHeader[]
+): TableOfContentsType[] {
     if (source.length === 0) return []
 
     const headerInfoArray: HeaderInfo[] = source.map(({ children, depth }) => {
@@ -142,7 +172,7 @@ function transformTableOfContents(source: MarkdownHeader[]): TableOfContents[] {
         []
     )
 
-    const tableOfContentsArray = headerInfoArray.reduce<TableOfContents[]>(
+    const tableOfContentsArray = headerInfoArray.reduce<TableOfContentsType[]>(
         (acc, { href, title, type }, index) => {
             if (type === "H2") return acc
 
@@ -185,7 +215,9 @@ function transformTableOfContents(source: MarkdownHeader[]): TableOfContents[] {
     return tableOfContentsArray
 }
 
-const getTableOfContents = (pureMarkdownSource: string) => {
+const getTableOfContents = (
+    pureMarkdownSource: string
+): TableOfContentsType[] => {
     const sorce = extractHeader(pureMarkdownSource)
     const tableOfContent = transformTableOfContents(sorce)
     return tableOfContent
