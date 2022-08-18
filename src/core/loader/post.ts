@@ -9,10 +9,10 @@ import {
 } from "@typing/post/meta"
 
 import {
-    CategoryPostType,
     PostType,
     PostControllerType,
     PostWithControllerType,
+    AllPostOfSpecificCategory,
 } from "@typing/post"
 
 import { SeriesType, SeriesInfoType } from "@typing/post/series"
@@ -42,7 +42,7 @@ import remarkMath from "remark-math"
 import {
     getTableOfContents,
     remarkAutomaticImageSize,
-    TableOfContents,
+    TableOfContentsType,
 } from "@lib/unified/remark"
 
 import rehypeKatex from "rehype-katex"
@@ -160,7 +160,7 @@ type BundledResult<MetaT> = Awaited<ReturnType<typeof bundleMDX<MetaT>>>
     }
 }): Promise<{
     bundledResult: BundledResult<MetaT>;
-    toc: TableOfContents[]
+    toc: TableOfContentsType[]
 }> => {
     //* ES Build env config: https://www.alaycock.co.uk/2021/03/mdx-bundler#esbuild-executable
     if (process.platform === "win32") {
@@ -204,7 +204,7 @@ type BundledResult<MetaT> = Awaited<ReturnType<typeof bundleMDX<MetaT>>>
             readingFileName: "❓",
         })
 
-    const toc: TableOfContents[] = getTableOfContents(postSource) //* toc on server-side
+    const toc: TableOfContentsType[] = getTableOfContents(postSource) //* toc on server-side
 
     return {
         bundledResult,
@@ -463,7 +463,7 @@ const extractSinglePost = async ({
 }): Promise<{
     bundledSource: string
     meta: MetaType | void 
-    toc: TableOfContents[]
+    toc: TableOfContentsType[]
 }> => {
     const postSource = await readFile(dir, "utf-8")
     if (!postSource)
@@ -511,8 +511,8 @@ const extractSinglePost = async ({
  */
 const extractAllPost = async (
     allPostFileName: CategoryPostFileNameType[]
-): Promise<CategoryPostType[]> => {
-    const allPost: CategoryPostType[] = await Promise.all(
+): Promise<AllPostOfSpecificCategory[]> => {
+    const allPost: AllPostOfSpecificCategory[] = await Promise.all(
         allPostFileName.map(
             async ({ category, allCategoryPostFileName }) => {
                 const allCategoryPost: PostType[] = (
@@ -563,7 +563,7 @@ const extractAllPost = async (
                         toc,
                     }))
 
-                const categoryPost: CategoryPostType= {
+                const categoryPost: AllPostOfSpecificCategory= {
                     allCategoryPost,
                     postCount: allCategoryPost.length,
                     category,
@@ -577,7 +577,9 @@ const extractAllPost = async (
 }
 
 /**
- * get single post {@link PostWithControllerType}
+ * - `controller` generates at this function
+ * -  check **controller text** option at `config.postControllerText`
+ * -  check {@link PostWithControllerType}
  */
 const getSinglePost = async ({
     categoryName,
@@ -601,7 +603,7 @@ const getSinglePost = async ({
 
                     const prevPost = isFirst
                         ? {
-                              title: `Return to ${categoryName}`,
+                              title: config.postControllerText.first(categoryName),
                               link: `/${categoryName}`,
                           }
                         : {
@@ -610,7 +612,7 @@ const getSinglePost = async ({
                           }
                     const nextPost = isLast
                         ? {
-                              title: `Last post of ${categoryName}!`,
+                              title: config.postControllerText.last(categoryName),
                               link: `/${categoryName}`,
                           }
                         : {
@@ -635,7 +637,7 @@ const getSinglePost = async ({
     return post
 }
 
-const getAllPost = async (): Promise<CategoryPostType[]> =>
+const getAllPost = async (): Promise<AllPostOfSpecificCategory[]> =>
     await extractAllPost(
         await extractAllPostFileName(await getAllCategoryName())
     )
