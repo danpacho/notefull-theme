@@ -54,6 +54,23 @@ export interface SeriesMetaType {
 }
 /**
  * post meta property with {@link MDXMetaType} and {@link SeriesMetaType}
+ * @example
+ * const postMeta = {
+        title: 'say Hi',
+        category: 'category',
+        preview: 'say Hi's preview!',
+        author: 'author name',
+        color: '#b8a182',
+        update: '2022/06/25',
+        tags: ["tag1", "tag2"],
+        postUrl: '/category/1/say-hi',
+        postOrder: 0,
+        postFileName: 'say-hi.mdx',
+        bannerUrl: 'banner.png',
+        series: [_SeriesMetaType_],
+        reference: ["https://google.com", "https://stackoverflow.com"]
+        postpone: false,
+ * }
  */
 export interface MetaType {
     title: string

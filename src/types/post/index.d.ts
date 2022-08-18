@@ -1,18 +1,35 @@
-import { TableOfContents } from "@lib/unified"
-import { MetaType } from "./meta"
+import type { TableOfContentsType } from "@lib/unified/remark"
+import type { MetaType } from "./meta"
 
-export interface CategoryPostType {
-    category: string
-    allCategoryPost: PostType[]
-    postCount: number
-}
-
+/**
+ * single post type
+ * @property **meta**: meta of the post. Check {@link MetaType}
+ * @property **soure**: post source. this `string` will be compiled by `mdx-bundler`
+ * @property **toc**: table of contents of post, `H1 ➡️ H2` nesting support. Check {@link TableOfContentsType[]}
+ */
 export interface PostType {
     meta: MetaType
     source: string
-    toc: TableOfContents[]
+    toc: TableOfContentsType[]
 }
-
+/**
+ * - post with controller
+ * - move the post back and forth using `controller` object
+ * @example
+ * const meta = {
+ *     controller: {
+ *          prevPost: {
+ *              title: "prev post",
+ *              link: "category/1/prev-post"
+ *          },
+ *          nextPost: {
+ *              title: "next post",
+ *              link: "category/1/next-post"
+ *          }
+ *     }
+ *     ...rest,
+ * }
+ */
 export interface PostWithControllerType extends PostType {
     controller: PostControllerType
 }
@@ -24,4 +41,16 @@ interface PostControllerInfoType {
 export interface PostControllerType {
     prevPost: PostControllerInfoType
     nextPost: PostControllerInfoType
+}
+
+/**
+ * all post type, inside of specific category
+ * @property **category**: category-name of the post
+ * @property **allCategoryPost**: whole post of the specific category
+ * @property **postCount**: number of post in the specific category
+ */
+export interface AllPostOfSpecificCategory {
+    category: string
+    allCategoryPost: PostType[]
+    postCount: number
 }
