@@ -13,6 +13,10 @@ import { DefaultSEO } from "@components/SEO"
 import { GoogleAnalytics } from "@lib/GoogleAnalytics"
 import { config } from "blog.config"
 
+/**
+ * - custom hook for restoring scroll position
+ * - restore forward-backward navagation
+ */
 const useRestorePageScroll = () => {
     const router = useRouter()
 
@@ -49,7 +53,8 @@ const useRestorePageScroll = () => {
 }
 
 function App({ Component, pageProps }: AppProps) {
-    const pageType = Component?.displayName as PageType // page type
+    // distinguish page, set diffrent style or layout for each pages
+    const pageType = Component?.displayName as PageType
 
     useRestorePageScroll()
 
