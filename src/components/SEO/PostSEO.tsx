@@ -6,12 +6,12 @@ import { config } from "blog.config"
 
 function PostSEO({
     author,
-    category,
     postUrl,
     update,
     preview,
     tags,
     title,
+    bannerUrl,
 }: MetaType) {
     const publishedTime = new Date(update).toISOString()
     const fullPostUrl = `${config.url}${postUrl}`
@@ -35,8 +35,10 @@ function PostSEO({
                     locale: config.language,
                     images: [
                         {
-                            url: config.author.bannerImageUrl,
-                            alt: `welcome to ${config.siteName}!`,
+                            url: bannerUrl ?? config.author.bannerImageUrl,
+                            alt: bannerUrl
+                                ? `banner of ${title}`
+                                : `welcome to ${config.siteName}!`,
                         },
                     ],
                 }}
