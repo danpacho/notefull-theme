@@ -34,7 +34,7 @@ const authorInfo: AuthorInfoType = {
     },
     logoImageUrl: "/logo.png",
     bannerImageUrl: "/banner.png",
-    faviconUrl: "/favicon.png",
+    faviconUrl: "/favicon.ico",
 } as const
 
 interface BlogInfoType {
