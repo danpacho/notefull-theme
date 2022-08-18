@@ -31,7 +31,7 @@ export interface SeriesInfoType extends SeriesMetaType {
 
 /**
  * - total series info of specific series
- * - union set of {@link SeriesInfoType}
+ * - set of {@link SeriesInfoType}
  */
 export interface SeriesType {
     seriesTitle: string
