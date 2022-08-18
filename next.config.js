@@ -14,7 +14,7 @@ module.exports = withPlugins([withBundleAnalyzer], {
     reactStrictMode: true,
     pageExtensions: ["mdx", "tsx", "ts"],
     swcMinify: true,
-    compiler: {
+    compiler: process.env.NODE_ENV === "production" && {
         removeConsole: {
             exclude: ["error"],
         },
