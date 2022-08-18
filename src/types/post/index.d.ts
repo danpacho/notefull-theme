@@ -5,7 +5,7 @@ import type { MetaType } from "./meta"
  * single post type
  * @property **meta**: meta of the post. Check {@link MetaType}
  * @property **soure**: post source. this `string` will be compiled by `mdx-bundler`
- * @property **toc**: table of contents of post, `H1 ➡️ H2` nesting support. Check {@link TableOfContentsType[]}
+ * @property **toc**: table of contents of post, `H1 ➡️ H2` nesting support. Check {@link TableOfContentsType}
  */
 export interface PostType {
     meta: MetaType
@@ -15,6 +15,7 @@ export interface PostType {
 /**
  * - post with controller
  * - move the post back and forth using `controller` object
+ * - check **controller text** option at `config.postControllerText`
  * @example
  * const meta = {
  *     controller: {
