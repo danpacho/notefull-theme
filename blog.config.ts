@@ -65,6 +65,10 @@ interface ConfigType extends BlogInfoType {
     postPerCategoryPage: number
     numberOfLatestPost: number
     numberOfMainPageCategory: number
+    postControllerText: {
+        first: (category: string) => string // first post ➡️ no prev post, so replace with your text
+        last: (category: string) => string // last post ➡️ no next post, so replace with your text
+    }
 }
 const config: ConfigType = {
     useTXT: false,
@@ -74,6 +78,10 @@ const config: ConfigType = {
     postPerCategoryPage: 4,
     numberOfLatestPost: 5,
     numberOfMainPageCategory: 5,
+    postControllerText: {
+        first: (category: string) => `Return to ${category}`,
+        last: (category: string) => `Last post of ${category}`,
+    },
     author: {
         ...authorInfo,
     },
