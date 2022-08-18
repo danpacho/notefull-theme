@@ -18,18 +18,17 @@ export const getStaticProps: GetStaticProps<MainPageProps> = async () => {
 
     return {
         props: {
-            latestPostMeta: latestPostMeta,
-            mainCategoryInfo: mainCategoryInfo,
+            latestPost: latestPostMeta,
+            mainCategory: mainCategoryInfo,
         },
     }
 }
 
 interface MainPageProps {
-    latestPostMeta: MetaType[]
-    mainCategoryInfo: CategoryInfoType[]
+    latestPost: MetaType[]
+    mainCategory: CategoryInfoType[]
 }
-
-function MainPage({ latestPostMeta, mainCategoryInfo }: MainPageProps) {
+function MainPage({ latestPost, mainCategory }: MainPageProps) {
     return (
         <>
             <NextSeo

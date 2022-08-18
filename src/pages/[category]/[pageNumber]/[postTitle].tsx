@@ -23,7 +23,9 @@ interface ParamQuery extends ParsedUrlQuery {
     pageNumber: string
     postTitle: string
 }
-export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PostPageProps> = async ({
+    params,
+}) => {
     const { category, pageNumber, postTitle } = params as ParamQuery
 
     const { controller, meta, source, toc } = await getSinglePost({
@@ -32,7 +34,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
         postTitle,
     })
 
-    const postSeriesInfo = meta.series
+    const seriesInfo = meta.series
         ? await getSingleSeries(
               meta.series.seriesTitle,
               await getSpecificCategoryMeta(category)
@@ -44,7 +46,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
             controller,
             meta,
             source,
-            postSeriesInfo,
+            seriesInfo,
             toc,
         },
     }
@@ -57,11 +59,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
         fallback: false,
     }
 }
-interface PostSeriesInfo {
-    postSeriesInfo: SeriesType | null
+
+interface PostPageProps extends PostWithControllerType {
+    seriesInfo: SeriesType | null
 }
-interface PostProps extends PostWithControllerType, PostSeriesInfo {}
-function Post({ controller, meta, source, postSeriesInfo, toc }: PostProps) {
+function PostPage({
+    source,
+    meta,
+    controller,
+    seriesInfo,
+    toc,
+}: PostPageProps) {
     return (
         <>
             <PostSEO {...meta} />
@@ -73,5 +81,5 @@ function Post({ controller, meta, source, postSeriesInfo, toc }: PostProps) {
     )
 }
 
-Post.displayName = "Post" as PageType
-export default Post
+PostPage.displayName = "Post" as PageType
+export default PostPage

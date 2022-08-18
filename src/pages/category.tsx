@@ -7,7 +7,9 @@ import { getAllCategoryInfo } from "@core/loader/category"
 
 import { config } from "blog.config"
 
-export const getStaticProps: GetStaticProps<CategoryProps> = async () => {
+export const getStaticProps: GetStaticProps<
+    AllCategoryPageProps
+> = async () => {
     const allCategoryInfo = await getAllCategoryInfo({
         useTXT: config.useTXT,
     })
@@ -18,11 +20,11 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async () => {
     }
 }
 
-interface CategoryProps {
+interface AllCategoryPageProps {
     allCategoryInfo: CategoryInfoType[]
 }
-function Category({ allCategoryInfo }: CategoryProps) {
+function AllCategoryPage({ allCategoryInfo }: AllCategoryPageProps) {
     return <></>
 }
-Category.displayName = "Category" as PageType
-export default Category
+AllCategoryPage.displayName = "Category" as PageType
+export default AllCategoryPage

@@ -25,7 +25,7 @@ interface ParamQuery extends ParsedUrlQuery {
     category: string
 }
 
-export const getStaticProps: GetStaticProps<CategoryProps> = async ({
+export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
     params,
 }) => {
     const { category } = params as ParamQuery
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
         getSpecificCategoryLatestMeta(specificCategoryMeta)
     const categorySeries = getAllSeries(specificCategoryMeta)
 
-    const latestCategoryTag = getUniqueTagFromMeta(latestCategoryPostMeta)
+    const latestTag = getUniqueTagFromMeta(latestCategoryPostMeta)
 
     const categoryInfo = await getSingleCategoryInfo({
         category,
@@ -44,9 +44,9 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
 
     return {
         props: {
-            latestCategoryPostMeta,
-            latestCategoryTag,
-            categorySeries,
+            latestPost: latestCategoryPostMeta,
+            latestTag,
+            allSeries: categorySeries,
             ...categoryInfo,
         },
     }
@@ -60,18 +60,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
 }
 
-interface CategoryProps extends CategoryInfoType {
-    latestCategoryPostMeta: MetaType[]
-    latestCategoryTag: string[]
-    categorySeries: SeriesType[]
+interface CategoryPageProps extends CategoryInfoType {
+    latestPost: MetaType[]
+    latestTag: string[]
+    allSeries: SeriesType[]
 }
-
-function Category(categoryProps: CategoryProps) {
+function CategoryPage(categoryProps: CategoryPageProps) {
     return (
         <>
             <CategorySEO {...categoryProps} />
         </>
     )
 }
-Category.displayName = "Category" as PageType
-export default Category
+CategoryPage.displayName = "Category" as PageType
+export default CategoryPage

@@ -42,7 +42,7 @@ interface ProfileProps {
     profileSource: string
 }
 
-function Profile({ profileSource }: ProfileProps) {
+function ProfilePage({ profileSource }: ProfileProps) {
     return (
         <>
             <MDXBundler source={profileSource} />
@@ -52,6 +52,6 @@ function Profile({ profileSource }: ProfileProps) {
         </>
     )
 }
-Profile.displayName = "Profile" as PageType
+ProfilePage.displayName = "Profile" as PageType
 
-export default Profile
+export default ProfilePage

@@ -22,9 +22,9 @@ interface ParamQuery extends ParsedUrlQuery {
     pageNumber: string
 }
 
-export const getStaticProps: GetStaticProps<CategoryPostPerPageProps> = async ({
-    params,
-}) => {
+export const getStaticProps: GetStaticProps<
+    PaginatedCategoryPageProps
+> = async ({ params }) => {
     const { category, pageNumber } = params as ParamQuery
 
     const categoryInfo = await getSingleCategoryInfo({
@@ -43,10 +43,10 @@ export const getStaticProps: GetStaticProps<CategoryPostPerPageProps> = async ({
 
     return {
         props: {
-            paginatedPostMeta,
-            paginatedTag: categoryTag,
+            allPost: paginatedPostMeta,
+            allTag: categoryTag,
             pageNumber,
-            isLast: Number(pageNumber) === endPageNumber,
+            isLastPage: Number(pageNumber) === endPageNumber,
             ...categoryInfo,
         },
     }
@@ -61,17 +61,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
 }
 
-interface CategoryPostPerPageProps extends CategoryInfoType {
-    category: string
+interface PaginatedCategoryPageProps extends CategoryInfoType {
+    allPost: MetaType[]
+    allTag: string[]
     pageNumber: string
-    paginatedTag: string[]
-    paginatedPostMeta: MetaType[]
-    isLast: boolean
+    isLastPage: boolean
 }
-
-function PaginatedPostPage(props: CategoryPostPerPageProps) {
+function PaginatedCategoryPage(props: PaginatedCategoryPageProps) {
     return <></>
 }
-PaginatedPostPage.displayName = "Category" as PageType
+PaginatedCategoryPage.displayName = "Category" as PageType
 
-export default PaginatedPostPage
+export default PaginatedCategoryPage
