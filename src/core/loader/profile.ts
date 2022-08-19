@@ -11,6 +11,11 @@ import { remarkAutomaticImageSize } from "@lib/unified/remark"
 import remarkGfm from "remark-gfm"
 import rehypePrism from "rehype-prism-plus"
 
+/**
+ * - you can set custom `remark-rehype` plugin for profile page
+ * - check param of {@link definePlugins}
+ * @returns profile source extraction at `{blog_dir}/profile/description.mdx`
+ */
 const getProfileSource = async () => {
     try {
         const profileContent = await readFile(BLOG_PROFILE_DIR, "utf-8")
