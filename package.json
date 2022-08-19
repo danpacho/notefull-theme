@@ -1,17 +1,16 @@
 {
-    "name": "only-core",
+    "name": "bloapi",
     "version": "1.0.0",
     "author": {
         "name": "danpacho",
         "url": "https://github.com/danpacho"
     },
-    "description": "start blog with powerfull ⚡️ core-battery 🔋",
+    "description": "Nextjs blog api starter kit. Don't think about handling data. Just draw it.",
     "keywords": [
         "blog",
         "nextjs",
-        "mdx",
-        "api battery",
-        "only core"
+        "api-only",
+        "no-style"
     ],
     "license": "MIT",
     "scripts": {
