@@ -1,6 +1,6 @@
 import { readdir, readFile } from "fs/promises"
 
-import { CategoryInfoType } from "@typing/category"
+import type { CategoryInfoType } from "@typing/category"
 
 import {
     DESCRIPTION_FILE_NAME,
@@ -37,24 +37,26 @@ const getAllCategoryName = async () => {
             customeErrorMessage: `directory structure should match with following path ⬇️\n\n      ${blogContentsDir}\n\n      🔒 Check Post Directory Structure:\n 
             📦"${config.blogContentsDirectoryName}"
             ┃
-            ┗ 📂"content"                                      blog content
+            ┣ 📂"content"
             ┃ ┃
-            ┃ ┗ 📂[catgory-name]                               your category name
+            ┃ ┣ 📂{catgory}
             ┃ ┃ ┃
-            ┃ ┃ ┣ 📂"posts"                                   category's posts
-            ┃ ┃ ┃ ┣ 📜[post-name].mdx                         format: "mdx"
-            ┃ ┃ ┃ ┗ ... more posts
+            ┃ ┃ ┣ 📂"posts"
+            ┃ ┃ ┃ ┣ 📜{postTitle}.mdx
+            ┃ ┃ ┃ ┗...
             ┃ ┃ ┃
-            ┃ ┃ ┗ 📜"description.json"                        your category's description
-            ┃ ┃
-            ┃ ┗ 📂[catgory-name2]...
+            ┃ ┃ ┗ 📜"description.json"
+            ┃ ┗...
+            ┃
+            ┣ 📂"profile"
+            ┗ ┗ 📜"description.json"
             `,
         })
     }
 }
 //* ----------------------------- 🔥 path, getStaticPath 🔥 -----------------------------
 /**
- * add URL notaition to category names
+ * add path notaition to category names
  * @returns `/{category}`
  */
 const getAllCategoryPath = async (): Promise<string[]> => {
@@ -328,7 +330,7 @@ const getAllCategoryInfo = async ({ useTXT = false }: { useTXT: boolean }) => {
 /**
  * set number of main category in `blog.config` at `config.numberOfMainPageCategory`
  */
-const getMainCategoryInfo = async ({ useTXT }: { useTXT: boolean }) =>
+const getMainCategoryInfo = async ({ useTXT = false }: { useTXT: boolean }) =>
     (
         await getAllCategoryInfo({
             useTXT,
