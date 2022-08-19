@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next"
 
-import { PageType } from "@typing/page"
-import { CategoryInfoType } from "@typing/category"
+import type { CategoryInfoType } from "@typing/category"
+import type { PageType } from "@typing/page"
 
 import { getAllCategoryInfo } from "@core/loader/category"
 

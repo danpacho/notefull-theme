@@ -2,9 +2,9 @@ import { GetStaticPaths, GetStaticProps } from "next"
 
 import { ParsedUrlQuery } from "querystring"
 
-import { PageType } from "@typing/page"
-import { MetaType } from "@typing/post/meta"
-import { CategoryInfoType } from "@typing/category"
+import type { CategoryInfoType } from "@typing/category"
+import type { MetaType } from "@typing/post/meta"
+import type { PageType } from "@typing/page"
 
 import {
     getCategoryPaginationPostMeta,
@@ -63,17 +63,16 @@ interface PaginatedCategoryPageProps extends CategoryInfoType {
     page: number
     isLastPage: boolean
 }
-function PaginatedCategoryPage(props: PaginatedCategoryPageProps) {
-    const {
-        allPost,
-        category,
-        categoryUrl,
-        description,
-        color,
-        emoji,
-        isLastPage,
-        page,
-    } = props
+function PaginatedCategoryPage({
+    allPost,
+    category,
+    categoryUrl,
+    description,
+    color,
+    emoji,
+    isLastPage,
+    page,
+}: PaginatedCategoryPageProps) {
     const allTag = getUniqueTagFromMeta(allPost)
 
     return <></>

@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
-import { PageType } from "@typing/page"
-import { SeriesType } from "@typing/post/series"
-import { PostWithControllerType } from "@typing/post"
+import type { PageType } from "@typing/page"
+import type { SeriesType } from "@typing/post/series"
+import type { PostWithControllerType } from "@typing/post"
 
 import {
     getSpecificCategoryMeta,
