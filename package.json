@@ -26,7 +26,7 @@
         "prettier": "prettier '**/*.{js,ts,tsx,json,mdx}' --check",
         "prettier:fix": "prettier '**/*.{js,ts,tsx,json,mdx}' --write",
         "pre-commit": "lint-staged",
-        "prepare": "husky install && npx husky add .husky/pre-commit 'pnpm pre-commit'"
+        "prepare": "husky install"
     },
     "dependencies": {
         "@builder.io/partytown": "^0.6.4",
