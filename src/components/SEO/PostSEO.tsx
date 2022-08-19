@@ -44,6 +44,7 @@ function PostSEO({
                 }}
             />
             <ArticleJsonLd
+                type="Blog"
                 url={fullPostUrl}
                 title={title}
                 description={preview}

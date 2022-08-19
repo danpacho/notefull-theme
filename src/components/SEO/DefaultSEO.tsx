@@ -6,11 +6,13 @@ const DEFAULT_SEO_PROPS: DefaultSeoProps = {
     title: config.siteName,
     description: config.subtitle,
     openGraph: {
-        type: "website",
-        locale: config.language,
         title: config.siteName,
         description: config.subtitle,
         url: config.url,
+        locale: config.language,
+        profile: {
+            username: config.author.name,
+        },
     },
     additionalMetaTags: [
         {
