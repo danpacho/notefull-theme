@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
-import { PageType } from "@typing/page"
 import { CategoryInfoType } from "@typing/category"
 import { MetaType } from "@typing/post/meta"
 import { SeriesType } from "@typing/post/series"
+import { PageType } from "@typing/page"
 
 import {
     getAllCategoryPath,
@@ -18,8 +18,9 @@ import {
     getUniqueTagFromMeta,
 } from "@core/loader/post"
 
-import { config } from "blog.config"
 import { CategorySEO } from "@components/SEO"
+
+import { config } from "blog.config"
 
 interface ParamQuery extends ParsedUrlQuery {
     category: string
@@ -35,8 +36,6 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
         getSpecificCategoryLatestMeta(specificCategoryMeta)
     const categorySeries = getAllSeries(specificCategoryMeta)
 
-    const latestTag = getUniqueTagFromMeta(latestCategoryPostMeta)
-
     const categoryInfo = await getSingleCategoryInfo({
         category,
         useTXT: config.useTXT,
@@ -45,7 +44,6 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
     return {
         props: {
             latestPost: latestCategoryPostMeta,
-            latestTag,
             allSeries: categorySeries,
             ...categoryInfo,
         },
@@ -62,13 +60,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 interface CategoryPageProps extends CategoryInfoType {
     latestPost: MetaType[]
-    latestTag: string[]
     allSeries: SeriesType[]
 }
-function CategoryPage(categoryProps: CategoryPageProps) {
+function CategoryPage(props: CategoryPageProps) {
+    const {
+        latestPost,
+        allSeries,
+        category,
+        categoryUrl,
+        description,
+        color,
+        emoji,
+    } = props
+    const latestTag = getUniqueTagFromMeta(latestPost)
+
     return (
         <>
-            <CategorySEO {...categoryProps} />
+            <CategorySEO {...props} />
         </>
     )
 }
