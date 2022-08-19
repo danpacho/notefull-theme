@@ -19,14 +19,14 @@ import { config } from "blog.config"
 
 interface ParamQuery extends ParsedUrlQuery {
     category: string
-    pageNumber: string
+    page: string
 }
 
 export const getStaticProps: GetStaticProps<
     PaginatedCategoryPageProps
 > = async ({ params }) => {
-    const { category, pageNumber } = params as ParamQuery
-
+    const { category, page } = params as ParamQuery
+    const pageNumber = Number(page)
     const categoryInfo = await getSingleCategoryInfo({
         category,
         useTXT: config.useTXT,
@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<
 
     const paginatedPostMeta = await getCategoryPaginationPostMeta({
         category,
-        pageNumber: Number(pageNumber),
+        pageNumber,
     })
 
     const categoryTag = getUniqueTagFromMeta(paginatedPostMeta)
@@ -45,8 +45,8 @@ export const getStaticProps: GetStaticProps<
         props: {
             allPost: paginatedPostMeta,
             allTag: categoryTag,
-            pageNumber,
-            isLastPage: Number(pageNumber) === endPageNumber,
+            page: pageNumber,
+            isLastPage: pageNumber === endPageNumber,
             ...categoryInfo,
         },
     }
@@ -64,7 +64,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 interface PaginatedCategoryPageProps extends CategoryInfoType {
     allPost: MetaType[]
     allTag: string[]
-    pageNumber: string
+    page: number
     isLastPage: boolean
 }
 function PaginatedCategoryPage(props: PaginatedCategoryPageProps) {

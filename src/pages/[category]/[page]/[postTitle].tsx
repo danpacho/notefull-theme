@@ -20,17 +20,17 @@ import { config } from "blog.config"
 
 interface ParamQuery extends ParsedUrlQuery {
     category: string
-    pageNumber: string
+    page: string
     postTitle: string
 }
 export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     params,
 }) => {
-    const { category, pageNumber, postTitle } = params as ParamQuery
+    const { category, page, postTitle } = params as ParamQuery
 
     const { controller, meta, source, toc } = await getSinglePost({
         categoryName: category,
-        categoryPage: Number(pageNumber),
+        categoryPage: Number(page),
         postTitle,
     })
 
