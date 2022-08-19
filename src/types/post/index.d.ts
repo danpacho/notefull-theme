@@ -50,7 +50,7 @@ export interface PostControllerType {
  * @property **allCategoryPost**: whole post of the specific category
  * @property **postCount**: number of post in the specific category
  */
-export interface AllPostOfSpecificCategory {
+export interface AllPostOfSpecificCategoryType {
     category: string
     allCategoryPost: PostType[]
     postCount: number

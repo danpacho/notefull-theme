@@ -2,18 +2,14 @@ import path from "path"
 import { cwd } from "process"
 import { readFile, readdir } from "fs/promises"
 
-import type {
-    MDXMetaType,
-    MetaType,
-    SeriesMetaType,
-} from "@typing/post/meta"
+import type { MDXMetaType, MetaType, SeriesMetaType } from "@typing/post/meta"
 
 import type {
     PostType,
     PostControllerType,
-    PostWithControllerType,
-    AllPostOfSpecificCategory,
     PostControllerInfoType,
+    PostWithControllerType,
+    AllPostOfSpecificCategoryType,
 } from "@typing/post"
 
 import type { SeriesType, SeriesInfoType } from "@typing/post/series"
@@ -94,16 +90,13 @@ const getTagArray = (tags: string, postFileName: string): string[] => {
  * @param metaArray {@link MetaType} any meta
  * @returns deduplicated unique meta
  */
-const getUniqueTagFromMeta = 
-    (metaArray: MetaType[]) => {
-        const deduplicatedSingleCategoryPageTagArray = [
-            ...new Set(
-                metaArray.flatMap(({ tags }) => tags)
-            ),
-        ].sort()
+const getUniqueTagFromMeta = (metaArray: MetaType[]) => {
+    const deduplicatedSingleCategoryPageTagArray = [
+        ...new Set(metaArray.flatMap(({ tags }) => tags)),
+    ].sort()
 
-        return deduplicatedSingleCategoryPageTagArray
-    }
+    return deduplicatedSingleCategoryPageTagArray
+}
 //* ----------------------------- 🔥 extract post name 🔥 -----------------------------
 interface CategoryPostFileNameType {
     category: string
@@ -123,10 +116,8 @@ const extractAllPostFileName = async (
             try {
                 const allCategoryPostFileName = (
                     await readdir(postDir, "utf-8")
-                ).filter(
-                    (fileName) => fileName !== MAC_OS_FILE_EXCEPTION
-                )
-                const data: CategoryPostFileNameType =  {
+                ).filter((fileName) => fileName !== MAC_OS_FILE_EXCEPTION)
+                const data: CategoryPostFileNameType = {
                     category,
                     allCategoryPostFileName,
                 }
@@ -150,7 +141,7 @@ type BundledResult<MetaT> = Awaited<ReturnType<typeof bundleMDX<MetaT>>>
 /**
  * bundling MDX source with mdx-bundler
  */
- const bundlePost = async <MetaT>({
+const bundlePost = async <MetaT>({
     postSource,
     customPlugin,
 }: {
@@ -160,7 +151,7 @@ type BundledResult<MetaT> = Awaited<ReturnType<typeof bundleMDX<MetaT>>>
         remarkPlugins: Pluggable[]
     }
 }): Promise<{
-    bundledResult: BundledResult<MetaT>;
+    bundledResult: BundledResult<MetaT>
     toc: TableOfContentsType[]
 }> => {
     //* ES Build env config: https://www.alaycock.co.uk/2021/03/mdx-bundler#esbuild-executable
@@ -219,7 +210,7 @@ type BundledResult<MetaT> = Awaited<ReturnType<typeof bundleMDX<MetaT>>>
  * @returns `seriesTitle`
  * @returns `order`
  */
- const transformStringToSeriesMeta = (
+const transformStringToSeriesMeta = (
     seriesString: string,
     postFileName: string
 ): SeriesMetaType => {
@@ -274,15 +265,15 @@ const generateMeta = ({
         postOrder: 0, // temporary set 0 for pagination
         category,
         postFileName,
-        tags: getTagArray(extractedMeta.tags, postFileName),
         postpone: false,
+        tags: getTagArray(extractedMeta.tags, postFileName),
         reference: extractedMeta?.reference
-        ? splitStringByComma(extractedMeta.reference)
-        : null,
+            ? splitStringByComma(extractedMeta.reference)
+            : null,
         color: getValidateColor(extractedMeta.color),
         series: extractedMeta?.series
-        ? transformStringToSeriesMeta(extractedMeta.series, postFileName)
-        : null,
+            ? transformStringToSeriesMeta(extractedMeta.series, postFileName)
+            : null,
     } as MetaType
 
     const validatedMeta = Object.entries(meta)
@@ -295,9 +286,9 @@ const generateMeta = ({
             metaKey,
             metaValue,
         })) as {
-            metaKey?: keyof MetaType;
-            metaValue: string;
-        }[]
+        metaKey?: keyof MetaType
+        metaValue: string
+    }[]
 
     if (validatedMeta.length !== 0)
         throw new BlogPropertyError<MetaType>({
@@ -317,22 +308,20 @@ const generateMeta = ({
  * @property `updateMeta.postOrder`: update `postOrder`
  */
 const updateMeta = {
-    postUrl: (
-        meta: MetaType,
-        order: number
-    ): MetaType => {
+    postUrl: (meta: MetaType, order: number): MetaType => {
         const paginationOrder = Math.floor(
             order / config.postPerCategoryPage + 1
         )
         const fileName = removeFileFormat(meta.postFileName, "mdx")
         return {
+            ...meta,
+            postUrl: `/${meta.category}/${paginationOrder}/${fileName}`,
+        }
+    },
+    postOrder: (meta: MetaType, order: number): MetaType => ({
         ...meta,
-        postUrl: `/${meta.category}/${paginationOrder}/${fileName}`,
-    }},
-    postOrder:  (
-        meta: MetaType,
-        order: number
-    ): MetaType => ({ ...meta, postOrder: order })
+        postOrder: order,
+    }),
 }
 
 /**
@@ -362,13 +351,12 @@ const extractSingleMeta = async ({
             category,
             postFileName,
         })
-    
+
         return meta
-    } catch(err: unknown){
+    } catch (err: unknown) {
         throw new BlogErrorAdditionalInfo({
             passedError: err,
-            errorNameDescription:
-                "meta extraction error",
+            errorNameDescription: "meta extraction error",
             message: `Track meta file's directory: ${dir}`,
         })
     }
@@ -383,15 +371,17 @@ const extractAllMeta = async (
     const allMeta = (
         await Promise.all(
             categoryPostFileNameArray.map(
-                ({ category, allCategoryPostFileName: categoryPostFileNameArray }) =>
+                ({
+                    category,
+                    allCategoryPostFileName: categoryPostFileNameArray,
+                }) =>
                     categoryPostFileNameArray.reduce<Promise<MetaType[]>>(
                         async (acc, postFileName) => {
                             const meta = await extractSingleMeta({
                                 category,
                                 postFileName,
                             })
-                            if (meta)
-                                return [...(await acc), meta]
+                            if (meta) return [...(await acc), meta]
 
                             return await acc
                         },
@@ -416,12 +406,11 @@ const getAllMeta = async () =>
         await extractAllPostFileName(await getAllCategoryName())
     )
 
-const getLatestPostMeta = 
-    async (): Promise<MetaType[]> =>
-        (await getAllMeta())
-            .sort((prev, current) => sortByDate(prev.update, current.update))
-            .slice(0, config.numberOfLatestPost)
-            .map(updateMeta.postOrder)
+const getLatestPostMeta = async (): Promise<MetaType[]> =>
+    (await getAllMeta())
+        .sort((prev, current) => sortByDate(prev.update, current.update))
+        .slice(0, config.numberOfLatestPost)
+        .map(updateMeta.postOrder)
 
 const getSpecificCategoryMeta = async (
     categoryName: string
@@ -438,20 +427,19 @@ const getSpecificCategoryLatestMeta = (
  * @param category meta extraction category
  * @param pageNumber meta extraction page-number
  */
-const getCategoryPaginationPostMeta =
-    async ({
-        category,
-        pageNumber,
-    }: {
-        category: string
-        pageNumber: number
-    }): Promise<MetaType[]> =>
-        await (
-            await getSpecificCategoryMeta(category)
-        ).slice(
-            (pageNumber - 1) * config.postPerCategoryPage,
-            pageNumber * config.postPerCategoryPage
-        )
+const getCategoryPaginationPostMeta = async ({
+    category,
+    pageNumber,
+}: {
+    category: string
+    pageNumber: number
+}): Promise<MetaType[]> =>
+    await (
+        await getSpecificCategoryMeta(category)
+    ).slice(
+        (pageNumber - 1) * config.postPerCategoryPage,
+        pageNumber * config.postPerCategoryPage
+    )
 //* ----------------------------- 🔥 post 🔥 -----------------------------
 const extractSinglePost = async ({
     category,
@@ -463,7 +451,7 @@ const extractSinglePost = async ({
     dir: string
 }): Promise<{
     bundledSource: string
-    meta: MetaType | void 
+    meta: MetaType | void
     toc: TableOfContentsType[]
 }> => {
     const postSource = await readFile(dir, "utf-8")
@@ -512,14 +500,12 @@ const extractSinglePost = async ({
  */
 const extractAllPost = async (
     allPostFileName: CategoryPostFileNameType[]
-): Promise<AllPostOfSpecificCategory[]> => {
-    const allPost: AllPostOfSpecificCategory[] = await Promise.all(
-        allPostFileName.map(
-            async ({ category, allCategoryPostFileName }) => {
-                const allCategoryPost: PostType[] = (
-                    await allCategoryPostFileName.reduce<
-                        Promise<PostType[]>
-                    >(async (acc, postFileName) => {
+): Promise<AllPostOfSpecificCategoryType[]> => {
+    const allPost: AllPostOfSpecificCategoryType[] = await Promise.all(
+        allPostFileName.map(async ({ category, allCategoryPostFileName }) => {
+            const allCategoryPost: PostType[] = (
+                await allCategoryPostFileName.reduce<Promise<PostType[]>>(
+                    async (acc, postFileName) => {
                         const postDir = `${blogContentsDir}/${category}/${POST_FILE_NAME}/${postFileName}`
 
                         try {
@@ -550,28 +536,29 @@ const extractAllPost = async (
                                 customeErrorMessage: `your post meta info at:\n\n   ${postDir}`,
                             })
                         }
-                    }, Promise.resolve([] as PostType[]))
+                    },
+                    Promise.resolve([] as PostType[])
                 )
-                    .sort(
-                        (
-                            { meta: { update: currDate } },
-                            { meta: { update: nextDate } }
-                        ) => sortByDate(currDate, nextDate)
-                    )
-                    .map(({ meta, source, toc }, order) => ({
-                        meta: updateMeta.postUrl(meta, order), // update url for pagination
-                        source,
-                        toc,
-                    }))
+            )
+                .sort(
+                    (
+                        { meta: { update: currDate } },
+                        { meta: { update: nextDate } }
+                    ) => sortByDate(currDate, nextDate)
+                )
+                .map(({ meta, source, toc }, order) => ({
+                    meta: updateMeta.postUrl(meta, order), // update url for pagination
+                    source,
+                    toc,
+                }))
 
-                const categoryPost: AllPostOfSpecificCategory= {
-                    allCategoryPost,
-                    postCount: allCategoryPost.length,
-                    category,
-                }
-                return categoryPost
+            const categoryPost: AllPostOfSpecificCategoryType = {
+                allCategoryPost,
+                postCount: allCategoryPost.length,
+                category,
             }
-        )
+            return categoryPost
+        })
     )
 
     return allPost
@@ -604,7 +591,9 @@ const getSinglePost = async ({
 
                     const prevPost: PostControllerInfoType = isFirst
                         ? {
-                              title: config.postControllerText.first(categoryName),
+                              title: config.postControllerText.first(
+                                  categoryName
+                              ),
                               link: `/${categoryName}`,
                           }
                         : {
@@ -613,7 +602,9 @@ const getSinglePost = async ({
                           }
                     const nextPost: PostControllerInfoType = isLast
                         ? {
-                              title: config.postControllerText.last(categoryName),
+                              title: config.postControllerText.last(
+                                  categoryName
+                              ),
                               link: `/${categoryName}`,
                           }
                         : {
@@ -638,7 +629,7 @@ const getSinglePost = async ({
     return post
 }
 
-const getAllPost = async (): Promise<AllPostOfSpecificCategory[]> =>
+const getAllPost = async (): Promise<AllPostOfSpecificCategoryType[]> =>
     await extractAllPost(
         await extractAllPostFileName(await getAllCategoryName())
     )
@@ -681,20 +672,21 @@ interface ExtractedSeriesMeta
     series: SeriesMetaType
 }
 const extractAllSeriesMeta = (allMeta: MetaType[]): ExtractedSeriesMeta[][] => {
-    const filterMetaBySeriesExsistance = allMeta.reduce<
-        ExtractedSeriesMeta[]
-    >((acc, { series, color, title, postUrl }) => {
-        if (series === null) return acc
-        return [
-            ...acc,
-            {
-                series,
-                color,
-                title,
-                postUrl,
-            },
-        ]
-    }, [])
+    const filterMetaBySeriesExsistance = allMeta.reduce<ExtractedSeriesMeta[]>(
+        (acc, { series, color, title, postUrl }) => {
+            if (series === null) return acc
+            return [
+                ...acc,
+                {
+                    series,
+                    color,
+                    title,
+                    postUrl,
+                },
+            ]
+        },
+        []
+    )
     const seriesTitle = [
         ...new Set(
             filterMetaBySeriesExsistance.map(
@@ -766,22 +758,21 @@ const getSingleSeries = async (
 export {
     //* bundleMDX
     bundlePost,
-     //* post
-     getSinglePost,
-     //* meta
-     getLatestPostMeta,
-     getSpecificCategoryMeta,
-     getSpecificCategoryLatestMeta,
-     getCategoryPaginationPostMeta,
-     //* series
-     getAllSeries,
-     getSingleSeries,
-     //* getStaticPaths
-     getAllPostPath,
-     getAllPostPaginationPath,
+    //* post
+    getSinglePost,
+    //* meta
+    getLatestPostMeta,
+    getSpecificCategoryMeta,
+    getSpecificCategoryLatestMeta,
+    getCategoryPaginationPostMeta,
+    //* series
+    getAllSeries,
+    getSingleSeries,
+    //* getStaticPaths
+    getAllPostPath,
+    getAllPostPaginationPath,
     //* pagination
     getTotalPageNumberOfCategory,
     //* tag
     getUniqueTagFromMeta,
-   
 }
