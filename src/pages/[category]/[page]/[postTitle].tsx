@@ -29,8 +29,8 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     const { category, page, postTitle } = params as ParamQuery
 
     const { controller, meta, source, toc } = await getSinglePost({
-        categoryName: category,
-        categoryPage: Number(page),
+        category: category,
+        page: Number(page),
         postTitle,
     })
 

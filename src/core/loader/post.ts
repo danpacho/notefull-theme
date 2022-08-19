@@ -429,16 +429,16 @@ const getSpecificCategoryLatestMeta = (
  */
 const getCategoryPaginationPostMeta = async ({
     category,
-    pageNumber,
+    page,
 }: {
     category: string
-    pageNumber: number
+    page: number
 }): Promise<MetaType[]> =>
     await (
         await getSpecificCategoryMeta(category)
     ).slice(
-        (pageNumber - 1) * config.postPerCategoryPage,
-        pageNumber * config.postPerCategoryPage
+        (page - 1) * config.postPerCategoryPage,
+        page * config.postPerCategoryPage
     )
 //* ----------------------------- 🔥 post 🔥 -----------------------------
 const extractSinglePost = async ({
@@ -570,31 +570,31 @@ const extractAllPost = async (
  * -  check {@link PostWithControllerType}
  */
 const getSinglePost = async ({
-    categoryName,
-    categoryPage,
+    category,
+    page,
     postTitle,
 }: {
-    categoryName: string
-    categoryPage: number
+    category: string
+    page: number
     postTitle: string
 }): Promise<PostWithControllerType> => {
     const post = (await getAllPost())
-        .find(({ category }) => category === categoryName)! //* It is definitely exsists, non-nullable
+        .find(
+            ({ category: extractedCategory }) => category === extractedCategory
+        )! //* It is definitely exsists, non-nullable
         .allCategoryPost.reduce<PostWithControllerType>(
             (post, currPost, idx, totPost) => {
                 if (
                     currPost.meta.postUrl ===
-                    `/${categoryName}/${categoryPage}/${postTitle}`
+                    `/${category}/${page}/${postTitle}`
                 ) {
                     const isFirst = idx === 0
                     const isLast = idx === totPost.length - 1
 
                     const prevPost: PostControllerInfoType = isFirst
                         ? {
-                              title: config.postControllerText.first(
-                                  categoryName
-                              ),
-                              link: `/${categoryName}`,
+                              title: config.postControllerText.first(category),
+                              link: `/${category}`,
                           }
                         : {
                               title: totPost[idx - 1].meta.title,
@@ -602,10 +602,8 @@ const getSinglePost = async ({
                           }
                     const nextPost: PostControllerInfoType = isLast
                         ? {
-                              title: config.postControllerText.last(
-                                  categoryName
-                              ),
-                              link: `/${categoryName}`,
+                              title: config.postControllerText.last(category),
+                              link: `/${category}`,
                           }
                         : {
                               title: totPost[idx + 1].meta.title,

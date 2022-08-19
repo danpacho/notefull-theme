@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<
 
     const paginatedPostMeta = await getCategoryPaginationPostMeta({
         category,
-        pageNumber,
+        page: pageNumber,
     })
 
     const categoryTag = getUniqueTagFromMeta(paginatedPostMeta)
