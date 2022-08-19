@@ -35,7 +35,7 @@ export interface PostWithControllerType extends PostType {
     controller: PostControllerType
 }
 
-interface PostControllerInfoType {
+export interface PostControllerInfoType {
     title: string
     link: string
 }

@@ -2,20 +2,21 @@ import path from "path"
 import { cwd } from "process"
 import { readFile, readdir } from "fs/promises"
 
-import {
+import type {
     MDXMetaType,
     MetaType,
     SeriesMetaType,
 } from "@typing/post/meta"
 
-import {
+import type {
     PostType,
     PostControllerType,
     PostWithControllerType,
     AllPostOfSpecificCategory,
+    PostControllerInfoType,
 } from "@typing/post"
 
-import { SeriesType, SeriesInfoType } from "@typing/post/series"
+import type { SeriesType, SeriesInfoType } from "@typing/post/series"
 
 import { POST_FILE_NAME, MAC_OS_FILE_EXCEPTION } from "@constants/index"
 
@@ -601,7 +602,7 @@ const getSinglePost = async ({
                     const isFirst = idx === 0
                     const isLast = idx === totPost.length - 1
 
-                    const prevPost = isFirst
+                    const prevPost: PostControllerInfoType = isFirst
                         ? {
                               title: config.postControllerText.first(categoryName),
                               link: `/${categoryName}`,
@@ -610,7 +611,7 @@ const getSinglePost = async ({
                               title: totPost[idx - 1].meta.title,
                               link: totPost[idx - 1].meta.postUrl,
                           }
-                    const nextPost = isLast
+                    const nextPost: PostControllerInfoType = isLast
                         ? {
                               title: config.postControllerText.last(categoryName),
                               link: `/${categoryName}`,
@@ -664,7 +665,6 @@ const getAllPostPaginationPath = async () =>
             })
         )
     ).flat()
-
 //* ----------------------------- 🔥 page number 🔥 -----------------------------
 const getTotalPageNumberOfCategory = async (category: string) =>
     Math.ceil(
