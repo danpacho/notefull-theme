@@ -1,28 +1,12 @@
 import getAuthorContactHref, { ContactPlatformType } from "@core/contact"
 
-const userPallete = {
-    primary1: "#F2E2CE",
-    primary2: "#D9BD9C",
-    primary3: "#A68A68",
-    primary4: "#776350",
-}
-export type UserPalleteType = typeof userPallete
-
-export interface AuthorInfoType {
-    name: string
-    currentGoal: string
-    currentState: string
-    contacts: {
-        [key in ContactPlatformType]: string
-    }
-    logoImageUrl: string
-    bannerImageUrl: string
-    faviconUrl: string
-}
-const authorInfo: AuthorInfoType = {
-    name: "your name",
-    currentState: "your current state",
-    currentGoal: "your current goal",
+const author = {
+    name: "author name",
+    currentState: "author current state",
+    currentGoal: "author current goal",
+    logoImageUrl: "/logo.png",
+    faviconUrl: "/favicon.ico",
+    bannerImageUrl: "/banner.png",
     contacts: {
         email: getAuthorContactHref("email", "your@email"),
         github: getAuthorContactHref("github", "githubID"),
@@ -31,61 +15,36 @@ const authorInfo: AuthorInfoType = {
         instagram: getAuthorContactHref("instagram", "instagramID"),
         linkedin: getAuthorContactHref("linkedin", "linkedinID"),
         twitter: getAuthorContactHref("twitter", "twitterID"),
-    },
-    logoImageUrl: "/logo.png",
-    bannerImageUrl: "/banner.png",
-    faviconUrl: "/favicon.ico",
+    } as { [key in ContactPlatformType]?: string },
 } as const
 
-interface BlogInfoType {
-    url: string
-    siteName: string
-    subtitle: string
-    copyright: string
-    language: string
-    googleAnalyticsID?: string
-}
-const blogInfo: BlogInfoType = {
+const blog = {
     url: "your DEPLOY URL",
     siteName: "your site name",
     subtitle: "your site subtitle",
     copyright: `${
-        authorInfo.name
+        author.name
     }© All rights reserved ${new Date().getFullYear()}.`,
     language: "ko",
+    googleAnalyticsID: "DISABLED", // default to "DISABLED"
 } as const
 
-const blogContentsDirectoryName = "blog" as const
-interface ConfigType extends BlogInfoType {
-    useTXT: boolean // description file format to .txt, not .json
-    useKatex: boolean // katex option
-    userPallete: UserPalleteType // personal pallete
-    blogContentsDirectoryName: `${typeof blogContentsDirectoryName}` // blog contents directory name
-    author: AuthorInfoType
-    postPerCategoryPage: number
-    numberOfLatestPost: number
-    numberOfMainPageCategory: number
-    postControllerText: {
-        first: (category: string) => string // first post ➡️ no prev post, so replace with your text
-        last: (category: string) => string // last post ➡️ no next post, so replace with your text
-    }
-}
-const config: ConfigType = {
-    useTXT: false,
-    useKatex: false,
-    userPallete,
-    blogContentsDirectoryName,
+const config = {
+    blogContentsDirectoryName: "blog", // blog contents directory name
+    useKatex: false, // katex option
     postPerCategoryPage: 4,
     numberOfLatestPost: 5,
     numberOfMainPageCategory: 5,
     postControllerText: {
-        first: (category: string) => `Return to ${category}`,
-        last: (category: string) => `Last post of ${category}`,
+        first: (category: string) => `Return to ${category}`, // first post ➡️ no prev post, so replace with your text
+        last: (category: string) => `Last post of ${category}`, // last post ➡️ no next post, so replace with your text
     },
-    author: {
-        ...authorInfo,
-    },
-    ...blogInfo,
+    author,
+    ...blog,
 } as const
+
+export type BlogInfoType = typeof blog
+export type AuthorInfoType = typeof author
+export type ConfigType = typeof config
 
 export { config }
