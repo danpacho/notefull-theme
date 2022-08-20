@@ -67,7 +67,7 @@ function App({ Component, pageProps }: AppProps) {
                 />
             </Head>
 
-            {config.googleAnalyticsID && (
+            {config.googleAnalyticsID !== "DISABLED" && (
                 <GoogleAnalytics googleAnalyticsID={config.googleAnalyticsID} />
             )}
 
