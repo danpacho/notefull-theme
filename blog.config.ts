@@ -8,6 +8,7 @@ const author = {
     faviconUrl: "/favicon.ico",
     bannerImageUrl: "/banner.png",
     contacts: {
+        // ✅ DO NOT REMOVE EMAIL, for rss
         email: getAuthorContactHref("email", "your@email"),
         github: getAuthorContactHref("github", "githubID"),
         youtube: getAuthorContactHref("youtube", "youtubeID"),
