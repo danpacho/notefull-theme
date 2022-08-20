@@ -2,9 +2,9 @@ import path from "path"
 import { cwd } from "process"
 import { readFile, readdir } from "fs/promises"
 
-import type { MDXMetaType, MetaType, SeriesMetaType } from "@typing/post/meta"
+import { MDXMetaType, MetaType, SeriesMetaType } from "@typing/post/meta"
 
-import type {
+import {
     PostType,
     PostControllerType,
     PostControllerInfoType,
@@ -12,7 +12,7 @@ import type {
     AllPostOfSpecificCategoryType,
 } from "@typing/post"
 
-import type { SeriesType, SeriesInfoType } from "@typing/post/series"
+import { SeriesType, SeriesInfoType } from "@typing/post/series"
 
 import { POST_FILE_NAME, MAC_OS_FILE_EXCEPTION } from "@constants/index"
 

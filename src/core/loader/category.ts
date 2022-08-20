@@ -1,6 +1,6 @@
 import { readdir, readFile } from "fs/promises"
 
-import type { CategoryInfoType } from "@typing/category"
+import { CategoryInfoType } from "@typing/category"
 
 import {
     DESCRIPTION_FILE_NAME,
