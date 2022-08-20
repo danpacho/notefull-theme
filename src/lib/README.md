@@ -1,12 +1,11 @@
 # Lib 📦
 
-## **`GoogleAnalytics`**
+## GoogleAnalytics
 
 -   Activate Google analytics
--   Run on `partytown🎉` thread, not `main` thread
-    -   get performance
+-   Runs on `partytown🎉` thread, not `main` thread, performant UX
 
-## **`unified`**
+## unified
 
 -   Markdown preprocessing utility function using `unified` package
 -   Running on build time means serverside excute, not clientside
