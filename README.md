@@ -48,9 +48,9 @@ start with just what we need.
 title: post title
 preview: post preview
 author: post author
-update: 2022/08/15 # 💡 YYYY/MM/DD
-color: "#A68A68" # 💡 "{ HEX | rgba | rgb }"
-tags: tag1, tag2 # 💡 split by comma
+update: 2022/08/15 #💡 <YYYY/MM/DD>
+color: "#A68A68" #💡 <"{ HEX | rgba | rgb }">
+tags: tag1, tag2 #💡 split by comma
 ---
 ```
 
@@ -58,10 +58,10 @@ tags: tag1, tag2 # 💡 split by comma
 
 ```yaml
 ---
-series: javascript-1 # {seriesTitle}-{order}
-bannerUrl: /category/post # nextjs static image location
-reference: ref1, ref2 # split by comma
-postpone: true # if true, post will not published
+series: javascript-1 #💡 <{seriesTitle}-{order}>
+bannerUrl: /category/post #💡 nextjs static image location
+reference: ref1, ref2 #💡 split by comma
+postpone: true #💡 if true, post will not published
 ---
 ```
 
