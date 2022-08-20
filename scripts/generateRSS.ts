@@ -2,7 +2,7 @@ import { config } from "blog.config"
 import { writeFile } from "fs/promises"
 import { TempMetaType } from "./utils"
 
-const email = config.author.contacts.email.replace("mailto:", "")
+const email = config.author.contacts.email?.replace("mailto:", "")!
 
 const generateRSSItem = ({
     postUrl,
