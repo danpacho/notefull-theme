@@ -12,9 +12,7 @@ import { config } from "blog.config"
 
 export const getStaticProps: GetStaticProps<MainPageProps> = async () => {
     const latestPostMeta = await getLatestPostMeta()
-    const mainCategoryInfo = await getMainCategoryInfo({
-        useTXT: config.useTXT,
-    })
+    const mainCategoryInfo = await getMainCategoryInfo()
 
     return {
         props: {

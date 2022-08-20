@@ -19,9 +19,6 @@ import {
 } from "@core/loader/post"
 
 import { CategorySEO } from "@components/SEO"
-
-import { config } from "blog.config"
-
 interface ParamQuery extends ParsedUrlQuery {
     category: string
 }
@@ -38,10 +35,7 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
 
     const categorySeries = getAllSeries(specificCategoryMeta)
 
-    const categoryInfo = await getSingleCategoryInfo({
-        category,
-        useTXT: config.useTXT,
-    })
+    const categoryInfo = await getSingleCategoryInfo(category)
 
     return {
         props: {

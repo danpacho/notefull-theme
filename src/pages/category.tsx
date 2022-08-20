@@ -5,14 +5,10 @@ import type { PageType } from "@typing/page"
 
 import { getAllCategoryInfo } from "@core/loader/category"
 
-import { config } from "blog.config"
-
 export const getStaticProps: GetStaticProps<
     AllCategoryPageProps
 > = async () => {
-    const allCategoryInfo = await getAllCategoryInfo({
-        useTXT: config.useTXT,
-    })
+    const allCategoryInfo = await getAllCategoryInfo()
     return {
         props: {
             allCategoryInfo,

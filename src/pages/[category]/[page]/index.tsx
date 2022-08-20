@@ -27,10 +27,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params }) => {
     const { category, page } = params as ParamQuery
     const pageNumber = Number(page)
-    const categoryInfo = await getSingleCategoryInfo({
-        category,
-        useTXT: config.useTXT,
-    })
+    const categoryInfo = await getSingleCategoryInfo(category)
 
     const paginatedPostMeta = await getCategoryPaginationPostMeta({
         category,
