@@ -36,12 +36,14 @@ export const getStaticProps: GetStaticProps<
         category,
         page: pageNumber,
     })
+    const paginatedTag = getUniqueTagFromMeta(paginatedPostMeta)
 
     const endPageNumber = await getTotalPageNumberOfCategory(category)
 
     return {
         props: {
             allPost: paginatedPostMeta,
+            allTag: paginatedTag,
             page: pageNumber,
             isLastPage: pageNumber === endPageNumber,
             ...categoryInfo,
@@ -60,11 +62,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 interface PaginatedCategoryPageProps extends CategoryInfoType {
     allPost: MetaType[]
+    allTag: string[]
     page: number
     isLastPage: boolean
 }
 function PaginatedCategoryPage({
     allPost,
+    allTag,
     category,
     categoryUrl,
     description,
@@ -73,8 +77,6 @@ function PaginatedCategoryPage({
     isLastPage,
     page,
 }: PaginatedCategoryPageProps) {
-    const allTag = getUniqueTagFromMeta(allPost)
-
     return <></>
 }
 PaginatedCategoryPage.displayName = "Category" as PageType
