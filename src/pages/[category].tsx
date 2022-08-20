@@ -34,8 +34,6 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
     const specificCategoryMeta = await getSpecificCategoryMeta(category)
     const latestCategoryPostMeta =
         getSpecificCategoryLatestMeta(specificCategoryMeta)
-    const latestCategoryPostTag = getUniqueTagFromMeta(specificCategoryMeta)
-
     const categorySeries = getAllSeries(specificCategoryMeta)
 
     const categoryInfo = await getSingleCategoryInfo({
@@ -46,7 +44,6 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
     return {
         props: {
             latestPost: latestCategoryPostMeta,
-            latestTag: latestCategoryPostTag,
             allSeries: categorySeries,
             ...categoryInfo,
         },
@@ -63,7 +60,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 interface CategoryPageProps extends CategoryInfoType {
     latestPost: MetaType[]
-    latestTag: string[]
     allSeries: SeriesType[]
 }
 function CategoryPage(props: CategoryPageProps) {
@@ -76,6 +72,7 @@ function CategoryPage(props: CategoryPageProps) {
         color,
         emoji,
     } = props
+    const latestTag = getUniqueTagFromMeta(latestPost)
 
     return (
         <>
