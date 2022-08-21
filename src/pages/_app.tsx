@@ -10,7 +10,7 @@ import type { PageType } from "@typing/page"
 
 import { DefaultSEO } from "@components/SEO"
 
-import { GoogleAnalytics } from "@lib/GoogleAnalytics"
+import { GoogleAnalytics } from "@components/GoogleAnalytics"
 import { config } from "blog.config"
 
 /**

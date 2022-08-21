@@ -1,10 +1,5 @@
 # Lib 📦
 
-## GoogleAnalytics
-
--   Activate Google analytics
--   Runs on `partytown🎉` thread, not `main` thread, performant UX
-
 ## remark
 
 -   Markdown preprocessing utility function using `unified` package
