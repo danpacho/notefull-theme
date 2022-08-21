@@ -15,7 +15,7 @@ type MarkdownElement =
     | "thematicBreak"
     | "image"
 
-export interface MarkdownNodeType {
+export interface MarkdownNodeType extends Node {
     type: MarkdownElement
     depth?: number
     children?: NodeChildrenType[]
