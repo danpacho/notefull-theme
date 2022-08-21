@@ -1,32 +1,36 @@
-import {
-    Paragraph,
-    Bold,
-    Italic,
-    H1,
-    H2,
-    H3,
-    OL,
-    UL,
-    LI,
-    Link,
-    Quote,
-    Pre,
-    Code,
-    Image,
-    Divider,
-    Table,
-    TD,
-    TH,
-    TR,
-} from "./MDXAtoms"
+import Paragraph from "./Text/Paragraph"
+import Italic from "./Text/Italic"
+import Bold from "./Text/Bold"
+import H1 from "./Text/H1"
+import H2 from "./Text/H2"
+import H3 from "./Text/H3"
+import Link from "next/link"
+
+import Code from "./Code/Code"
+import Pre from "./Code/Pre"
+
+import LI from "./List/LI"
+import OL from "./List/OL"
+import UL from "./List/UL"
+import Quote from "./Quote"
+
+import Divider from "./Divider"
+
+import Table from "./Table/Table"
+import TD from "./Table/TD"
+import TH from "./Table/TH"
+import TR from "./Table/TR"
+
 import { MDXComponents } from "mdx/types"
+import Image from "./Image"
 
 const MDXAtoms = {
     p: Paragraph,
     strong: Bold,
     em: Italic,
+    a: Link,
 
-    h1: H1 as MDXComponents["h1"],
+    h1: H1,
     h2: H2,
     h3: H3,
 
@@ -34,14 +38,12 @@ const MDXAtoms = {
     ul: UL,
     li: LI,
 
-    a: Link as MDXComponents["a"],
-
-    blockquote: Quote as MDXComponents["blockquote"],
+    blockquote: Quote,
 
     pre: Pre,
-    code: Code as MDXComponents["code"],
+    code: Code,
 
-    img: Image as MDXComponents["img"],
+    img: Image,
 
     hr: Divider,
 
@@ -49,6 +51,6 @@ const MDXAtoms = {
     th: TH,
     td: TD,
     tr: TR,
-}
+} as MDXComponents
 
 export default MDXAtoms

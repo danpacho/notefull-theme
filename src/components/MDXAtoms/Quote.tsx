@@ -1,5 +1,5 @@
 function Quote(props: any) {
-    return <div {...props} />
+    return <blockquote {...props} />
 }
 
 export default Quote

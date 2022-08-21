@@ -1,8 +1,6 @@
 import { useMemo } from "react"
 import { getMDXComponent } from "mdx-bundler/client"
 
-import { MDXComponents } from "mdx/types"
-
 import MDXAtoms from "@components/MDXAtoms"
 
 interface MDXBundlerProp {
@@ -12,7 +10,7 @@ interface MDXBundlerProp {
 function MDXBundler({ source }: MDXBundlerProp) {
     const BundledComponent = useMemo(() => getMDXComponent(source), [source])
 
-    return <BundledComponent components={MDXAtoms as MDXComponents} />
+    return <BundledComponent components={MDXAtoms} />
 }
 
 export default MDXBundler
