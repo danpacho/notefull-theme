@@ -6,19 +6,19 @@
 
 </div>
 
--   [Bloapi 🐧](#bloapi-)
--   [The Problem](#the-problem)
--   [Let's Play Practical](#lets-play-practical)
--   [Perfect Fit for](#perfect-fit-for)
--   [Kind of meta](#kind-of-meta)
-    -   [required](#required)
-    -   [optional](#optional)
--   [Kind of data](#kind-of-data)
--   [Features](#features)
-    -   [Essential 📦](#essential-)
-    -   [More 🚀](#more-)
--   [Get started](#get-started)
--   [LICENSE](#license)
+- [Bloapi 🐧](#bloapi-)
+- [The Problem](#the-problem)
+- [Let's Play Practical](#lets-play-practical)
+- [Perfect Fit for](#perfect-fit-for)
+- [Kind of meta](#kind-of-meta)
+  - [required](#required)
+  - [optional](#optional)
+- [Kind of data](#kind-of-data)
+- [Features](#features)
+  - [Essential 📦](#essential-)
+  - [More 🚀](#more-)
+- [Get started](#get-started)
+- [LICENSE](#license)
 
 # The Problem
 
@@ -173,23 +173,21 @@ interface PostPageProps extends PostWithControllerType {
 2. **[CLI posting](https://github.com/danpacho/blog-post-generator)** support
 3. **`SEO` optimized** with [next-seo](https://github.com/garmeeh/next-seo)
 4. **`RSS`/`SITEMAP` generation** in `scripts`
-5. Familiar url structure for blog
 
 ## More 🚀
 
 1. **First Load Js ⚡️ `44.5kb` ⚡️**, **preact** on production build
 2. **`Toc` object** generation on server-side
-3. **Image optimized** with `next/image`
-4. **Automatic sized** static image
-5. **Google-analytics** full support in [party-town-thread](https://github.com/BuilderIO/partytown#readme)
-6. **Code highlight** with [rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus#readme)
-7. **Math expression** _optional_ support with `katex`
-8. Kind error message
-9. Kind `tsdoc`. Read doc with `cmd`+`mouse hover` shortcut in vscode
+3. **Image optimized** with `next/image` and support **automatic-sizing**
+4. **Google-analytics** full support in **[party-town-thread](https://github.com/BuilderIO/partytown#readme)**
+5. **Code highlight** with [rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus#readme)
+6. **Math expression** _optional_ support with `katex`
+7. Kind error message
+8. Kind `tsdoc`. Read doc with `cmd`+`mouse hover` shortcut in vscode
 
 # Get started
 
-Click `Use This Template` || `git clone`
+Click `🐧 Use This Template` or `🐧 git clone`
 
 # LICENSE
 
