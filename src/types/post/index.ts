@@ -1,4 +1,4 @@
-import type { TableOfContentsType } from "@lib/unified/remark"
+import type { TableOfContentsType } from "@lib/remark/getTableOfContents"
 import type { MetaType } from "./meta"
 
 /**

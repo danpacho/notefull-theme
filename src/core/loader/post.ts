@@ -11,6 +11,7 @@ import {
     PostWithControllerType,
     AllPostOfSpecificCategoryType,
 } from "@typing/post"
+import { TableOfContentsType as PostTOCType } from "@lib/remark/getTableOfContents"
 
 import { SeriesType, SeriesInfoType } from "@typing/post/series"
 
@@ -36,15 +37,10 @@ import matter from "gray-matter"
 
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
-import {
-    getTableOfContents,
-    remarkAutomaticImageSize,
-    TableOfContentsType,
-} from "@lib/unified/remark"
+import { getTableOfContents, remarkImageSizeByAlt } from "@lib/remark"
 
 import rehypeKatex from "rehype-katex"
 import rehypePrism from "rehype-prism-plus"
-import { rehypeHeaderId } from "@lib/unified/rehype"
 
 import { bundleMDX } from "mdx-bundler"
 import type { Pluggable } from "unified"
@@ -152,7 +148,7 @@ const bundlePost = async <MetaT>({
     }
 }): Promise<{
     bundledResult: BundledResult<MetaT>
-    toc: TableOfContentsType[]
+    toc: PostTOCType[]
 }> => {
     //* ES Build env config: https://www.alaycock.co.uk/2021/03/mdx-bundler#esbuild-executable
     if (process.platform === "win32") {
@@ -196,7 +192,7 @@ const bundlePost = async <MetaT>({
             readingFileName: "❓",
         })
 
-    const toc: TableOfContentsType[] = getTableOfContents(postSource) //* toc on server-side
+    const toc: PostTOCType[] = getTableOfContents(postSource) //* toc on server-side
 
     return {
         bundledResult,
@@ -452,7 +448,7 @@ const extractSinglePost = async ({
 }): Promise<{
     bundledSource: string
     meta: MetaType | void
-    toc: TableOfContentsType[]
+    toc: PostTOCType[]
 }> => {
     const postSource = await readFile(dir, "utf-8")
     if (!postSource)
@@ -470,16 +466,12 @@ const extractSinglePost = async ({
         postSource,
         customPlugin: config.useKatex
             ? definePlugins({
-                  rehypePlugins: [rehypePrism, rehypeKatex, rehypeHeaderId],
-                  remarkPlugins: [
-                      remarkAutomaticImageSize,
-                      remarkGfm,
-                      remarkMath,
-                  ],
+                  rehypePlugins: [rehypePrism, rehypeKatex],
+                  remarkPlugins: [remarkImageSizeByAlt, remarkGfm, remarkMath],
               })
             : definePlugins({
-                  rehypePlugins: [rehypePrism, rehypeHeaderId],
-                  remarkPlugins: [remarkAutomaticImageSize, remarkGfm],
+                  rehypePlugins: [rehypePrism],
+                  remarkPlugins: [remarkImageSizeByAlt, remarkGfm],
               }),
     })
 

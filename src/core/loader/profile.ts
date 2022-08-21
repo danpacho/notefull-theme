@@ -7,7 +7,7 @@ import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "@core/error"
 import { definePlugins } from "@core/loader/util"
 import { bundlePost } from "@core/loader/post"
 
-import { remarkAutomaticImageSize } from "@lib/unified/remark"
+import { remarkImageSizeByAlt } from "@lib/remark"
 import remarkGfm from "remark-gfm"
 import rehypePrism from "rehype-prism-plus"
 
@@ -33,7 +33,7 @@ const getProfileSource = async () => {
                 customPlugin: definePlugins({
                     // plugins using on profile page
                     rehypePlugins: [rehypePrism],
-                    remarkPlugins: [remarkAutomaticImageSize, remarkGfm],
+                    remarkPlugins: [remarkImageSizeByAlt, remarkGfm],
                 }),
             })
         ).bundledResult.code
