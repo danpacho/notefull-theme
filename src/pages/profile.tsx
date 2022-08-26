@@ -46,8 +46,8 @@ function ProfilePage({ profileSource }: ProfileProps) {
     return (
         <>
             <MDXBundler source={profileSource} />
-            <a href="https://github.com/danpa725/only-core">
-                {config.copyright} Blog Core Battery 🔋
+            <a href="https://github.com/danpa725/bloapi">
+                {config.copyright}, Powered by Bloapi 🐧
             </a>
         </>
     )
