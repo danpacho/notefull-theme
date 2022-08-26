@@ -9,13 +9,13 @@ const author = {
     bannerImageUrl: "/banner.png",
     contacts: {
         // ✅ DO NOT REMOVE EMAIL, for rss
-        email: getAuthorContactHref("email", "your@email"),
-        github: getAuthorContactHref("github", "githubID"),
-        youtube: getAuthorContactHref("youtube", "youtubeID"),
-        facebook: getAuthorContactHref("facebook", "facebookID"),
-        instagram: getAuthorContactHref("instagram", "instagramID"),
-        linkedin: getAuthorContactHref("linkedin", "linkedinID"),
-        twitter: getAuthorContactHref("twitter", "twitterID"),
+        email: getAuthorContactHref("email", "your_email"),
+        github: getAuthorContactHref("github", "github_id"),
+        youtube: getAuthorContactHref("youtube", "youtube_id"),
+        facebook: getAuthorContactHref("facebook", "facebook_id"),
+        instagram: getAuthorContactHref("instagram", "instagram_id"),
+        linkedin: getAuthorContactHref("linkedin", "linkedin_id"),
+        twitter: getAuthorContactHref("twitter", "twitter_id"),
     } as { [key in ContactPlatformType]?: string },
 } as const
 
