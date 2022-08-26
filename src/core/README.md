@@ -9,19 +9,19 @@
 -   A set of functions that extract categories and posts from a `blog file structure` and return the processed data
 -   **blog file structure**
     ```bash
-      🏠 ${config.blogContentsDirectoryName}
-      ┣ 📦 content
-      ┃ ┣ 🗂 [catgory-name]
-      ┃ ┃ ┣ 🗂 posts
-      ┃ ┃ ┃ ┣ 📔 [post-name].mdx
-      ┃ ┃ ┃ ┗...
-      ┃ ┃ ┃
-      ┃ ┃ ┗ 📔 description.json
-      ┃ ┃
-      ┣ ┗ 🗂 [catgory-name2]...
-      ┃
-      ┗ 📦 profile
-        ┗ 📔 description.mdx
+    🏠 ${config.blogContentsDirectoryName}
+    ┣ 📦 "content"
+    ┃ ┣ 🗂 {catgory}
+    ┃ ┃ ┃
+    ┃ ┃ ┣ 🗂 "posts"
+    ┃ ┃ ┃ ┣ 📔 {post}.mdx
+    ┃ ┃ ┃ ┗...
+    ┃ ┃ ┃
+    ┃ ┃ ┗ 📔 "description.json"
+    ┃ ┃
+    ┣ ┗ 🗂 {catgory2}...
+    ┃
+    ┗ 📔 "profile.mdx"
     ```
     1. File name and structure **must follow above**
     2. You can modify the **`blogContentsDirectoryName`** of the `blog.config.ts` file to set the name of the blog directory name
@@ -39,6 +39,6 @@
 
 ---
 
-## **contact**
+## **profile**
 
-get contact info
+extract profile source from **`${config.blogContentsDirectoryName}/profile.mdx`**

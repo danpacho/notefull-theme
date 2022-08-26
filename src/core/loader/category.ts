@@ -31,21 +31,19 @@ const getAllCategoryName = async () => {
                 "blog-contents directory name 📝 incorrection",
             message: `Check ${config.blogContentsDirectoryName} and "${config.blogContentsDirectoryName}/contens" file name 🔎`,
             customeErrorMessage: `directory structure should match with following path ⬇️\n\n      ${blogContentsDir}\n\n      🔒 Check Post Directory Structure:\n 
-            📦"${config.blogContentsDirectoryName}"
-            ┃
-            ┣ 📂"content"
-            ┃ ┃
-            ┃ ┣ 📂{catgory}
+            🏠 ${config.blogContentsDirectoryName}
+            ┣ 📦 "content"
+            ┃ ┣ 🗂 {catgory}
             ┃ ┃ ┃
-            ┃ ┃ ┣ 📂"posts"
-            ┃ ┃ ┃ ┣ 📜{postTitle}.mdx
+            ┃ ┃ ┣ 🗂 "posts"
+            ┃ ┃ ┃ ┣ 📔 {post}.mdx
             ┃ ┃ ┃ ┗...
             ┃ ┃ ┃
-            ┃ ┃ ┗ 📜"description.json"
-            ┃ ┗...
+            ┃ ┃ ┗ 📔 "description.json"
+            ┃ ┃
+            ┣ ┗ 🗂 {catgory2}...
             ┃
-            ┣ 📂"profile"
-            ┗ ┗ 📜"description.json"
+            ┗ 📔 "profile.mdx"
             `,
         })
     }
