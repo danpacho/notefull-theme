@@ -27,7 +27,7 @@ const getProfileSource = async () => {
                 readingFileName: "profile.mdx",
             })
 
-        return await (
+        const profileSource = await (
             await bundlePost({
                 postSource: profileContent,
                 customPlugin: definePlugins({
@@ -37,6 +37,7 @@ const getProfileSource = async () => {
                 }),
             })
         ).bundledResult.code
+        return profileSource
     } catch (err) {
         throw new BlogErrorAdditionalInfo({
             passedError: err,
