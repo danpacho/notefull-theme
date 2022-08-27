@@ -1,4 +1,4 @@
-import "../styles/code.css"
+import "../styles/tailwind.css"
 
 import { useEffect, useRef } from "react"
 
@@ -12,6 +12,7 @@ import { DefaultSEO } from "@components/SEO"
 
 import { GoogleAnalytics } from "@components/GoogleAnalytics"
 import { config } from "blog.config"
+import Layout from "@components/Layout"
 
 /**
  * - custom hook for restoring scroll position
@@ -73,7 +74,9 @@ function App({ Component, pageProps }: AppProps) {
 
             <DefaultSEO />
 
-            <Component {...pageProps} />
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
         </>
     )
 }
