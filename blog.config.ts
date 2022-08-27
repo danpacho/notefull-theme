@@ -1,7 +1,7 @@
 import getAuthorContactHref, { ContactPlatformType } from "@core/contact"
 
 const author = {
-    name: "author name",
+    name: "myname",
     currentState: "author current state",
     currentGoal: "author current goal",
     logoImageUrl: "/logo.png",
@@ -36,6 +36,7 @@ const config = {
     postPerCategoryPage: 4,
     numberOfLatestPost: 5,
     numberOfMainPageCategory: 5,
+    themeColor: "#73d1d7",
     postControllerText: {
         first: (category: string) => `Return to ${category}`, // first post ➡️ no prev post, so replace with your text
         last: (category: string) => `Last post of ${category}`, // last post ➡️ no next post, so replace with your text
