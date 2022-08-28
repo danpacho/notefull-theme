@@ -40,12 +40,8 @@ const DEFAULT_SEO_PROPS: DefaultSeoProps = {
             content: config.author.name,
         },
         {
-            name: "currentState",
-            content: config.author.currentState,
-        },
-        {
-            name: "currentGoal",
-            content: config.author.currentGoal,
+            name: "introduce",
+            content: config.author.introduce,
         },
         ...contactMetaTags,
     ],
