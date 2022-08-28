@@ -4,7 +4,7 @@ import { PageType } from "@typing/page"
 
 import { getProfileSource } from "@core/loader/profile"
 
-import MDXBundler from "@components/MDXBundler"
+import MDXBundler from "@components/MDX/Bundler"
 
 import { config } from "blog.config"
 

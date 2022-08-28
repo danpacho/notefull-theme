@@ -14,7 +14,7 @@ import {
 
 import { PostSEO } from "@components/SEO"
 import KatexStyleLoader from "@components/KatexStyleLoader"
-import MDXBundler from "@components/MDXBundler"
+import MDXBundler from "@components/MDX/Bundler"
 
 import { config } from "blog.config"
 
