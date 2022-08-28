@@ -2,8 +2,7 @@ import getAuthorContactHref, { ContactPlatformType } from "@core/contact"
 
 const author = {
     name: "myname",
-    currentState: "author current state",
-    currentGoal: "author current goal",
+    introduce: "Introduce yourself",
     logoImageUrl: "/logo.png",
     faviconUrl: "/favicon.ico",
     bannerImageUrl: "/banner.png",
