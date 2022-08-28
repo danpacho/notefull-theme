@@ -12,7 +12,7 @@ import { DefaultSEO } from "@components/SEO"
 
 import { GoogleAnalytics } from "@components/GoogleAnalytics"
 import { config } from "blog.config"
-import Layout from "@components/Layout"
+import Layout from "@components/_layout"
 
 /**
  * - custom hook for restoring scroll position
