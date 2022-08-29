@@ -58,15 +58,34 @@ export type TailwindFontSizeType = `text-${TailwindSizeVarients}`
 export type TailwindStrokeColorType =
     | `stroke-${TailwindColorVarients}-${TailwindColorAccent}`
     | `stroke-${TailwindColorWithNoVarients}`
+export type TailwindStrokeDarkColorType =
+    | `dark:stroke-${TailwindColorVarients}-${TailwindColorAccent}`
+    | `dark:stroke-${TailwindColorWithNoVarients}`
+
 export type TailwindBgColorType =
     | `bg-${TailwindColorVarients}-${TailwindColorAccent}`
     | `bg-${TailwindColorWithNoVarients}`
+export type TailwindBgDarkColorType =
+    | `dark:bg-${TailwindColorVarients}-${TailwindColorAccent}`
+    | `dark:bg-${TailwindColorWithNoVarients}`
+
 export type TailwindBorderColorType =
     | `border-${TailwindColorVarients}-${TailwindColorAccent}`
     | `border-${TailwindColorWithNoVarients}`
+export type TailwindBorderDarkColorType =
+    | `dark:border-${TailwindColorVarients}-${TailwindColorAccent}`
+    | `dark:border-${TailwindColorWithNoVarients}`
+
 export type TailwindDividerColorType =
     | `divide-${TailwindColorVarients}-${TailwindColorAccent}`
     | `divide-${TailwindColorWithNoVarients}`
+export type TailwindDividerDarkColorType =
+    | `dark:divide-${TailwindColorVarients}-${TailwindColorAccent}`
+    | `dark:divide-${TailwindColorWithNoVarients}`
+
 export type TailwindTextColorType =
     | `text-${TailwindColorVarients}-${TailwindColorAccent}`
     | `text-${TailwindColorWithNoVarients}`
+export type TailwindTextDarkColorType =
+    | `dark:text-${TailwindColorVarients}-${TailwindColorAccent}`
+    | `dark:text-${TailwindColorWithNoVarients}`
