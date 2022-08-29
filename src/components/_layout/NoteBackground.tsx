@@ -1,10 +1,18 @@
+import { TailwindStrokeColorType } from "@typing/tailwind"
+
 interface NoteBackgroundProps {
-    innerRectRowNumber: number
-    outereRectSize: number
+    rectSize: number
+    rectStrokeWidth?: number
+    rectStrokeColor?: TailwindStrokeColorType
+    outerRectStrokeWidth?: number
+    outerRectStrokeColor?: TailwindStrokeColorType
 }
 function NoteBackground({
-    outereRectSize,
-    innerRectRowNumber,
+    rectSize,
+    rectStrokeColor = "stroke-red-200",
+    rectStrokeWidth = 0.5,
+    outerRectStrokeColor = "stroke-gray-400",
+    outerRectStrokeWidth = 0.75,
 }: NoteBackgroundProps) {
     return (
         <svg
@@ -16,17 +24,15 @@ function NoteBackground({
             <defs>
                 <pattern
                     id="smallGrid"
-                    width={`${outereRectSize / innerRectRowNumber}`}
-                    height={`${outereRectSize / innerRectRowNumber}`}
+                    width={`${rectSize}`}
+                    height={`${rectSize}`}
                     patternUnits="userSpaceOnUse"
-                    className="stroke-red-200"
+                    className={rectStrokeColor}
                 >
                     <path
-                        d={`M ${
-                            outereRectSize / innerRectRowNumber
-                        } 0 L 0 0 0 ${outereRectSize / innerRectRowNumber}`}
+                        d={`M ${rectSize} 0 L 0 0 0 ${rectSize}`}
                         fill="none"
-                        strokeWidth="0.5"
+                        strokeWidth={rectStrokeWidth}
                     />
                 </pattern>
             </defs>
@@ -35,8 +41,8 @@ function NoteBackground({
                 width="100%"
                 height="100%"
                 fill="url(#smallGrid)"
-                className="stroke-gray-400"
-                strokeWidth={0.75}
+                className={outerRectStrokeColor}
+                strokeWidth={outerRectStrokeWidth}
             />
         </svg>
     )
