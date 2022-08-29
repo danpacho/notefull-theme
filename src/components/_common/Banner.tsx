@@ -5,7 +5,7 @@ interface BannerProps {
     hex: string
     description: string
 }
-const Banner = ({ title, hex, description }: BannerProps) => {
+function Banner({ title, hex, description }: BannerProps) {
     return (
         <div>
             <BannerTitle title={title} size="text-5xl" hex={hex} />
@@ -15,7 +15,7 @@ const Banner = ({ title, hex, description }: BannerProps) => {
 }
 
 const BannerDescription = ({ children }: { children: string }) => {
-    return <div className="mt-6 font-light text-gray-500">{children}</div>
+    return <div className="mt-6 description_text">{children}</div>
 }
 
 export default Banner
