@@ -2,6 +2,8 @@ import "../styles/tailwind.css"
 
 import { useEffect, useRef } from "react"
 
+import { ThemeProvider } from "next-themes"
+
 import type { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import Head from "next/head"
@@ -74,9 +76,11 @@ function App({ Component, pageProps }: AppProps) {
 
             <DefaultSEO />
 
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <ThemeProvider attribute="class" disableTransitionOnChange>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </ThemeProvider>
         </>
     )
 }
