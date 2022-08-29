@@ -23,6 +23,7 @@ specifiers:
   next-compose-plugins: ^2.2.1
   next-remote-watch: ^1.0.0
   next-seo: ^5.5.0
+  next-themes: ^0.2.0
   postcss: ^8.4.16
   preact: ^10.10.2
   prettier: ^2.7.1
@@ -51,6 +52,7 @@ dependencies:
   next: 12.1.6_sfoxds7t5ydpegc3knd667wn6m
   next-compose-plugins: 2.2.1
   next-seo: 5.5.0_zhtyyhxvjc4vmyivr6fwl32yja
+  next-themes: 0.2.0_zhtyyhxvjc4vmyivr6fwl32yja
   preact: 10.10.6
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -3430,6 +3432,18 @@ packages:
       next: ^8.1.1-canary.54 || >=9.0.0
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
+    dependencies:
+      next: 12.1.6_sfoxds7t5ydpegc3knd667wn6m
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
+  /next-themes/0.2.0_zhtyyhxvjc4vmyivr6fwl32yja:
+    resolution: {integrity: sha512-myhpDL4vadBD9YDSHiewqvzorGzB03N84e+3LxCwHRlM/hiBOaW+UsKsQojQAzC7fdcJA0l2ppveXcYaVV+hxQ==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
     dependencies:
       next: 12.1.6_sfoxds7t5ydpegc3knd667wn6m
       react: 17.0.2
