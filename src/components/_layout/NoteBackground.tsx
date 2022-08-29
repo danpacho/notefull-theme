@@ -1,22 +1,35 @@
-import { TailwindStrokeColorType } from "@typing/tailwind"
+import {
+    TailwindBgColorType,
+    TailwindBgDarkColorType,
+    TailwindStrokeColorType,
+    TailwindStrokeDarkColorType,
+} from "@typing/tailwind"
 
 interface NoteBackgroundProps {
+    bgLight?: TailwindBgColorType
+    bgDark?: TailwindBgDarkColorType
     rectSize: number
+    rectStrokeLight?: TailwindStrokeColorType
+    rectStrokeDark?: TailwindStrokeDarkColorType
     rectStrokeWidth?: number
-    rectStrokeColor?: TailwindStrokeColorType
+    outerRectStrokeLight?: TailwindStrokeColorType
+    outerRectStrokeDark?: TailwindStrokeDarkColorType
     outerRectStrokeWidth?: number
-    outerRectStrokeColor?: TailwindStrokeColorType
 }
 function NoteBackground({
+    bgLight = "bg-transparent",
+    bgDark = "dark:bg-neutral-900",
     rectSize,
-    rectStrokeColor = "stroke-red-200",
     rectStrokeWidth = 0.5,
-    outerRectStrokeColor = "stroke-gray-400",
+    rectStrokeLight = "stroke-gray-300",
+    rectStrokeDark = "dark:stroke-neutral-600",
     outerRectStrokeWidth = 0.75,
+    outerRectStrokeLight = "stroke-gray-400",
+    outerRectStrokeDark = "dark:stroke-gray-500",
 }: NoteBackgroundProps) {
     return (
         <svg
-            className="fixed top-0 layout -z-10"
+            className={`fixed top-0 layout -z-10 ${bgLight} ${bgDark}`}
             width="100%"
             height="100%"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,10 +37,10 @@ function NoteBackground({
             <defs>
                 <pattern
                     id="grid"
-                    width={`${rectSize}`}
-                    height={`${rectSize}`}
+                    width={rectSize}
+                    height={rectSize}
+                    className={`${rectStrokeLight} ${rectStrokeDark}`}
                     patternUnits="userSpaceOnUse"
-                    className={rectStrokeColor}
                 >
                     <path
                         d={`M ${rectSize} 0 L 0 0 0 ${rectSize}`}
@@ -41,7 +54,7 @@ function NoteBackground({
                 width="100%"
                 height="100%"
                 fill="url(#grid)"
-                className={outerRectStrokeColor}
+                className={`${outerRectStrokeLight} ${outerRectStrokeDark}`}
                 strokeWidth={outerRectStrokeWidth}
             />
         </svg>
