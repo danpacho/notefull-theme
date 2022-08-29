@@ -16,14 +16,14 @@ function NoteBackground({
 }: NoteBackgroundProps) {
     return (
         <svg
-            className="fixed top-0 w-full -z-10 md:w-3/4 lg:w-4/6"
+            className="fixed top-0 layout -z-10"
             width="100%"
             height="100%"
             xmlns="http://www.w3.org/2000/svg"
         >
             <defs>
                 <pattern
-                    id="smallGrid"
+                    id="grid"
                     width={`${rectSize}`}
                     height={`${rectSize}`}
                     patternUnits="userSpaceOnUse"
@@ -40,7 +40,7 @@ function NoteBackground({
             <rect
                 width="100%"
                 height="100%"
-                fill="url(#smallGrid)"
+                fill="url(#grid)"
                 className={outerRectStrokeColor}
                 strokeWidth={outerRectStrokeWidth}
             />
