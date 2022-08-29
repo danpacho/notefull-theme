@@ -12,6 +12,7 @@ module.exports = {
                 // 🚀 VSCODE_AUTO_COMPLETE 🚀
                 ".description_text": {},
                 ".heading_text": {},
+                ".layout": {},
             })
         }),
     ],
