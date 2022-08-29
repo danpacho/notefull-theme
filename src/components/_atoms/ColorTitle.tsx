@@ -4,15 +4,19 @@ import { TailwindFontSizeType } from "@typing/tailwind"
 const getRandBetween = (maxNum: number) => Math.floor(Math.random() * maxNum)
 
 const tiltStyle = {
+    leftLg: "hover:-rotate-6 hover:scale-110 hover:translate-y-1",
     left: "hover:-rotate-2 hover:translate-y-1",
     neutral: "hover:rotate-0 hover:translate-y-0.5",
     right: "hover:rotate-2 hover:translate-y-1",
+    rightLg: "hover:rotate-6 hover:scale-110 hover:translate-y-1",
 }
 type TiltType = keyof typeof tiltStyle
+
 const characterStyle = {
     first: "capitalize transition hover:scale-110",
     rest: "transition hover:scale-110",
 }
+
 interface ColorTitleProps {
     title: string
     hex: string
@@ -33,11 +37,15 @@ function ColorTitle({ title, hex, size }: ColorTitleProps) {
         const focusLocation = focusNum + 1
         switch (isEven) {
             case true:
-                if (focusLocation <= mid) setTilte("left")
+                if (focusLocation === 1) setTilte("leftLg")
+                else if (focusLocation === titleLength) setTilte("rightLg")
+                else if (focusLocation <= mid) setTilte("left")
                 else setTilte("right")
                 return
             case false:
-                if (focusLocation < mid) setTilte("left")
+                if (focusLocation === 1) setTilte("leftLg")
+                else if (focusLocation === titleLength) setTilte("rightLg")
+                else if (focusLocation < mid) setTilte("left")
                 else if (focusLocation === mid) setTilte("neutral")
                 else setTilte("right")
                 return
