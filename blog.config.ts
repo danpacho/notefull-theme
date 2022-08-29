@@ -40,6 +40,20 @@ const config = {
         first: (category: string) => `Return to ${category}`, // first post ➡️ no prev post, so replace with your text
         last: (category: string) => `Last post of ${category}`, // last post ➡️ no next post, so replace with your text
     },
+    navigationMenu: [
+        {
+            name: "Home",
+            path: "/",
+        },
+        {
+            name: "Category",
+            path: "/category",
+        },
+        {
+            name: "Profile",
+            path: "/profile",
+        },
+    ],
     author,
     ...blog,
 } as const
