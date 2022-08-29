@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { TailwindFontSizeType } from "@typing/tailwind"
 
 const getRandBetween = (maxNum: number) => Math.floor(Math.random() * maxNum)
 
@@ -12,12 +13,6 @@ const characterStyle = {
     first: "capitalize transition hover:scale-110",
     rest: "transition hover:scale-110",
 }
-type TailwindFontSizeType =
-    | "text-5xl"
-    | "text-4xl"
-    | "text-3xl"
-    | "text-2xl"
-    | "text-xl"
 interface ColorTitleProps {
     title: string
     hex: string
@@ -53,7 +48,7 @@ function ColorTitle({ title, hex, size }: ColorTitleProps) {
 
     return (
         <div
-            className={`${tiltStyle[tilte]} ${size} py-4 truncate font-bold flex flex-row select-none transition`}
+            className={`${tiltStyle[tilte]} ${size} text- py-4 truncate font-bold flex flex-row select-none transition`}
         >
             {title.split("").map((character, index) => {
                 const isFirstCharacter = index === 0
