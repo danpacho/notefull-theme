@@ -31,7 +31,7 @@ interface MainPageProps {
 }
 function MainPage({ latestPost, mainCategory }: MainPageProps) {
     return (
-        <div className="flex flex-col items-start justify-center gap-4 p-8">
+        <div className="flex flex-col items-start justify-center gap-4">
             <NextSeo
                 title={config.siteName}
                 canonical={config.url}
@@ -68,7 +68,7 @@ function MainPage({ latestPost, mainCategory }: MainPageProps) {
                 size="text-2xl"
             />
 
-            <div className="grid w-full grid-cols-1 grid-rows-2 gap-4 md:grid-cols-2">
+            <div className="grid w-full grid-cols-1 grid-rows-2 gap-4 pb-8 md:grid-cols-2">
                 {latestPost.map((post) => (
                     <PostLink {...post} key={post.title} />
                 ))}
