@@ -19,6 +19,7 @@
         "next:build": "next build",
         "next:lint": "next lint",
         "lint": "eslint '**/*.{ts,tsx}'",
+        "svg": "npx @svgr/cli src/components/_icons --out-dir src/components/_icons --typescript",
         "build": "pnpm next:build && pnpm seo",
         "start": "next start",
         "post": "npx -y @danpacho/post-generator",
