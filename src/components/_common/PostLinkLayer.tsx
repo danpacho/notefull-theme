@@ -9,7 +9,6 @@ interface PostLinkLayerProps {
 function PostLinkLayer({ postMetaArray }: PostLinkLayerProps) {
     return (
         <Grid
-            row="grid-rows-2"
             col="grid-cols-1"
             gap="gap-4"
             mdCol="md:grid-cols-2"
