@@ -59,6 +59,9 @@ export type TailwindGridRowType = `grid-rows-${TailwindGridNumberType}`
 export type TailwindGridColType = `grid-cols-${TailwindGridNumberType}`
 
 export type TailwindFontSizeType = `text-${TailwindSizeVarients}`
+export type TailwindFontColorType =
+    | `text-${TailwindColorVarients}-${TailwindColorAccent}`
+    | `text-${TailwindColorWithNoVarients}`
 
 export type TailwindStrokeColorType =
     | `stroke-${TailwindColorVarients}-${TailwindColorAccent}`
