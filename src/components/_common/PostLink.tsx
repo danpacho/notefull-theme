@@ -1,6 +1,9 @@
-import { IconBox, RowBetween } from "@components/_atoms"
-import { MetaType } from "@typing/post/meta"
+import { Description, IconBox, RowBetween, Title } from "@components/_atoms"
 import Link from "next/link"
+
+import tw from "@styles/tailwind.util"
+
+import { MetaType } from "@typing/post/meta"
 
 const Order = "ABCDEFGHIJKLMNOPQR"
 function PostLink({
@@ -15,9 +18,11 @@ function PostLink({
 }: MetaType) {
     return (
         <Link passHref href={postUrl}>
-            <div className="flex flex-col gap-4 px-3 py-4 transition border border-l-2 cursor-pointer dark:border-gray-500 hover:border-black dark:hover:border-gray-100">
+            <div
+                className={`flex flex-col gap-4 px-3 py-4 transition ${tw.boxBorder} border-l-2 cursor-pointer`}
+            >
                 <RowBetween>
-                    <h1 className="heading_text text-md md:text-lg">{title}</h1>
+                    <Title>{title}</Title>
                     <IconBox hex={color}>{Order[postOrder]}</IconBox>
                 </RowBetween>
 
@@ -32,9 +37,7 @@ function PostLink({
                         <p key={tag}>#{tag}</p>
                     ))}
                 </div>
-                <div className="w-full overflow-hidden text-sm description_text">
-                    {preview}
-                </div>
+                <Description>{preview}</Description>
             </div>
         </Link>
     )
