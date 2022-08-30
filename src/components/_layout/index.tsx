@@ -1,10 +1,13 @@
+import tw from "@styles/tailwind.util"
 import Navigation from "./Navigation"
 import NoteBackground from "./NoteBackground"
 
 function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <main className="flex flex-col items-center justify-center p-8 mx-auto layout">
-            <div className="flex flex-col items-start justify-center w-full h-full gap-4">
+        <main
+            className={`${tw.layout} flex flex-col items-center justify-center p-8 mx-auto`}
+        >
+            <div className="flex flex-col items-start justify-start w-full h-full min-h-screen gap-4">
                 {children}
             </div>
             <Navigation />

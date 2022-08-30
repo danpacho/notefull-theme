@@ -1,3 +1,5 @@
+import tw from "@styles/tailwind.util"
+
 import {
     TailwindBgColorType,
     TailwindBgDarkColorType,
@@ -29,7 +31,7 @@ function NoteBackground({
 }: NoteBackgroundProps) {
     return (
         <svg
-            className={`fixed top-0 layout -z-10 ${bgLight} ${bgDark}`}
+            className={`${tw.layout} fixed top-0 -z-10 ${bgLight} ${bgDark}`}
             width="100%"
             height="100%"
             xmlns="http://www.w3.org/2000/svg"
