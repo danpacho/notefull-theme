@@ -43,12 +43,11 @@ function ColorTitle({ title, hex, size }: ColorTitleProps) {
                 else setTilte("right")
                 return
             case false:
-                if (focusLocation === 1) setTilte("leftLg")
+                if (focusLocation === Math.floor(mid) + 1) setTilte("neutral")
+                else if (focusLocation === 1) setTilte("leftLg")
                 else if (focusLocation === titleLength) setTilte("rightLg")
                 else if (focusLocation < mid) setTilte("left")
-                else if (focusLocation === mid) setTilte("neutral")
                 else setTilte("right")
-                return
             default:
                 return
         }
@@ -56,7 +55,7 @@ function ColorTitle({ title, hex, size }: ColorTitleProps) {
 
     return (
         <div
-            className={`${tiltStyle[tilte]} ${size} text- py-4 truncate font-bold flex flex-row select-none transition`}
+            className={`${tiltStyle[tilte]} ${size} text- py-4 truncate font-bold flex flex-row select-none transition `}
         >
             {title.split("").map((character, index) => {
                 const isFirstCharacter = index === 0
