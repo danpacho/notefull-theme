@@ -53,6 +53,11 @@ type TailwindSizeVarients =
     | "7xl"
     | "8xl"
 
+type TailwindGridNumberType = "1" | "2" | "3" | "4" | "5" | "6" | "none"
+
+export type TailwindGridRowType = `grid-rows-${TailwindGridNumberType}`
+export type TailwindGridColType = `grid-cols-${TailwindGridNumberType}`
+
 export type TailwindFontSizeType = `text-${TailwindSizeVarients}`
 
 export type TailwindStrokeColorType =
