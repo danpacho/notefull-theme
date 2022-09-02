@@ -11,7 +11,7 @@ import { getLatestPostMeta } from "@core/loader/post"
 import { config } from "blog.config"
 
 import { Banner, PostLinkLayer, CategoryLinkLayer } from "@components/_common"
-import { ColorTitle } from "@components/_atoms"
+import { Title } from "@components/_atoms"
 
 export const getStaticProps: GetStaticProps<MainPageProps> = async () => {
     const latestPostMeta = await getLatestPostMeta()
@@ -43,18 +43,17 @@ function MainPage({ latestPost, mainCategory }: MainPageProps) {
                 hex={config.themeColor}
             />
 
-            <ColorTitle
-                hex={config.themeColor}
-                title="Category"
-                size="text-2xl"
+            <Title mdSize="md:text-3xl" size="text-2xl" styleClass="pt-6 pb-3">
+                Category
+            </Title>
+            <CategoryLinkLayer
+                categoryInfoArray={mainCategory}
+                displayCategoryPageLinkBtn
             />
-            <CategoryLinkLayer categoryInfoArray={mainCategory} />
 
-            <ColorTitle
-                hex={config.themeColor}
-                title="Latest"
-                size="text-2xl"
-            />
+            <Title mdSize="md:text-3xl" size="text-2xl" styleClass="pt-6 pb-3">
+                Latest
+            </Title>
             <PostLinkLayer postMetaArray={latestPost} />
         </>
     )

@@ -19,6 +19,10 @@ import {
 } from "@core/loader/post"
 
 import { CategorySEO } from "@components/SEO"
+import { Banner, PostLinkLayer } from "@components/_common"
+import { ColorTitle } from "@components/_atoms"
+import { SeriesViewer } from "@components/_pages/category"
+
 interface ParamQuery extends ParsedUrlQuery {
     category: string
 }
@@ -71,9 +75,27 @@ function CategoryPage(props: CategoryPageProps) {
         emoji,
     } = props
 
+    const isSeriesExsist = allSeries.length !== 0
     return (
         <>
             <CategorySEO {...props} />
+
+            <Banner title={category} description={description} hex={color} />
+
+            {isSeriesExsist && (
+                <>
+                    <ColorTitle title="Series" size="text-3xl" hex={color} />
+                    <SeriesViewer allSeriesInfo={allSeries} color={color} />
+                </>
+            )}
+
+            <ColorTitle
+                title="Read More"
+                size="text-3xl"
+                hex={color}
+                href={`/${category}/1`}
+            />
+            <PostLinkLayer postMetaArray={latestPost} />
         </>
     )
 }
