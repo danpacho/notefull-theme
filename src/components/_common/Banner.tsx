@@ -4,11 +4,18 @@ interface BannerProps {
     title: string
     hex: string
     description: string
+    containerStyleClass?: string
     href?: string
 }
-function Banner({ title, hex, description, href }: BannerProps) {
+function Banner({
+    title,
+    hex,
+    description,
+    containerStyleClass,
+    href,
+}: BannerProps) {
     return (
-        <div>
+        <div className={containerStyleClass}>
             <BannerTitle title={title} size="text-5xl" hex={hex} href={href} />
             <Description
                 size="text-base"
