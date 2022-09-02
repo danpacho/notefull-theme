@@ -77,7 +77,7 @@ function App({ Component, pageProps }: AppProps) {
             <DefaultSEO />
 
             <ThemeProvider attribute="class" disableTransitionOnChange>
-                <Layout>
+                <Layout pageType={pageType}>
                     <Component {...pageProps} />
                 </Layout>
             </ThemeProvider>
