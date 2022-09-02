@@ -10,7 +10,8 @@ import {
 interface NoteBackgroundProps {
     bgLight?: TailwindBgColorType
     bgDark?: TailwindBgDarkColorType
-    rectSize: number
+    rectWidth: number
+    rectHeight: number
     rectStrokeLight?: TailwindStrokeColorType
     rectStrokeDark?: TailwindStrokeDarkColorType
     rectStrokeWidth?: number
@@ -21,7 +22,8 @@ interface NoteBackgroundProps {
 function NoteBackground({
     bgLight = "bg-transparent",
     bgDark = "dark:bg-neutral-900",
-    rectSize,
+    rectWidth,
+    rectHeight,
     rectStrokeWidth = 0.5,
     rectStrokeLight = "stroke-gray-300",
     rectStrokeDark = "dark:stroke-neutral-600",
@@ -39,13 +41,13 @@ function NoteBackground({
             <defs>
                 <pattern
                     id="grid"
-                    width={rectSize}
-                    height={rectSize}
+                    width={rectWidth}
+                    height={rectHeight}
                     className={`${rectStrokeLight} ${rectStrokeDark}`}
                     patternUnits="userSpaceOnUse"
                 >
                     <path
-                        d={`M ${rectSize} 0 L 0 0 0 ${rectSize}`}
+                        d={`M ${rectWidth} 0 L 0 0 0 ${rectHeight}`}
                         fill="none"
                         strokeWidth={rectStrokeWidth}
                     />
