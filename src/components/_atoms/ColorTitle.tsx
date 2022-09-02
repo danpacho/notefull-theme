@@ -1,9 +1,17 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 
 import { TailwindFontSizeType } from "@typing/tailwind"
 
 const getRandBetween = (maxNum: number) => Math.floor(Math.random() * maxNum)
+
+const getIndexOfSpaceCharacter = (strArr: string[]) => {
+    const spaceIndex = []
+    for (let index = 0; index < strArr.length; index++) {
+        if (strArr[index] === " ") spaceIndex.push(index)
+    }
+    return spaceIndex
+}
 
 const tiltStyle = {
     leftLg: "hover:-rotate-6 hover:scale-95 hover:translate-y-1",
@@ -15,25 +23,33 @@ const tiltStyle = {
 type TiltType = keyof typeof tiltStyle
 
 const characterStyle = {
-    first: "capitalize transition hover:scale-110",
-    rest: "transition hover:scale-110",
+    first: "capitalize transition hover:scale-110 min-w-[0.5rem]",
+    rest: "transition hover:scale-110 min-w-[0.5rem]",
 }
 
 interface ColorTitleProps {
     title: string
     hex: string
     size: TailwindFontSizeType
+    mdSize?: `md:${TailwindFontSizeType}`
     href?: string
 }
-function ColorTitle({ title, hex, size, href }: ColorTitleProps) {
+function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
+    const splitedTitle = useMemo(() => title.split(""), [title])
+    const spaceIndexArr = useMemo(
+        () => getIndexOfSpaceCharacter(splitedTitle),
+        [splitedTitle]
+    )
     const titleLength = title.length
 
     const [focusNum, setFocusNum] = useState(titleLength + 1)
-    const [tilte, setTilte] = useState<TiltType>("neutral")
     useEffect(() => {
-        setFocusNum(getRandBetween(titleLength))
-    }, [titleLength])
+        const randNum = getRandBetween(titleLength)
+        const focusNum = spaceIndexArr.includes(randNum) ? randNum + 1 : randNum
+        setFocusNum(focusNum)
+    }, [titleLength, spaceIndexArr])
 
+    const [tilte, setTilte] = useState<TiltType>("neutral")
     useEffect(() => {
         const isEven = titleLength % 2 === 0
         const mid = titleLength / 2
@@ -51,17 +67,26 @@ function ColorTitle({ title, hex, size, href }: ColorTitleProps) {
                 else if (focusLocation === titleLength) setTilte("rightLg")
                 else if (focusLocation < mid) setTilte("left")
                 else setTilte("right")
+                return
             default:
                 return
         }
     }, [focusNum, titleLength])
 
+    const onPointerFocusCharacter = useCallback(
+        (index: number, spaceIndexArr: number[]) =>
+            spaceIndexArr.includes(index)
+                ? setFocusNum(index + 1)
+                : setFocusNum(index),
+        []
+    )
+
     return (
         <Link passHref href={href ?? "/"}>
             <div
-                className={`${tiltStyle[tilte]} ${size} py-4 truncate font-bold flex flex-row select-none transition active:scale-90`}
+                className={`${tiltStyle[tilte]} ${size} ${mdSize} py-4 truncate font-bold flex flex-row select-none transition active:scale-90 cursor-pointer`}
             >
-                {title.split("").map((character, index) => {
+                {splitedTitle.map((character, index) => {
                     const isFirstCharacter = index === 0
                     if (index === focusNum)
                         return (
@@ -75,7 +100,12 @@ function ColorTitle({ title, hex, size, href }: ColorTitleProps) {
                                 style={{
                                     color: hex,
                                 }}
-                                onPointerEnter={() => setFocusNum(index)}
+                                onPointerEnter={() =>
+                                    onPointerFocusCharacter(
+                                        index,
+                                        spaceIndexArr
+                                    )
+                                }
                             >
                                 {character}
                             </p>
@@ -88,7 +118,9 @@ function ColorTitle({ title, hex, size, href }: ColorTitleProps) {
                                     ? characterStyle.first
                                     : characterStyle.rest
                             }
-                            onPointerEnter={() => setFocusNum(index)}
+                            onPointerEnter={() =>
+                                onPointerFocusCharacter(index, spaceIndexArr)
+                            }
                         >
                             {character}
                         </p>
