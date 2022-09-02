@@ -1,7 +1,8 @@
 import { CategoryInfoType } from "@typing/category"
 
 import Link from "next/link"
-import { Description, IconBox, RowBetween, Title } from "@components/_atoms"
+
+import { Description, ColorBox, RowBetween, Title } from "@components/_atoms"
 
 import tw from "@styles/tailwind.util"
 
@@ -19,7 +20,7 @@ function CategoryLink({
             >
                 <RowBetween>
                     <Title>{category}</Title>
-                    <IconBox hex={color}>{emoji}</IconBox>
+                    <ColorBox hex={color}>{emoji}</ColorBox>
                 </RowBetween>
 
                 <Description styleClass="h-10">{description}</Description>

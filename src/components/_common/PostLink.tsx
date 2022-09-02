@@ -1,14 +1,14 @@
-import { Description, IconBox, RowBetween, Title } from "@components/_atoms"
 import Link from "next/link"
 
 import tw from "@styles/tailwind.util"
 
 import { MetaType } from "@typing/post/meta"
 
-const Order = "ABCDEFGHIJKLMNOPQR"
+import { Pencil } from "@components/_icons"
+import { Description, ColorBox, RowBetween, Title } from "@components/_atoms"
+
 function PostLink({
     title,
-    postOrder,
     preview,
     tags,
     category,
@@ -23,7 +23,9 @@ function PostLink({
             >
                 <RowBetween>
                     <Title>{title}</Title>
-                    <IconBox hex={color}>{Order[postOrder]}</IconBox>
+                    <ColorBox hex={color} varients="bg-border">
+                        <Pencil className="fill-current" />
+                    </ColorBox>
                 </RowBetween>
 
                 <div className="flex flex-row items-center justify-start gap-1 text-sm font-light text-gray-400 truncate">
