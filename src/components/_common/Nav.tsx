@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react"
+import React, { PropsWithChildren, useEffect, useState } from "react"
 import Link from "next/link"
 
 import ThemeBtn from "@components/ThemeBtn"
-
-import { config } from "blog.config"
 
 const useMounted = () => {
     const [isMounted, setIsMounted] = useState(false)
@@ -28,7 +26,8 @@ const NavBtnStyle = {
     text: "text-sm font-normal hover:text-black dark:hover:text-gray-100",
 } as const
 
-function Navigation() {
+const Nav = () => {}
+const Container = ({ children }: PropsWithChildren<React.ReactNode>) => {
     const { isMounted } = useMounted()
 
     if (!isMounted) return <></>
@@ -37,21 +36,28 @@ function Navigation() {
         <nav
             className={`${NavStyle.layout} ${NavStyle.box} ${NavStyle.bg} ${NavStyle.border} ${NavStyle.text} z-0`}
         >
-            {config.navigationMenu.map(({ name, path }) => {
-                return (
-                    <div
-                        key={name}
-                        className={`${NavBtnStyle.box} ${NavBtnStyle.border} ${NavBtnStyle.text}`}
-                    >
-                        <Link href={path}>{name}</Link>
-                    </div>
-                )
-            })}
+            {children}
             <ThemeBtn
                 styleClass={`${NavBtnStyle.box} ${NavBtnStyle.border} ${NavBtnStyle.text}`}
             />
         </nav>
     )
 }
+const Btn = ({ path, name }: { path: string; name: string }) => {
+    return (
+        <Link href={path}>
+            <button
+                type="button"
+                className={`${NavBtnStyle.box} ${NavBtnStyle.border} ${NavBtnStyle.text}`}
+                aria-label={`Link to ${name}`}
+            >
+                {name}
+            </button>
+        </Link>
+    )
+}
 
-export default Navigation
+Nav.Container = Container
+Nav.Btn = Btn
+
+export default Nav
