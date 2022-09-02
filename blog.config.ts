@@ -33,8 +33,8 @@ const config = {
     blogContentsDirectoryName: "blog", // blog contents directory name
     useKatex: false, // katex option
     postPerCategoryPage: 4,
-    numberOfLatestPost: 5,
-    numberOfMainPageCategory: 5,
+    numberOfLatestPost: 4,
+    numberOfMainPageCategory: 6,
     themeColor: "#73d1d7",
     postControllerText: {
         first: (category: string) => `Return to ${category}`, // first post ➡️ no prev post, so replace with your text
