@@ -13,7 +13,7 @@ const useMounted = () => {
 }
 
 const NavStyle = {
-    layout: "fixed bottom-[-0.1px] flex flex-row items-start justify-center gap-2 md:gap-0 md:top-0 md:right-0 md:flex-col lg:right-[5%]",
+    layout: "fixed bottom-[-0.1px] left-0 flex flex-row items-start justify-center gap-2 md:left-[unset] md:gap-0 md:top-0 md:right-0 md:flex-col lg:right-[5%]",
     box: "w-full py-2 md:w-fit",
     bg: "bg-white dark:bg-neutral-900 md:dark:bg-transparent md:bg-transparent",
     text: "dark:text-gray-400 dark:hover:text-gray-500 text-gray-400 hover:text-black",
