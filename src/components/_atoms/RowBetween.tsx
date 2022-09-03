@@ -1,13 +1,15 @@
 function RowBetween({
     children,
     onClick,
+    styleClass,
 }: {
     children: React.ReactNode
+    styleClass?: string
     onClick?: () => void
 }) {
     return (
         <div
-            className="flex flex-row items-center justify-between w-full"
+            className={`${styleClass} flex flex-row items-center justify-between w-full`}
             onClick={onClick}
         >
             {children}
