@@ -1,21 +1,22 @@
+import { ThemeMode } from "@typing/theme"
 import { useTheme } from "next-themes"
 
-import { ThemeMode } from "@typing/theme"
+import { RenderAfterMounted } from "@components/_common"
 
 const useThemeHex = (hex: string) => {
     const theme = useTheme().theme as ThemeMode
-
     const themeHex =
         theme === "light"
             ? `${hex}${HEX_OPACITY_OPTION.light}`
             : `${hex}${HEX_OPACITY_OPTION.dark}`
-
     return { themeHex }
 }
+
 const HEX_OPACITY_OPTION = {
     dark: "59",
     light: "40",
 } as const
+
 const COMMON_STYLE = {
     size: "w-6 h-6",
     stroke: "border-[1.5px]",
@@ -30,6 +31,7 @@ const COMMON_STYLE = {
         borderColor: hex,
     }),
 } as const
+
 const IconVarients = {
     bg: {
         class: COMMON_STYLE.size,
@@ -59,12 +61,14 @@ function ColorBox({ hex, children, varients = "bg" }: IconBoxProps) {
     const { themeHex } = useThemeHex(hex)
 
     return (
-        <div
-            className={`${IconVarients[varients].class} flex items-center justify-center text-xs font-bold`}
-            style={IconVarients[varients].style(themeHex)}
-        >
-            {children}
-        </div>
+        <RenderAfterMounted>
+            <div
+                className={`${IconVarients[varients].class} flex items-center justify-center text-xs font-bold`}
+                style={IconVarients[varients].style(themeHex)}
+            >
+                {children}
+            </div>
+        </RenderAfterMounted>
     )
 }
 
