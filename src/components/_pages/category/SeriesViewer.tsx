@@ -100,7 +100,7 @@ function SeriesViewer({ allSeriesInfo, color }: SeriesViwerProps) {
             styleClass="relative"
         >
             <div
-                className={`${tw.boxBorder} absolute -top-16 right-0 flex flex-row items-center justify-center transition border-b-2 hover:underline select-none`}
+                className={`${tw.border} absolute -top-16 right-0 flex flex-row items-center justify-center transition border-b-2 hover:underline select-none`}
             >
                 <PaginationBtn
                     type="prev"

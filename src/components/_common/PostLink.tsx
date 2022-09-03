@@ -19,7 +19,7 @@ function PostLink({
     return (
         <Link passHref href={postUrl}>
             <div
-                className={`flex flex-col gap-4 px-3 py-4 transition ${tw.boxBorder} border-l-2 cursor-pointer`}
+                className={`flex flex-col gap-4 px-3 py-4 transition ${tw.border} border-l-2 cursor-pointer`}
             >
                 <RowBetween>
                     <Title>{title}</Title>

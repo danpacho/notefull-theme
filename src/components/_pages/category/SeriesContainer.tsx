@@ -44,7 +44,7 @@ function SeriesContainer({
     return (
         <>
             <div
-                className={`w-full ${tw.boxBorder} flex flex-col gap-1 border-b-2 p-2 cursor-pointer transition`}
+                className={`w-full ${tw.border} flex flex-col gap-1 border-b-2 p-2 cursor-pointer transition`}
             >
                 <RowBetween
                     onClick={() => setHeaderOpen((headerOpen) => !headerOpen)}
