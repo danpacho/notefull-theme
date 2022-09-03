@@ -1,5 +1,8 @@
 import { PageType } from "@typing/page"
 
+import { useEffect } from "react"
+import { useTheme } from "next-themes"
+
 import tw from "@styles/tailwind.util"
 
 import { Nav } from "@components/_common/index"
@@ -7,6 +10,13 @@ import { Nav } from "@components/_common/index"
 import NoteBackground from "./NoteBackground"
 
 import { config } from "blog.config"
+
+const useSetSystemTheme = () => {
+    const { setTheme, systemTheme } = useTheme()
+    useEffect(() => {
+        systemTheme && setTheme(systemTheme)
+    }, [systemTheme, setTheme])
+}
 
 const MainNav = () => (
     <Nav.Container>
@@ -23,6 +33,8 @@ function Layout({
     children: React.ReactNode
     pageType: PageType
 }) {
+    useSetSystemTheme()
+
     return (
         <main
             className={`${tw.layout} flex flex-col items-center justify-center p-8 mx-auto`}
