@@ -37,7 +37,7 @@ function Layout({
 
     return (
         <main
-            className={`${tw.layout} flex flex-col items-center justify-center p-8 mx-auto`}
+            className={`${tw.layout} flex flex-col items-center justify-center p-5 pb-14 md:p-8 mx-auto`}
         >
             <div className="flex flex-col items-start justify-start w-full h-full min-h-screen gap-4">
                 {children}
