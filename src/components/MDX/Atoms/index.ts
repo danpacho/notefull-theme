@@ -1,56 +1,39 @@
-import Paragraph from "./Text/Paragraph"
-import Italic from "./Text/Italic"
-import Bold from "./Text/Bold"
-import H1 from "./Text/H1"
-import H2 from "./Text/H2"
-import H3 from "./Text/H3"
-import Link from "next/link"
+import { MDXComponents } from "mdx/types"
 
-import Code from "./Code/Code"
-import Pre from "./Code/Pre"
-
-import LI from "./List/LI"
-import OL from "./List/OL"
-import UL from "./List/UL"
+import Text from "./Text"
+import List from "./List"
+import Image from "./Image"
+import Code from "./Code"
 import Quote from "./Quote"
-
+import Tables from "./Table"
 import Divider from "./Divider"
 
-import Table from "./Table/Table"
-import TD from "./Table/TD"
-import TH from "./Table/TH"
-import TR from "./Table/TR"
-
-import { MDXComponents } from "mdx/types"
-import Image from "./Image"
-
 const MDXAtoms = {
-    p: Paragraph,
-    strong: Bold,
-    em: Italic,
-    a: Link,
+    p: Text.Paragraph,
+    strong: Text.Bold,
+    em: Text.Italic,
+    a: Text.Link,
+    h1: Text.H1,
+    h2: Text.H2,
+    h3: Text.H3,
 
-    h1: H1,
-    h2: H2,
-    h3: H3,
+    li: List.Li,
+    ol: List.Ol,
+    ul: List.Ul,
 
-    ol: OL,
-    ul: UL,
-    li: LI,
+    table: Tables.Table,
+    th: Tables.Th,
+    td: Tables.Td,
+    tr: Tables.Tr,
 
     blockquote: Quote,
 
-    pre: Pre,
-    code: Code,
+    code: Code.Block,
+    pre: Code.Pre,
 
     img: Image,
 
     hr: Divider,
-
-    table: Table,
-    th: TH,
-    td: TD,
-    tr: TR,
 } as MDXComponents
 
 export default MDXAtoms
