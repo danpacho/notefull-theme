@@ -1,13 +1,13 @@
 import { ThemeMode } from "@typing/theme"
 import { useTheme } from "next-themes"
 
-import { RenderAfterMounted } from "@components/_common"
+import useMounted from "@hooks/useMounted"
 
 const ThemeBtn = ({ styleClass }: { styleClass: string }) => {
     const { theme, setTheme } = useTheme()
-
+    const { isMounted } = useMounted()
     return (
-        <RenderAfterMounted>
+        <>
             <button
                 onClick={() =>
                     (theme as ThemeMode) === "light"
@@ -16,10 +16,10 @@ const ThemeBtn = ({ styleClass }: { styleClass: string }) => {
                 }
                 className={styleClass}
             >
-                {theme === "dark" && "Light"}
-                {theme === "light" && "Dark"}
+                {!isMounted && "Loading"}
+                {isMounted && theme === "dark" ? "Light" : "Dark"}
             </button>
-        </RenderAfterMounted>
+        </>
     )
 }
 

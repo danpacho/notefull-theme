@@ -1,7 +1,7 @@
 import { ThemeMode } from "@typing/theme"
 import { useTheme } from "next-themes"
 
-import { RenderAfterMounted } from "@components/_common"
+import useMounted from "@hooks/useMounted"
 
 const useThemeHex = (hex: string) => {
     const theme = useTheme().theme as ThemeMode
@@ -57,18 +57,17 @@ interface IconBoxProps {
     children: React.ReactNode
     varients?: IconVarientsType
 }
+
 function ColorBox({ hex, children, varients = "bg" }: IconBoxProps) {
     const { themeHex } = useThemeHex(hex)
-
+    const { isMounted } = useMounted()
     return (
-        <RenderAfterMounted>
-            <div
-                className={`${IconVarients[varients].class} flex items-center justify-center text-xs font-bold`}
-                style={IconVarients[varients].style(themeHex)}
-            >
-                {children}
-            </div>
-        </RenderAfterMounted>
+        <div
+            className={`${IconVarients[varients].class} flex items-center justify-center text-xs font-bold`}
+            style={isMounted ? IconVarients[varients].style(themeHex) : {}}
+        >
+            {children}
+        </div>
     )
 }
 
