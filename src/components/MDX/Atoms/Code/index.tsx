@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+
 import CodeCopyBtn from "./CodeCopyBtn"
 import { useTimeout } from "./useTimeout"
 
@@ -34,7 +35,7 @@ const Block = (props: CodeBlockProps) => {
     return (
         <code
             {...props}
-            className="inline-table text-neutral-100 md:text-base text-sm"
+            className="inline-table text-neutral-100 md:text-[0.925rem] text-sm"
         />
     )
 }
