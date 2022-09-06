@@ -28,14 +28,14 @@ const Block = (props: CodeBlockProps) => {
         return (
             <code
                 {...props}
-                className="px-1 bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-emerald-400 text-red-600 dark:text-emerald-400 rounded-sm break-words"
+                className="px-1 font-medium bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-emerald-400 text-red-600 dark:text-emerald-400 rounded-sm break-words"
             />
         )
 
     return (
         <code
             {...props}
-            className="inline-table text-neutral-100 md:text-[0.925rem] text-sm"
+            className="inline-table text-neutral-100 md:text-[0.925rem] text-sm font-medium"
         />
     )
 }
