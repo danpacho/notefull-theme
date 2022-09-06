@@ -13,12 +13,15 @@ const getIndexOfSpaceCharacter = (strArr: string[]) => {
     return spaceIndex
 }
 
+const getSplitedText = (text: string) =>
+    [...new Intl.Segmenter().segment(text)].map((x) => x.segment)
+
 const tiltStyle = {
-    leftLg: "hover:-rotate-6 hover:scale-95 hover:translate-y-1",
+    leftLg: "hover:-rotate-1 hover:scale-95 hover:translate-y-1",
     left: "hover:-rotate-2 hover:translate-y-1",
     neutral: "hover:rotate-0 hover:translate-y-0.5",
     right: "hover:rotate-2 hover:translate-y-1",
-    rightLg: "hover:rotate-6 hover:scale-95 hover:translate-y-1",
+    rightLg: "hover:rotate-1 hover:scale-95 hover:translate-y-1",
 }
 type TiltType = keyof typeof tiltStyle
 
@@ -35,7 +38,7 @@ interface ColorTitleProps {
     href?: string
 }
 function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
-    const splitedTitle = useMemo(() => title.split(""), [title])
+    const splitedTitle = useMemo(() => getSplitedText(title), [title])
     const spaceIndexArr = useMemo(
         () => getIndexOfSpaceCharacter(splitedTitle),
         [splitedTitle]
@@ -84,7 +87,7 @@ function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
     return (
         <Link passHref href={href ?? "/"}>
             <div
-                className={`${tiltStyle[tilte]} ${size} ${mdSize} py-4 truncate font-bold flex flex-row select-none transition active:scale-90 cursor-pointer`}
+                className={`${tiltStyle[tilte]} ${size} ${mdSize} py-4 truncate font-bold flex flex-rowv flex-wrap select-none transition active:scale-90 cursor-pointer`}
             >
                 {splitedTitle.map((character, index) => {
                     const isFirstCharacter = index === 0
