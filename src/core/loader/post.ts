@@ -41,6 +41,7 @@ import { getTableOfContents, remarkImageSizeByAlt } from "@lib/remark"
 
 import rehypeKatex from "rehype-katex"
 import rehypePrism from "rehype-prism-plus"
+import { rehypeInjectCodeClassName } from "@lib/rehype"
 
 import { bundleMDX } from "mdx-bundler"
 import type { Pluggable } from "unified"
@@ -132,12 +133,15 @@ const extractAllPostFileName = async (
 }
 //* ----------------------------- 🔥 bundler 🔥 -----------------------------
 type Awaited<T> = T extends Promise<infer PromiseT> ? Awaited<PromiseT> : T
-type BundledResult<MetaT> = Awaited<ReturnType<typeof bundleMDX<MetaT>>>
+type MetaObjT = { [key: string]: any }
+type BundledResult<MetaT extends MetaObjT> = Awaited<
+    ReturnType<typeof bundleMDX<MetaT>>
+>
 
 /**
  * bundling MDX source with mdx-bundler
  */
-const bundlePost = async <MetaT>({
+const bundlePost = async <MetaT extends MetaObjT>({
     postSource,
     customPlugin,
 }: {
@@ -466,11 +470,15 @@ const extractSinglePost = async ({
         postSource,
         customPlugin: config.useKatex
             ? definePlugins({
-                  rehypePlugins: [rehypePrism, rehypeKatex],
+                  rehypePlugins: [
+                      rehypePrism,
+                      rehypeKatex,
+                      rehypeInjectCodeClassName,
+                  ],
                   remarkPlugins: [remarkImageSizeByAlt, remarkGfm, remarkMath],
               })
             : definePlugins({
-                  rehypePlugins: [rehypePrism],
+                  rehypePlugins: [rehypePrism, rehypeInjectCodeClassName],
                   remarkPlugins: [remarkImageSizeByAlt, remarkGfm],
               }),
     })

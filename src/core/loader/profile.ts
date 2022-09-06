@@ -7,9 +7,11 @@ import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "@core/error"
 import { definePlugins } from "@core/loader/util"
 import { bundlePost } from "@core/loader/post"
 
-import { remarkImageSizeByAlt } from "@lib/remark"
 import remarkGfm from "remark-gfm"
+import { remarkImageSizeByAlt } from "@lib/remark"
+
 import rehypePrism from "rehype-prism-plus"
+import { rehypeInjectCodeClassName } from "@lib/rehype"
 
 /**
  * - you can set custom `remark-rehype` plugin for profile page
@@ -32,7 +34,7 @@ const getProfileSource = async () => {
                 postSource: profileContent,
                 customPlugin: definePlugins({
                     // plugins using on profile page
-                    rehypePlugins: [rehypePrism],
+                    rehypePlugins: [rehypePrism, rehypeInjectCodeClassName],
                     remarkPlugins: [remarkImageSizeByAlt, remarkGfm],
                 }),
             })
