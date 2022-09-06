@@ -16,7 +16,13 @@ function Banner({
 }: BannerProps) {
     return (
         <div className={containerStyleClass}>
-            <BannerTitle title={title} size="text-5xl" hex={hex} href={href} />
+            <BannerTitle
+                title={title}
+                mdSize="md:text-5xl"
+                size="text-4xl"
+                hex={hex}
+                href={href}
+            />
             <Description
                 size="text-base"
                 mdSize="md:text-base"
