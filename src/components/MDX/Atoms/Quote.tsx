@@ -2,7 +2,7 @@ function Quote(props: any) {
     return (
         <blockquote
             {...props}
-            className="w-full pl-3 border-l-2 border-l-neutral-200 dark:border-l-neutral-600"
+            className={`w-full pl-4 font-medium border-l-4 border-neutral-200 dark:border-neutral-600`}
         />
     )
 }
