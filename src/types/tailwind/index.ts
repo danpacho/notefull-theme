@@ -19,6 +19,7 @@ type TailwindColorVarients =
     | "fuchsia"
     | "pink"
     | "rose"
+    | "purple"
 
 type TailwindColorWithNoVarients =
     | "inherit"
@@ -55,6 +56,17 @@ type TailwindSizeVarients =
 
 type TailwindGridNumberType = "1" | "2" | "3" | "4" | "5" | "6" | "none"
 
+type TailwindFontWeightVarients =
+    | "thin"
+    | "extralight"
+    | "light"
+    | "normal"
+    | "medium"
+    | "semibold"
+    | "bold"
+    | "extrabold"
+    | "black"
+
 export type TailwindGridRowType = `grid-rows-${TailwindGridNumberType}`
 export type TailwindGridColType = `grid-cols-${TailwindGridNumberType}`
 
@@ -62,7 +74,7 @@ export type TailwindFontSizeType = `text-${TailwindSizeVarients}`
 export type TailwindFontColorType =
     | `text-${TailwindColorVarients}-${TailwindColorAccent}`
     | `text-${TailwindColorWithNoVarients}`
-
+export type TailwindFontWeightType = `font-${TailwindFontWeightVarients}`
 export type TailwindStrokeColorType =
     | `stroke-${TailwindColorVarients}-${TailwindColorAccent}`
     | `stroke-${TailwindColorWithNoVarients}`
