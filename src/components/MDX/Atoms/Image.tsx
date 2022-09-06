@@ -12,10 +12,12 @@ function Image(props: ImageProps) {
     return (
         <>
             {isExternalImage ? (
-                <NextImage
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                     {...props}
-                    layout="fill"
-                    quality={75}
+                    width={width}
+                    height={height}
+                    alt={pureAlt}
                     loading="lazy"
                     crossOrigin="anonymous"
                     onContextMenu={(e) => e.preventDefault()}
