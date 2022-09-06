@@ -16,8 +16,8 @@ const ThemeBtn = ({ styleClass }: { styleClass: string }) => {
                 }
                 className={styleClass}
             >
-                {!isMounted && "Loading"}
-                {isMounted && theme === "dark" ? "Light" : "Dark"}
+                {!isMounted && "⚡️"}
+                {isMounted && (theme === "dark" ? "Light" : "Dark")}
             </button>
         </>
     )
