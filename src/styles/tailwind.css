@@ -7,3 +7,36 @@
         @apply antialiased;
     }
 }
+
+/* DONOT_DELETE_STYLE_BELOW: CODE_STYLESHEETS */
+.line-number::before {
+    display: inline-block;
+    width: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: right;
+    margin-right: 16px;
+    margin-left: 0px;
+    color: rgb(156, 163, 175);
+    content: attr(line);
+}
+
+.code-line {
+    display: block;
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    padding-left: 1rem;
+    padding-right: -1rem;
+    min-width: 100%;
+    border-left: 0.25rem solid rgba(0, 0, 0, 0);
+}
+@media (min-width: 768px) {
+    .code-line {
+        padding-left: 1.75rem;
+    }
+}
+
+.highlight-line {
+    background-color: rgba(55, 65, 81, 0.5);
+    border-left: 0.25rem solid rgb(59, 130, 246);
+}
