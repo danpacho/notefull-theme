@@ -1,3 +1,5 @@
+import useTrackTitle from "./useTrackTitle"
+
 const Text = () => {}
 
 const Paragraph = (props: any) => (
@@ -13,8 +15,20 @@ const Link = (props: any) => (
 const Bold = (props: any) => (
     <strong {...props} className="text-base font-extrabold" />
 )
-const H1 = (props: any) => <h1 {...props} className="text-3xl font-bold my-4" />
-const H2 = (props: any) => <h1 {...props} className="text-2xl font-bold my-3" />
+//============================== TOC 1 ==============================
+const H1 = (props: any) => {
+    const { observerRef } = useTrackTitle()
+    return (
+        <h1 {...props} ref={observerRef} className="text-3xl font-bold my-4" />
+    )
+}
+//============================== TOC 2 ==============================
+const H2 = (props: any) => {
+    const { observerRef } = useTrackTitle()
+    return (
+        <h1 {...props} ref={observerRef} className="text-2xl font-bold my-3" />
+    )
+}
 const H3 = (props: any) => <h1 {...props} className="text-xl font-bold my-2" />
 
 Text.Paragraph = Paragraph
