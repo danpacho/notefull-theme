@@ -16,19 +16,17 @@ const getIndexOfSpaceCharacter = (strArr: string[]) => {
 const getSplitedText = (text: string) =>
     [...new Intl.Segmenter().segment(text)].map((x) => x.segment)
 
-const tiltStyle = {
-    leftLg: "hover:-rotate-1 hover:scale-95 hover:translate-y-1",
-    left: "hover:-rotate-2 hover:translate-y-1",
-    neutral: "hover:rotate-0 hover:translate-y-0.5",
-    right: "hover:rotate-2 hover:translate-y-1",
-    rightLg: "hover:rotate-1 hover:scale-95 hover:translate-y-1",
-}
-type TiltType = keyof typeof tiltStyle
+const skewStyle = {
+    leftEnd: "hover:skew-y-12 hover:-rotate-12",
+    left: "hover:skew-y-6 hover:-rotate-6",
+    neutral: "animate-pulse",
+    right: "hover:-skew-y-6 hover:rotate-6",
+    rightEnd: "hover:-skew-y-12 hover:rotate-12",
+} as const
+type SkewType = keyof typeof skewStyle
 
-const characterStyle = {
-    first: "capitalize transition hover:scale-110 min-w-[0.5rem]",
-    rest: "transition hover:scale-110 min-w-[0.5rem]",
-}
+const commonCharacterStyle =
+    "transition min-w-[0.5rem] hover:scale-110" as const
 
 interface ColorTitleProps {
     title: string
@@ -52,24 +50,25 @@ function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
         setFocusNum(focusNum)
     }, [titleLength, spaceIndexArr])
 
-    const [tilte, setTilte] = useState<TiltType>("neutral")
+    const [skew, setSkew] = useState<SkewType>("neutral")
     useEffect(() => {
-        const isEven = titleLength % 2 === 0
         const mid = titleLength / 2
+        const isEven = titleLength % 2 === 0
         const focusLocation = focusNum + 1
+
         switch (isEven) {
             case true:
-                if (focusLocation === 1) setTilte("leftLg")
-                else if (focusLocation === titleLength) setTilte("rightLg")
-                else if (focusLocation <= mid) setTilte("left")
-                else setTilte("right")
+                if (focusLocation === 1) setSkew("leftEnd")
+                else if (focusLocation === titleLength) setSkew("rightEnd")
+                else if (focusLocation <= mid) setSkew("left")
+                else setSkew("right")
                 return
             case false:
-                if (focusLocation === Math.floor(mid) + 1) setTilte("neutral")
-                else if (focusLocation === 1) setTilte("leftLg")
-                else if (focusLocation === titleLength) setTilte("rightLg")
-                else if (focusLocation < mid) setTilte("left")
-                else setTilte("right")
+                if (focusLocation === Math.floor(mid) + 1) setSkew("neutral")
+                else if (focusLocation === 1) setSkew("leftEnd")
+                else if (focusLocation === titleLength) setSkew("rightEnd")
+                else if (focusLocation < mid) setSkew("left")
+                else setSkew("right")
                 return
             default:
                 return
@@ -87,39 +86,28 @@ function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
     return (
         <Link passHref href={href ?? "/"}>
             <div
-                className={`${tiltStyle[tilte]} ${size} ${mdSize} py-4 truncate font-bold flex flex-rowv flex-wrap select-none transition active:scale-90 cursor-pointer`}
+                className={`${skewStyle[skew]} ${size} ${mdSize} 
+                            flex flex-row flex-wrap py-4
+                            font-bold 
+                            origin-left active:scale-90 transform-gpu
+                            cursor-pointer select-none transition`}
             >
                 {splitedTitle.map((character, index) => {
                     const isFirstCharacter = index === 0
-                    if (index === focusNum)
-                        return (
-                            <p
-                                key={character + index}
-                                className={
-                                    isFirstCharacter
-                                        ? characterStyle.first
-                                        : characterStyle.rest
-                                }
-                                style={{
-                                    color: hex,
-                                }}
-                                onPointerEnter={() =>
-                                    onPointerFocusCharacter(
-                                        index,
-                                        spaceIndexArr
-                                    )
-                                }
-                            >
-                                {character}
-                            </p>
-                        )
+                    const isFocused = index === focusNum
+                    const style = isFocused
+                        ? {
+                              color: hex,
+                          }
+                        : {}
                     return (
                         <p
                             key={character + index}
+                            style={style}
                             className={
                                 isFirstCharacter
-                                    ? characterStyle.first
-                                    : characterStyle.rest
+                                    ? `${commonCharacterStyle} capitalize`
+                                    : commonCharacterStyle
                             }
                             onPointerEnter={() =>
                                 onPointerFocusCharacter(index, spaceIndexArr)
