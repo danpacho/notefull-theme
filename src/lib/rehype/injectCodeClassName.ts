@@ -74,14 +74,14 @@ const tokenClassNames: {
     deleted: "text-red-500 italic",
 
     // orange 200
-    "known-class-name": "text-orange-200 font-bold",
-    "maybe-class-name": "text-orange-200 font-bold",
-    "attr-value": "text-orange-200",
     atrule: "text-orange-200",
     number: "text-orange-200",
+    "maybe-class-name": "text-orange-200 font-bold",
+    "attr-value": "text-orange-200",
     // orange 300
     generic: "text-orange-300 font-bold",
     "class-name": "text-orange-300 font-bold",
+    "known-class-name": "text-orange-300 font-bold",
     "attr-name": "text-orange-300",
 
     // neutral 100
