@@ -10,11 +10,12 @@ import Head from "next/head"
 
 import type { PageType } from "@typing/page"
 
-import { DefaultSEO } from "@components/SEO"
-
-import { GoogleAnalytics } from "@components/GoogleAnalytics"
-import { config } from "blog.config"
 import Layout from "@components/_layout"
+import { TocProvider } from "@components/TocProvider"
+import { DefaultSEO } from "@components/SEO"
+import { GoogleAnalytics } from "@components/GoogleAnalytics"
+
+import { config } from "blog.config"
 
 /**
  * - custom hook for restoring scroll position
@@ -82,7 +83,9 @@ function App({ Component, pageProps }: AppProps) {
                 disableTransitionOnChange
             >
                 <Layout pageType={pageType}>
-                    <Component {...pageProps} />
+                    <TocProvider>
+                        <Component {...pageProps} />
+                    </TocProvider>
                 </Layout>
             </ThemeProvider>
         </>
