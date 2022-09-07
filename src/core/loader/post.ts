@@ -41,7 +41,7 @@ import { getTableOfContents, remarkImageSizeByAlt } from "@lib/remark"
 
 import rehypeKatex from "rehype-katex"
 import rehypePrism from "rehype-prism-plus"
-import { rehypeInjectCodeClassName } from "@lib/rehype"
+import { rehypeHeaderId, rehypeInjectCodeClassName } from "@lib/rehype"
 
 import { bundleMDX } from "mdx-bundler"
 import type { Pluggable } from "unified"
@@ -474,11 +474,16 @@ const extractSinglePost = async ({
                       rehypePrism,
                       rehypeKatex,
                       rehypeInjectCodeClassName,
+                      rehypeHeaderId,
                   ],
                   remarkPlugins: [remarkImageSizeByAlt, remarkGfm, remarkMath],
               })
             : definePlugins({
-                  rehypePlugins: [rehypePrism, rehypeInjectCodeClassName],
+                  rehypePlugins: [
+                      rehypePrism,
+                      rehypeInjectCodeClassName,
+                      rehypeHeaderId,
+                  ],
                   remarkPlugins: [remarkImageSizeByAlt, remarkGfm],
               }),
     })
