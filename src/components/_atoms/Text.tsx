@@ -36,9 +36,4 @@ function Description({
         </div>
     )
 }
-
-function Tag() {
-    return <></>
-}
-
 export { Title, Description }
