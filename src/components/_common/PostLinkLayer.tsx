@@ -5,8 +5,12 @@ import PostLink from "./PostLink"
 
 interface PostLinkLayerProps {
     postMetaArray: MetaType[]
+    displayAuthorInsteadCategory?: boolean
 }
-function PostLinkLayer({ postMetaArray }: PostLinkLayerProps) {
+function PostLinkLayer({
+    postMetaArray,
+    displayAuthorInsteadCategory = false,
+}: PostLinkLayerProps) {
     return (
         <Grid
             col="grid-cols-1"
@@ -15,7 +19,11 @@ function PostLinkLayer({ postMetaArray }: PostLinkLayerProps) {
             styleClass="pb-8"
         >
             {postMetaArray.map((postMeta) => (
-                <PostLink {...postMeta} key={postMeta.title} />
+                <PostLink
+                    {...postMeta}
+                    displayAuthorInsteadCategory={displayAuthorInsteadCategory}
+                    key={postMeta.title}
+                />
             ))}
         </Grid>
     )

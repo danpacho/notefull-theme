@@ -6,7 +6,11 @@ import { MetaType } from "@typing/post/meta"
 
 import { Pencil } from "@components/_icons"
 import { Description, ColorBox, RowBetween, Title } from "@components/_atoms"
+import { config } from "blog.config"
 
+interface PostLinkProps extends MetaType {
+    displayAuthorInsteadCategory?: boolean
+}
 function PostLink({
     title,
     preview,
@@ -15,7 +19,9 @@ function PostLink({
     update,
     color,
     postUrl,
-}: MetaType) {
+    author,
+    displayAuthorInsteadCategory = false,
+}: PostLinkProps) {
     return (
         <Link passHref href={postUrl}>
             <div
@@ -28,15 +34,30 @@ function PostLink({
                     </ColorBox>
                 </RowBetween>
 
-                <div className="flex flex-row items-center justify-start gap-1 text-sm font-light text-gray-400 truncate">
-                    <Link href={`/${category}`}>
-                        <p className="hover:text-black dark:hover:text-gray-100">
-                            {category},
-                        </p>
-                    </Link>
+                <div className="flex flex-row flex-wrap items-center justify-start gap-1 text-sm font-normal text-gray-400 truncate">
+                    {!displayAuthorInsteadCategory && (
+                        <Link href={`/${category}`}>
+                            <p className="hover:text-black dark:hover:text-gray-100">
+                                {category},
+                            </p>
+                        </Link>
+                    )}
+                    {displayAuthorInsteadCategory && (
+                        <Link href={config.navigationMenu[2].path}>
+                            <p className="hover:text-black dark:hover:text-gray-100">
+                                {author},
+                            </p>
+                        </Link>
+                    )}
                     {update},
                     {tags.map((tag) => (
-                        <p key={tag}>#{tag}</p>
+                        <div
+                            key={tag}
+                            className="flex flex-row items-center justify-center gap-[0.5px]"
+                        >
+                            <p>#</p>
+                            <p>{tag}</p>
+                        </div>
                     ))}
                 </div>
                 <Description>{preview}</Description>
