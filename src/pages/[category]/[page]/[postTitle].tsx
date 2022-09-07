@@ -16,6 +16,14 @@ import { PostSEO } from "@components/SEO"
 import KatexStyleLoader from "@components/KatexStyleLoader"
 import MDXBundler from "@components/MDX/Bundler"
 
+import {
+    PostNav,
+    PostController,
+    PostBanner,
+    PostMeta,
+    PostToc,
+} from "@components/_pages/post"
+
 import { config } from "blog.config"
 
 interface ParamQuery extends ParsedUrlQuery {
@@ -70,14 +78,30 @@ function PostPage({
     seriesInfo,
     toc,
 }: PostPageProps) {
+    const { reference } = meta
+
     return (
-        <>
+        <div
+            className={`flex flex-col items-start justify-start gap-4 min-h-screen w-full`}
+        >
             <PostSEO {...meta} />
 
+            <PostBanner
+                {...meta}
+                seriesTitle={seriesInfo?.seriesTitle}
+                seriesCount={seriesInfo?.seriesInfo.length}
+                seriesInfoArray={seriesInfo?.seriesInfo}
+            />
             <MDXBundler source={source} />
 
+            {reference && <PostMeta hex={meta.color} metaArray={reference} />}
+            <PostController controller={controller} />
+
+            <PostNav category={meta.category} />
+            <PostToc toc={toc} />
+
             {config.useKatex && <KatexStyleLoader />}
-        </>
+        </div>
     )
 }
 

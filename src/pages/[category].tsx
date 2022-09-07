@@ -19,9 +19,8 @@ import {
 } from "@core/loader/post"
 
 import { CategorySEO } from "@components/SEO"
-import { Banner, PostLinkLayer } from "@components/_common"
 import { ColorTitle } from "@components/_atoms"
-import { SeriesViewer } from "@components/_pages/category"
+import { Banner, PostLinkLayer, SeriesViewer } from "@components/_common"
 
 interface ParamQuery extends ParsedUrlQuery {
     category: string
@@ -65,26 +64,24 @@ interface CategoryPageProps extends CategoryInfoType {
     allSeries: SeriesType[]
 }
 function CategoryPage(props: CategoryPageProps) {
-    const {
-        latestPost,
-        allSeries,
-        category,
-        categoryUrl,
-        description,
-        color,
-        emoji,
-    } = props
+    const { latestPost, allSeries, category, description, color, emoji } = props
 
     const isSeriesExsist = allSeries.length !== 0
+    const title = `${category} ${emoji}`
     return (
         <>
             <CategorySEO {...props} />
 
-            <Banner title={category} description={description} hex={color} />
+            <Banner title={title} description={description} hex={color} />
 
             {isSeriesExsist && (
                 <>
-                    <ColorTitle title="Series" size="text-3xl" hex={color} />
+                    <ColorTitle
+                        title="Series"
+                        size="text-3xl"
+                        hex={color}
+                        href={allSeries[0].seriesInfo[0].url}
+                    />
                     <SeriesViewer allSeriesInfo={allSeries} color={color} />
                 </>
             )}
@@ -95,7 +92,10 @@ function CategoryPage(props: CategoryPageProps) {
                 hex={color}
                 href={`/${category}/1`}
             />
-            <PostLinkLayer postMetaArray={latestPost} />
+            <PostLinkLayer
+                displayAuthorInsteadCategory
+                postMetaArray={latestPost}
+            />
         </>
     )
 }

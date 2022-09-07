@@ -8,6 +8,8 @@ import MDXBundler from "@components/MDX/Bundler"
 
 import { config } from "blog.config"
 
+import { Banner } from "@components/_common"
+
 export const getStaticProps: GetStaticProps<ProfileProps> = async () => {
     const profileSource = await getProfileSource()
     return {
@@ -45,6 +47,11 @@ interface ProfileProps {
 function ProfilePage({ profileSource }: ProfileProps) {
     return (
         <>
+            <Banner
+                title="Profile"
+                description={config.subtitle}
+                hex={config.themeColor}
+            />
             <MDXBundler source={profileSource} />
             <a href="https://github.com/danpa725/bloapi">
                 {config.copyright}, Powered by Bloapi 🐧

@@ -15,7 +15,8 @@ import {
 
 import { getSingleCategoryInfo } from "@core/loader/category"
 
-import { config } from "blog.config"
+import { Banner, PostLinkLayer } from "@components/_common"
+import { ColorTitle } from "@components/_atoms"
 
 interface ParamQuery extends ParsedUrlQuery {
     category: string
@@ -74,7 +75,27 @@ function PaginatedCategoryPage({
     isLastPage,
     page,
 }: PaginatedCategoryPageProps) {
-    return <></>
+    const title = `${category} ${emoji}`
+    return (
+        <>
+            <Banner
+                title={title}
+                description={description}
+                href={categoryUrl}
+                hex={color}
+            />
+            <ColorTitle
+                title={`Page ${page}`}
+                hex={color}
+                size="text-3xl"
+                href={categoryUrl}
+            />
+            <PostLinkLayer
+                displayAuthorInsteadCategory
+                postMetaArray={allPost}
+            />
+        </>
+    )
 }
 PaginatedCategoryPage.displayName = "Category" as PageType
 
