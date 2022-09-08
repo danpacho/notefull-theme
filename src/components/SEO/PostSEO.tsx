@@ -52,7 +52,6 @@ function PostSEO({
                 publisherName={author}
                 datePublished={publishedTime}
                 images={[config.author.bannerImageUrl]}
-                publisherLogo={config.author.logoImageUrl}
             />
         </>
     )
