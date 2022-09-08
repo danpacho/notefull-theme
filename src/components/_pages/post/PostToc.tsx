@@ -1,6 +1,6 @@
 import type { TableOfContentsType } from "@lib/remark/getTableOfContents"
 
-import { useTocValue } from "@components/TocProvider"
+import { useTocAction, useTocValue } from "@components/TocProvider"
 
 const LinkBtnStyle = {
     h1: "pb-1 py-1 border-l border-gray-300 dark:border-gray-400 hover:border-black dark:hover:border-transparent",
@@ -23,20 +23,27 @@ const LinkBtn = ({
     type: LinkBtnType
     children?: React.ReactNode
 }) => {
+    const { setActiveTitle } = useTocAction()
+    const disableParentFocus = !children // disable click func of h2 parent
     return (
         <div
             className={`
             ${LinkBtnStyle[type]} 
             ${isFoucused && "border-black"} 
-            pl-2 transition`}
+            pl-2 transition w-full`}
         >
-            <a className="w-full" href={href}>
+            <a
+                className="w-full"
+                href={href}
+                onClick={() => disableParentFocus && setActiveTitle(title)}
+            >
                 <p
                     className={`
                     ${isFoucused && focusedStyle} 
-                    transition w-40 truncate text-sm 
-                    text-gray-400 hover:text-black
-                    dark:text-gray-400 dark:hover:text-gray-100`}
+                    transition w-40 
+                    truncate text-sm 
+                    text-gray-400 hover:text-black dark:hover:text-gray-100
+                    `}
                 >
                     {title}
                 </p>
@@ -56,7 +63,7 @@ interface PostTocProps {
     toc: TableOfContentsType[]
 }
 function PostToc({ toc }: PostTocProps) {
-    const { title } = useTocValue()
+    const { activeTitle } = useTocValue()
     return (
         <nav
             className={`${TocStyle.position} ${TocStyle.layout} ${TocStyle.box} ${TocStyle.text}`}
@@ -66,14 +73,14 @@ function PostToc({ toc }: PostTocProps) {
                 return (
                     <LinkBtn
                         type="h1"
-                        isFoucused={title === tocDepth1.title}
+                        isFoucused={activeTitle === tocDepth1.title}
                         key={tocDepth1.title}
                         {...tocDepth1}
                     >
                         {children?.map((tocDepth2) => (
                             <LinkBtn
                                 type="h2"
-                                isFoucused={title === tocDepth2.title}
+                                isFoucused={activeTitle === tocDepth2.title}
                                 key={tocDepth2.title}
                                 {...tocDepth2}
                             />
