@@ -81,6 +81,12 @@ export type TailwindStrokeColorType =
 export type TailwindStrokeDarkColorType =
     | `dark:stroke-${TailwindColorVarients}-${TailwindColorAccent}`
     | `dark:stroke-${TailwindColorWithNoVarients}`
+export type TailwindFillColorType =
+    | `fill-${TailwindColorVarients}-${TailwindColorAccent}`
+    | `fill-${TailwindColorWithNoVarients}`
+export type TailwindFillDarkColorType =
+    | `dark:fill-${TailwindColorVarients}-${TailwindColorAccent}`
+    | `dark:fill-${TailwindColorWithNoVarients}`
 
 export type TailwindBgColorType =
     | `bg-${TailwindColorVarients}-${TailwindColorAccent}`
