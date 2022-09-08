@@ -3,7 +3,6 @@ import getAuthorContactHref, { ContactPlatformType } from "@core/contact"
 const author = {
     name: "myname",
     introduce: "Introduce yourself",
-    logoImageUrl: "/logo.png",
     faviconUrl: "/favicon.ico",
     bannerImageUrl: "/banner.png",
     contacts: {
@@ -12,7 +11,6 @@ const author = {
         github: getAuthorContactHref("github", "github_id"),
         youtube: getAuthorContactHref("youtube", "youtube_id"),
         facebook: getAuthorContactHref("facebook", "facebook_id"),
-        instagram: getAuthorContactHref("instagram", "instagram_id"),
         linkedin: getAuthorContactHref("linkedin", "linkedin_id"),
         twitter: getAuthorContactHref("twitter", "twitter_id"),
     } as { [key in ContactPlatformType]?: string },
@@ -34,7 +32,7 @@ const config = {
     useKatex: false, // katex option
     postPerCategoryPage: 4,
     numberOfLatestPost: 4,
-    numberOfMainPageCategory: 6,
+    numberOfMainPageCategory: 5,
     themeColor: "#73d1d7",
     postControllerText: {
         first: (category: string) => `Return to ${category}`, // first post ➡️ no prev post, so replace with your text
