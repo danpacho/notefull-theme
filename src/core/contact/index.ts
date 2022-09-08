@@ -3,7 +3,6 @@ const contactPlatformList = [
     "github",
     "email",
     "linkedin",
-    "instagram",
     "facebook",
     "youtube",
 ] as const
@@ -28,9 +27,6 @@ const getAuthorContactHref = (
             break
         case "linkedin":
             href = `https://www.linkedin.com/in/${contact}`
-            break
-        case "instagram":
-            href = `https://www.instagram.com/${contact}`
             break
         case "facebook":
             href = `https://www.facebook.com/${contact}`
