@@ -1,14 +1,14 @@
 import { GetStaticProps } from "next"
 
-import { PageType } from "@typing/page"
+import type { PageType } from "@typing/page"
 
 import { getProfileSource } from "@core/loader/profile"
 
 import MDXBundler from "@components/MDX/Bundler"
+import { Banner } from "@components/_common"
+import { ProfileContacts, ProfileFooter } from "@components/_pages/profile"
 
 import { config } from "blog.config"
-
-import { Banner } from "@components/_common"
 
 export const getStaticProps: GetStaticProps<ProfileProps> = async () => {
     const profileSource = await getProfileSource()
@@ -18,32 +18,9 @@ export const getStaticProps: GetStaticProps<ProfileProps> = async () => {
         },
     }
 }
-
-const Logo = ({ width, height }: { width: number; height: number }) => {
-    const [alt, fileType] = config.author.logoImageUrl.split(".")
-    return (
-        <picture>
-            <source
-                srcSet={config.author.logoImageUrl}
-                type={`image/${fileType}`}
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element*/}
-            <img
-                src={config.author.logoImageUrl}
-                width={width}
-                height={height}
-                alt={alt}
-                loading="lazy"
-                decoding="async"
-            />
-        </picture>
-    )
-}
-
 interface ProfileProps {
     profileSource: string
 }
-
 function ProfilePage({ profileSource }: ProfileProps) {
     return (
         <>
@@ -52,10 +29,14 @@ function ProfilePage({ profileSource }: ProfileProps) {
                 description={config.subtitle}
                 hex={config.themeColor}
             />
+            <ProfileContacts
+                hover="hover:fill-teal-500"
+                hoverDark="dark:hover:fill-teal-300"
+            />
+
             <MDXBundler source={profileSource} />
-            <a href="https://github.com/danpa725/bloapi">
-                {config.copyright}, Powered by Bloapi 🐧
-            </a>
+
+            <ProfileFooter />
         </>
     )
 }
