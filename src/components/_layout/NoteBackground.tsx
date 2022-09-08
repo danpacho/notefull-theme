@@ -1,13 +1,13 @@
 import tw from "@styles/tailwind.util"
 
-import {
+import type {
     TailwindBgColorType,
     TailwindBgDarkColorType,
     TailwindStrokeColorType,
     TailwindStrokeDarkColorType,
 } from "@typing/tailwind"
 
-interface NoteBackgroundProps {
+export interface NoteBackgroundProps {
     bgLight?: TailwindBgColorType
     bgDark?: TailwindBgDarkColorType
     rectWidth: number
@@ -20,10 +20,10 @@ interface NoteBackgroundProps {
     outerRectStrokeWidth?: number
 }
 function NoteBackground({
-    bgLight = "bg-transparent",
-    bgDark = "dark:bg-neutral-900",
     rectWidth,
     rectHeight,
+    bgLight = "bg-transparent",
+    bgDark = "dark:bg-neutral-900",
     rectStrokeWidth = 0.5,
     rectStrokeLight = "stroke-gray-300",
     rectStrokeDark = "dark:stroke-neutral-600",

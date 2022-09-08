@@ -1,4 +1,7 @@
-import getAuthorContactHref, { ContactPlatformType } from "@core/contact"
+import type { NoteBackgroundProps } from "@components/_layout/NoteBackground"
+import type { ContactPlatformType } from "@core/contact"
+
+import getAuthorContactHref from "@core/contact"
 
 const author = {
     name: "myname",
@@ -27,6 +30,12 @@ const blog = {
     googleAnalyticsID: "DISABLED", // default to "DISABLED"
 } as const
 
+const noteStyle: NoteBackgroundProps = {
+    // ✅ note background option
+    rectWidth: 150,
+    rectHeight: 150,
+}
+
 const config = {
     blogContentsDirectoryName: "blog", // blog contents directory name
     useKatex: false, // katex option
@@ -53,6 +62,7 @@ const config = {
         },
     ],
     author,
+    noteStyle,
     ...blog,
 } as const
 

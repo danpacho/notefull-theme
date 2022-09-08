@@ -1,12 +1,11 @@
-import { PageType } from "@typing/page"
+import type { PageType } from "@typing/page"
+
+import tw from "@styles/tailwind.util"
 
 import { useEffect } from "react"
 import { useTheme } from "next-themes"
 
-import tw from "@styles/tailwind.util"
-
-import { Nav } from "@components/_common/index"
-
+import { Nav } from "@components/_common"
 import NoteBackground from "./NoteBackground"
 
 import { config } from "blog.config"
@@ -44,7 +43,7 @@ function Layout({
             </div>
             {pageType !== "Post" && <MainNav />}
 
-            <NoteBackground rectWidth={150} rectHeight={150} />
+            <NoteBackground {...config.noteStyle} />
         </main>
     )
 }
