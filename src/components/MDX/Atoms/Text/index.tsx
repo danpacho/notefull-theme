@@ -19,17 +19,27 @@ const Bold = (props: any) => (
 const H1 = (props: any) => {
     const { observerRef } = useTrackTitle()
     return (
-        <h1 {...props} ref={observerRef} className="text-3xl font-bold my-4" />
+        <h1
+            {...props}
+            ref={observerRef}
+            className="text-3xl font-bold my-2 py-2"
+        />
     )
 }
 //============================== TOC 2 ==============================
 const H2 = (props: any) => {
     const { observerRef } = useTrackTitle()
     return (
-        <h1 {...props} ref={observerRef} className="text-2xl font-bold my-3" />
+        <h1
+            {...props}
+            ref={observerRef}
+            className="text-2xl font-bold my-1 py-2"
+        />
     )
 }
-const H3 = (props: any) => <h1 {...props} className="text-xl font-bold my-2" />
+const H3 = (props: any) => (
+    <h1 {...props} className="text-xl font-bold my-1 py-1" />
+)
 
 Text.Paragraph = Paragraph
 Text.Italic = Italic
