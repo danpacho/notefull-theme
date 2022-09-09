@@ -1,17 +1,17 @@
 import { GetStaticProps } from "next"
 import { NextSeo } from "next-seo"
 
-import { PageType } from "@typing/page"
-import { MetaType } from "@typing/post/meta"
-import { CategoryInfoType } from "@typing/category"
+import type { PageType } from "@typing/page"
+import type { MetaType } from "@typing/post/meta"
+import type { CategoryInfoType } from "@typing/category"
 
 import { getMainCategoryInfo } from "@core/loader/category"
 import { getLatestPostMeta } from "@core/loader/post"
 
-import { config } from "blog.config"
-
 import { Banner, PostLinkLayer, CategoryLinkLayer } from "@components/_common"
 import { Title } from "@components/_atoms"
+
+import { config } from "blog.config"
 
 export const getStaticProps: GetStaticProps<MainPageProps> = async () => {
     const latestPostMeta = await getLatestPostMeta()
