@@ -3,20 +3,26 @@ import type { ContactPlatformType } from "@core/contact"
 
 import getAuthorContactHref from "@core/contact"
 
+const contacts: Readonly<
+    {
+        [key in Exclude<ContactPlatformType, "email">]?: string
+    } & {
+        email: string // ✅ email for RSS
+    }
+> = {
+    email: getAuthorContactHref("email", "your_email"),
+    github: getAuthorContactHref("github", "github_id"),
+    youtube: getAuthorContactHref("youtube", "youtube_id"),
+    facebook: getAuthorContactHref("facebook", "facebook_id"),
+    linkedin: getAuthorContactHref("linkedin", "linkedin_id"),
+    twitter: getAuthorContactHref("twitter", "twitter_id"),
+}
 const author = {
     name: "myname",
     introduce: "Introduce yourself",
     faviconUrl: "/favicon.ico",
     bannerImageUrl: "/banner.png",
-    contacts: {
-        // ✅ DO NOT REMOVE EMAIL, for rss
-        email: getAuthorContactHref("email", "your_email"),
-        github: getAuthorContactHref("github", "github_id"),
-        youtube: getAuthorContactHref("youtube", "youtube_id"),
-        facebook: getAuthorContactHref("facebook", "facebook_id"),
-        linkedin: getAuthorContactHref("linkedin", "linkedin_id"),
-        twitter: getAuthorContactHref("twitter", "twitter_id"),
-    } as { [key in ContactPlatformType]?: string },
+    contacts,
 } as const
 
 const blog = {
