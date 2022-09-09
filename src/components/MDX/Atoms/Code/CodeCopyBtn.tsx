@@ -26,7 +26,7 @@ const useClipboard = () => {
 }
 
 const Style = {
-    common: "absolute right-3 top-3 md:right-4 md:top-4 transition",
+    common: "absolute right-3 top-3 transition",
     hide: "opacity-0",
     show: "opacity-100",
 }
