@@ -23,6 +23,7 @@ export interface NoteBackgroundProps {
  *
  * @param NoteBackgroundProps  {@link NoteBackgroundProps}
  * @returns svg note grid background
+ * @note see tailwind background color at [docs](https://tailwindcss.com/docs/background-color)
  * @note prop should be pass directly
  * @example
  * // 📦 Tailwind JIT can't extract class in the object
