@@ -19,6 +19,24 @@ export interface NoteBackgroundProps {
     outerRectStrokeDark?: TailwindStrokeDarkColorType
     outerRectStrokeWidth?: number
 }
+/**
+ *
+ * @param NoteBackgroundProps  {@link NoteBackgroundProps}
+ * @returns svg note grid background
+ * @note prop should be pass directly
+ * @example
+ * // 📦 Tailwind JIT can't extract class in the object
+ * // 🚫 Dont pass prop as object destruct
+ * const option: NoteBackgroundProps = {
+ *      bgLight: "bg-amber-50",
+ *      rectWidth: 100,
+ *      rectHeight: 100
+ * }
+ * const DontDoThis = () => <NoteBackground {...options}/>
+ *
+ * // ✅ Do this: pass prop directly
+ * const DoThis = () => <NoteBackground rectWidth={100} rectHeight={100} bgLight="bg-amber-50"/>
+ */
 function NoteBackground({
     rectWidth,
     rectHeight,

@@ -43,7 +43,7 @@ function Layout({
             </div>
             {pageType !== "Post" && <MainNav />}
 
-            <NoteBackground {...config.noteStyle} />
+            <NoteBackground rectWidth={150} rectHeight={150} />
         </main>
     )
 }
