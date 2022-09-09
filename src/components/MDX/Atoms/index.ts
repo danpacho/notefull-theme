@@ -5,7 +5,7 @@ import List from "./List"
 import Image from "./Image"
 import Code from "./Code"
 import Quote from "./Quote"
-import Tables from "./Table"
+import Table from "./Table"
 import Divider from "./Divider"
 
 const MDXAtoms = {
@@ -21,10 +21,10 @@ const MDXAtoms = {
     ol: List.Ol,
     ul: List.Ul,
 
-    table: Tables.Table,
-    th: Tables.Th,
-    td: Tables.Td,
-    tr: Tables.Tr,
+    table: Table,
+    th: Table.Th,
+    td: Table.Td,
+    tr: Table.Tr,
 
     blockquote: Quote,
 
