@@ -7,13 +7,13 @@ interface PostNavProps {
 }
 function PostNav({ category }: PostNavProps) {
     return (
-        <Nav.Container>
+        <Nav>
             <Nav.Btn
                 name={config.navigationMenu[0].name}
                 path={config.navigationMenu[0].path}
             />
             <Nav.Btn name={category} path={`/${category}`} />
-        </Nav.Container>
+        </Nav>
     )
 }
 

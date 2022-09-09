@@ -17,8 +17,7 @@ const NavBtnStyle = {
     text: "text-sm font-normal hover:text-black dark:hover:text-gray-100",
 } as const
 
-const Nav = () => {}
-const Container = ({ children }: PropsWithChildren<React.ReactNode>) => {
+const Nav = ({ children }: PropsWithChildren<React.ReactNode>) => {
     return (
         <nav
             className={`${NavStyle.layout} ${NavStyle.box} ${NavStyle.bg} ${NavStyle.border} ${NavStyle.text} z-0`}
@@ -44,7 +43,6 @@ const Btn = ({ path, name }: { path: string; name: string }) => {
     )
 }
 
-Nav.Container = Container
 Nav.Btn = Btn
 
 export default Nav

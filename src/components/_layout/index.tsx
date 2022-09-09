@@ -18,11 +18,11 @@ const useSetSystemTheme = () => {
 }
 
 const MainNav = () => (
-    <Nav.Container>
+    <Nav>
         {config.navigationMenu.map(({ name, path }) => (
             <Nav.Btn key={name} name={name} path={path} />
         ))}
-    </Nav.Container>
+    </Nav>
 )
 
 function Layout({
