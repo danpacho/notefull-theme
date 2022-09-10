@@ -43,7 +43,7 @@ const config = {
     themeColor: "#73d1d7",
     postControllerText: {
         first: (category: string) => `Return to ${category}`, // first post ➡️ no prev post, so replace with your text
-        last: (category: string) => `Last post of ${category}`, // last post ➡️ no next post, so replace with your text
+        last: (category: string) => `Last contents of ${category}`, // last post ➡️ no next post, so replace with your text
     },
     navigationMenu: [
         {
