@@ -87,7 +87,7 @@ function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
         <Link passHref href={href ?? "/"}>
             <div
                 className={`${skewStyle[skew]} ${size} ${mdSize} 
-                            flex flex-row flex-wrap py-4
+                            flex flex-row flex-wrap w-fit py-4
                             font-bold 
                             origin-left active:scale-90 transform-gpu
                             cursor-pointer select-none transition`}
