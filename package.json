@@ -22,7 +22,7 @@
         "svg": "npx @svgr/cli src/components/_icons --out-dir src/components/_icons --typescript",
         "build": "pnpm next:build && pnpm seo",
         "start": "next start",
-        "post": "npx -y @danpacho/post-generator",
+        "post": "post-generator",
         "analyze": "ANALYZE=true pnpm next:build",
         "prettier": "prettier '**/*.{js,ts,tsx,json,mdx}' --check",
         "prettier:fix": "prettier '**/*.{js,ts,tsx,json,mdx}' --write",
@@ -52,6 +52,7 @@
         "unist-util-visit": "^4.1.0"
     },
     "devDependencies": {
+        "@danpacho/post-generator": "^1.2.14",
         "@next/bundle-analyzer": "^12.2.5",
         "@types/mdx": "^2.0.2",
         "@types/mdx-js__react": "^1.5.5",
