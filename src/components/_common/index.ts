@@ -1,3 +1,4 @@
+export { default as PageLinkController } from "./PageLinkController"
 export { default as PostLink } from "./PostLink"
 export { default as PostLinkLayer } from "./PostLinkLayer"
 export { default as SeriesContainer } from "./SeriesContainer"

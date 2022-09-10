@@ -2,21 +2,22 @@ import tw from "@styles/tailwind.util"
 
 import Link from "next/link"
 
-import type { PostControllerType, PostControllerInfoType } from "@typing/post"
+import type { PostControllerInfoType as LinkInfo } from "@typing/post"
 
 import { Description, RowBetween } from "@components/_atoms"
 import { Arrow } from "@components/_icons"
 
-interface PostLinkProps extends PostControllerInfoType {
+interface PostLinkProps extends LinkInfo {
     type: "prev" | "next"
 }
-const PostLink = ({ title, link, type }: PostLinkProps) => {
+const PageLink = ({ title, link, type }: PostLinkProps) => {
     const isPrev = type === "prev"
     return (
         <Link href={link} passHref>
             <button
                 type="button"
                 aria-label={`${type} post: ${title}`}
+                title={type}
                 className={`flex ${
                     isPrev
                         ? "flex-row border-l-2 hover:-translate-x-1"
@@ -38,16 +39,17 @@ const PostLink = ({ title, link, type }: PostLinkProps) => {
     )
 }
 
-interface PostControllerProps {
-    controller: PostControllerType
+interface PageLinkControllerProps {
+    prev: LinkInfo
+    next: LinkInfo
 }
-function PostController({ controller }: PostControllerProps) {
+function PageLinkController({ prev, next }: PageLinkControllerProps) {
     return (
         <RowBetween styleClass="md:flex-row flex-col-reverse gap-3 pt-4 pb-8">
-            <PostLink type="prev" {...controller.prevPost} />
-            <PostLink type="next" {...controller.nextPost} />
+            <PageLink type="prev" {...prev} />
+            <PageLink type="next" {...next} />
         </RowBetween>
     )
 }
 
-export default PostController
+export default PageLinkController
