@@ -15,7 +15,6 @@ import {
     getAllSeries,
     getSpecificCategoryMeta,
     getSpecificCategoryLatestMeta,
-    getUniqueTagFromMeta,
 } from "@core/loader/post"
 
 import { CategorySEO } from "@components/SEO"
@@ -34,7 +33,6 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
     const specificCategoryMeta = await getSpecificCategoryMeta(category)
     const latestCategoryPostMeta =
         getSpecificCategoryLatestMeta(specificCategoryMeta)
-    const latestCategoryPostTag = getUniqueTagFromMeta(specificCategoryMeta)
 
     const categorySeries = getAllSeries(specificCategoryMeta)
 
@@ -43,7 +41,6 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
     return {
         props: {
             latestPost: latestCategoryPostMeta,
-            latestTag: latestCategoryPostTag,
             allSeries: categorySeries,
             ...categoryInfo,
         },
@@ -60,9 +57,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 interface CategoryPageProps extends CategoryInfoType {
     latestPost: MetaType[]
-    latestTag: string[]
     allSeries: SeriesType[]
 }
+//TODO: pagination 버튼 넣기
 function CategoryPage(props: CategoryPageProps) {
     const { latestPost, allSeries, category, description, color, emoji } = props
 
