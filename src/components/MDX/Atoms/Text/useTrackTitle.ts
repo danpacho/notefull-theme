@@ -5,10 +5,10 @@ import useElementObserver from "./useObserver"
 
 const UPDATE_CONDITION = {
     top: 50,
-    bottom: -50,
+    bottom: -100,
 } as const
 const OBSERVER_OPTION = {
-    top: "-10px",
+    top: "-20px",
     bottom: "0px",
     threshold: [0, 1],
 }
