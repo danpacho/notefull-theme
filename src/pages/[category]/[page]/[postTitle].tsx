@@ -16,13 +16,8 @@ import { PostSEO } from "@components/SEO"
 import KatexStyleLoader from "@components/KatexStyleLoader"
 import MDXBundler from "@components/MDX/Bundler"
 
-import {
-    PostNav,
-    PostController,
-    PostBanner,
-    PostMeta,
-    PostToc,
-} from "@components/_pages/post"
+import { PageLinkController } from "@components/_common"
+import { PostNav, PostBanner, PostMeta, PostToc } from "@components/_pages/post"
 
 import { config } from "blog.config"
 
@@ -95,7 +90,11 @@ function PostPage({
             <MDXBundler source={source} />
 
             {reference && <PostMeta hex={meta.color} metaArray={reference} />}
-            <PostController controller={controller} />
+
+            <PageLinkController
+                prev={controller.prevPost}
+                next={controller.nextPost}
+            />
 
             <PostNav category={meta.category} />
             <PostToc toc={toc} />
