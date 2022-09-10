@@ -1,5 +1,5 @@
 import type { MetaType } from "@typing/post/meta"
-import type { SeriesHeaderProps } from "../../_common/SeriesContainer"
+import type { SeriesHeaderProps } from "@components/_common/SeriesContainer"
 
 import { Banner, SeriesContainer } from "@components/_common"
 
