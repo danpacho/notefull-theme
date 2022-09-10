@@ -40,7 +40,7 @@ const LinkBtn = ({
                 <p
                     className={`
                     ${isFoucused && focusedStyle} 
-                    transition w-40 
+                    transition w-40 2xl:w-56
                     truncate text-sm 
                     text-gray-400 hover:text-black dark:hover:text-gray-100
                     `}
