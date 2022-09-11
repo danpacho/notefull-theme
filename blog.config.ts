@@ -37,7 +37,7 @@ const blog = {
 const config = {
     blogContentsDirectoryName: "blog", // blog contents directory name
     useKatex: false, // katex option
-    postPerCategoryPage: 4,
+    postPerCategoryPage: 8,
     numberOfLatestPost: 4,
     numberOfMainPageCategory: 5,
     themeColor: "#73d1d7",
