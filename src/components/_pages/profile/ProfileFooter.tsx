@@ -11,9 +11,9 @@ function ProfileFooter() {
             <ColorBox hex={config.themeColor} varients="double-bg-border">
                 <a
                     className="font-mono italic font-bold text-xs hover:underline "
-                    href="https://github.com/danpacho/simple-note-theme"
+                    href="https://github.com/danpacho/notefull-theme"
                 >
-                    🔌 Powered by simple note theme ⚡️
+                    🔌 Powered by Notefull ⚡️
                 </a>
             </ColorBox>
         </footer>
