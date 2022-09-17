@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+xmlns:xhtml="http://www.w3.org/1999/xhtml"
+xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+<url><loc>your DEPLOY URL</loc></url>
+<url><loc>your DEPLOY URL/category</loc></url>
+<url><loc>your DEPLOY URL/profile</loc></url>
+
+<url><loc>your%20DEPLOY%20URL/Demo</loc><priority>0.4</priority><changefreq>monthly</changefreq></url>
+<url><loc>your DEPLOY URL/Demo/1</loc><priority>0.2</priority><changefreq>daily</changefreq></url>
+<url><loc>your DEPLOY URL/Demo/1/Hi!-I'm-demo</loc><priority>0.8</priority><changefreq>daily</changefreq><lastmod>2022-09-17</lastmod></url>
+</urlset>
