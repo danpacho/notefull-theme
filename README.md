@@ -2,6 +2,8 @@
 
 # Notefull Theme 📔
 
+> **`Note shape` | `Minimal` theme**
+
 ![Next JS](https://img.shields.io/badge/Next-black?style=flat-square&logo=next.js&logoColor=white)
 ![vercel](https://img.shields.io/badge/%20-vercel-%23000000?style=flat-square&logo=vercel&logoColor=white)
 ![Typescript](https://img.shields.io/badge/%20-Typescript-%23000000?style=flat-square&logo=typescript&logoColor=white)
@@ -9,12 +11,6 @@
 ![MDX](https://img.shields.io/badge/%20-MDX-%23000000?style=flat-square&logo=mdx&logoColor=white)
 
 </div>
-
-<br />
-
-# Blog template
-
-> **`Note shape` | `Minimal` theme**
 
 <br />
 
