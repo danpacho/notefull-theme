@@ -1,16 +1,15 @@
 {
-    "name": "bloapi",
+    "name": "notefull-theme",
     "version": "1.0.0",
     "author": {
         "name": "danpacho",
         "url": "https://github.com/danpacho"
     },
-    "description": "Nextjs blog api starter kit. Don't think about handling data. Just draw it.",
+    "description": "Minimal blog theme, built with NextJs",
     "keywords": [
         "blog",
-        "nextjs",
-        "api-only",
-        "no-style"
+        "nextJs",
+        "simple"
     ],
     "license": "MIT",
     "scripts": {
@@ -48,6 +47,7 @@
         "remark-gfm": "^3.0.1",
         "remark-math": "^5.1.1",
         "sharp": "^0.30.7",
+        "tailwindest": "^1.0.5",
         "unified": "^10.1.2",
         "unist-util-visit": "^4.1.0"
     },
@@ -73,6 +73,6 @@
         "ts-node": "^10.9.1",
         "tsconfig-paths": "^4.1.0",
         "tslib": "^2.4.0",
-        "typescript": "4.7.2"
+        "typescript": "4.9.3"
     }
 }
