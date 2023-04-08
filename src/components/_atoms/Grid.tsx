@@ -1,16 +1,16 @@
-import { TailwindGridRowType, TailwindGridColType } from "@typing/tailwind"
+import { Tw } from "@lib/wind"
 
 interface GirdProps {
     children: React.ReactNode
-    col: TailwindGridColType
-    row?: TailwindGridRowType
-    mdCol?: `md:${TailwindGridColType}`
-    mdRow?: `md:${TailwindGridRowType}`
-    gap: `gap-${"0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"}`
+    col: Tw["gridTemplateColumns"]
+    row?: Tw["gridTemplateRows"]
+    mdCol?: `md:${Tw["gridTemplateColumns"]}`
+    mdRow?: `md:${Tw["gridTemplateRows"]}`
+    gap: Tw["gap"]
     styleClass?: string
 }
 
-function Grid({
+const Grid = ({
     children,
     col,
     row,
@@ -18,14 +18,12 @@ function Grid({
     mdCol,
     mdRow,
     styleClass,
-}: GirdProps) {
-    return (
-        <div
-            className={`grid w-full ${row} ${col} ${gap} ${mdRow} ${mdCol} ${styleClass}`}
-        >
-            {children}
-        </div>
-    )
-}
+}: GirdProps) => (
+    <div
+        className={`grid w-full ${row} ${col} ${gap} ${mdRow} ${mdCol} ${styleClass}`}
+    >
+        {children}
+    </div>
+)
 
 export default Grid

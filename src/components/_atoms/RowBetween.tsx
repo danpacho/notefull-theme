@@ -1,4 +1,4 @@
-function RowBetween({
+const RowBetween = ({
     children,
     onClick,
     styleClass,
@@ -6,15 +6,13 @@ function RowBetween({
     children: React.ReactNode
     styleClass?: string
     onClick?: () => void
-}) {
-    return (
-        <div
-            className={`${styleClass} flex flex-row items-center justify-between w-full`}
-            onClick={onClick}
-        >
-            {children}
-        </div>
-    )
-}
+}) => (
+    <div
+        className={`${styleClass} flex flex-row items-center justify-between w-full`}
+        onClick={onClick}
+    >
+        {children}
+    </div>
+)
 
 export default RowBetween

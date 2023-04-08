@@ -2,7 +2,7 @@ import matter from "gray-matter"
 
 import { readdir, readFile } from "fs/promises"
 
-import { POST_FILE_NAME, MAC_OS_FILE_EXCEPTION } from "@constants/index"
+import { MAC_OS_FILE_EXCEPTION, POST_FILE_NAME } from "@constants/index"
 
 import { MDXMetaType } from "@typing/post/meta"
 

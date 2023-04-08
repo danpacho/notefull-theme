@@ -1,8 +1,4 @@
-import {
-    TailwindFontColorType,
-    TailwindFontWeightType,
-} from "../../types/tailwind/index"
-
+import { Tw } from "@lib/wind"
 import type { Node } from "unist"
 import { visit } from "unist-util-visit"
 
@@ -30,9 +26,9 @@ type TokenType =
     | "cdata"
     | "punctuation"
     | "namespace"
-    | "slector"
+    | "selector"
     | "doctype"
-    | "atrule"
+    | "atRule"
     | "regex"
     | "important"
     | "variable"
@@ -41,6 +37,9 @@ type TokenType =
     | "known-class-name"
     | "class-name"
     | "generic"
+
+type TailwindFontColorType = Tw["color"]
+type TailwindFontWeightType = Tw["fontWeight"]
 
 const tokenClassNames: {
     [key in TokenType]:
@@ -74,7 +73,7 @@ const tokenClassNames: {
     deleted: "text-red-500 italic",
 
     // orange 200
-    atrule: "text-orange-200",
+    atRule: "text-orange-200",
     number: "text-orange-200",
     "maybe-class-name": "text-orange-200 font-bold",
     "attr-value": "text-orange-200",
@@ -99,7 +98,7 @@ const tokenClassNames: {
     // purple #c792ea
     keyword: "text-[#c792ea] font-bold",
     operator: "text-[#c792ea] font-bold",
-    slector: "text-[#c792ea] font-bold",
+    selector: "text-[#c792ea] font-bold",
     doctype: "text-[#c792ea] font-bold",
 
     bold: "font-bold",

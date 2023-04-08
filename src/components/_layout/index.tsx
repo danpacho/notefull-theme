@@ -9,6 +9,7 @@ import { Nav } from "@components/_common"
 import NoteBackground from "./NoteBackground"
 
 import { config } from "blog.config"
+import { wind } from "tailwindest"
 
 const useSetSystemTheme = () => {
     const { setTheme, systemTheme } = useTheme()
@@ -25,25 +26,48 @@ const MainNav = () => (
     </Nav>
 )
 
-function Layout({
+const layout = wind({
+    display: "flex",
+    flexDirection: "flex-col",
+    justifyContent: "justify-center",
+    alignItems: "items-center",
+    padding: "p-5",
+    paddingBottom: "pb-14",
+    "@md": {
+        padding: "md:p-8",
+    },
+    marginX: "mx-auto",
+})
+    .compose(tw.layoutStyle)
+    .class()
+
+const layoutWrapper = wind({
+    display: "flex",
+    flexDirection: "flex-col",
+    alignItems: "items-start",
+    justifyContent: "justify-start",
+    gap: "gap-4",
+
+    width: "w-full",
+    height: "h-full",
+    minHeight: "min-h-screen",
+}).class()
+
+const Layout = ({
     children,
     pageType,
 }: {
     children: React.ReactNode
     pageType: PageType
-}) {
+}) => {
     useSetSystemTheme()
 
     return (
-        <main
-            className={`${tw.layout} flex flex-col items-center justify-center p-5 pb-14 md:p-8 mx-auto`}
-        >
-            <div className="flex flex-col items-start justify-start w-full h-full min-h-screen gap-4">
-                {children}
-            </div>
+        <main className={layout}>
+            <div className={layoutWrapper}>{children}</div>
             {pageType !== "Post" && <MainNav />}
 
-            <NoteBackground rectWidth={150} rectHeight={150} />
+            <NoteBackground {...config.noteBackgroundStyle} />
         </main>
     )
 }

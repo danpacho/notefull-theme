@@ -18,7 +18,7 @@ function CategoryLinkLayer({
             ))}
             {displayCategoryPageLinkBtn && (
                 <CategoryLink
-                    category="Expore More"
+                    category="Explore More"
                     categoryUrl="/category"
                     color="#ded235"
                     description="click to explore more category"

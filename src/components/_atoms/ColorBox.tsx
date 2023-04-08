@@ -2,6 +2,8 @@ import { ThemeMode } from "@typing/theme"
 import { useTheme } from "next-themes"
 
 import useMounted from "@hooks/useMounted"
+import { createVariants, WindVariants } from "tailwindest"
+import { tw$ } from "@lib/wind"
 
 const useThemeHex = (hex: string) => {
     const theme = useTheme().theme as ThemeMode
@@ -17,55 +19,69 @@ const HEX_OPACITY_OPTION = {
     light: "40",
 } as const
 
-const COMMON_STYLE = {
-    size: "w-6 h-6",
-    stroke: "border-[1.5px]",
-    bgStylesheet: (hex: string) => ({
-        backgroundColor: hex,
-    }),
-    borderStylesheet: (hex: string) => ({
-        borderColor: hex,
-    }),
-    bgBorderStylesheet: (hex: string) => ({
-        backgroundColor: hex,
-        borderColor: hex,
-    }),
-} as const
+const iconStyle = tw$("border")(
+    {
+        width: "w-6",
+        height: "h-6",
+        fontSize: "text-xs",
+        fontWeight: "font-bold",
+        "@dark": {
+            ":hover": {
+                backgroundColor: "dark:hover:bg-fuchsia-400",
+            },
+        },
+    },
+    {
+        border: {
+            border: "border-black border-solid",
+            borderWidth: "border-[1.5px]",
+        },
+    }
+)
 
-const IconVarients = {
-    bg: {
-        class: COMMON_STYLE.size,
-        style: COMMON_STYLE.bgStylesheet,
+const iconLayout = tw$("flexible")(
+    {
+        display: "flex",
+        alignItems: "items-center",
+        justifyContent: "justify-center",
     },
-    border: {
-        class: `${COMMON_STYLE.size} ${COMMON_STYLE.stroke}`,
-        style: COMMON_STYLE.borderStylesheet,
-    },
-    ["bg-border"]: {
-        class: `${COMMON_STYLE.size} ${COMMON_STYLE.stroke}`,
-        style: COMMON_STYLE.bgBorderStylesheet,
-    },
-    ["double-bg-border"]: {
-        class: `flex-row px-1.5 w-fit h-6 gap-1.5 ${COMMON_STYLE.stroke}`,
-        style: COMMON_STYLE.bgBorderStylesheet,
-    },
-} as const
-type IconVarientsType = keyof typeof IconVarients
+    {
+        flexible: {
+            flexDirection: "flex-row",
+            gap: "gap-1.5",
 
-interface IconBoxProps {
+            width: "w-fit",
+            height: "h-6",
+
+            paddingX: "px-1.5",
+        },
+    }
+)
+
+const iconBox = createVariants({
+    style: iconStyle,
+    layout: iconLayout,
+})
+
+interface IconBoxProps extends WindVariants<typeof iconBox> {
     hex: string
     children: React.ReactNode
-    varients?: IconVarientsType
 }
 
-function ColorBox({ hex, children, varients = "bg" }: IconBoxProps) {
+function ColorBox({ hex, children, ...iconProps }: IconBoxProps) {
     const { themeHex } = useThemeHex(hex)
     const { isMounted } = useMounted()
+    const style: React.CSSProperties =
+        iconProps.style === "border"
+            ? {
+                  backgroundColor: themeHex,
+                  borderColor: themeHex,
+              }
+            : {
+                  backgroundColor: themeHex,
+              }
     return (
-        <div
-            className={`${IconVarients[varients].class} flex items-center justify-center text-xs font-bold`}
-            style={isMounted ? IconVarients[varients].style(themeHex) : {}}
-        >
+        <div className={iconBox(iconProps)} style={isMounted ? style : {}}>
             {children}
         </div>
     )

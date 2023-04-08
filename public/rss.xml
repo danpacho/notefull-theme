@@ -6,8 +6,8 @@
     <description>your site subtitle</description>
     <language>ko</language>
     <lastBuildDate>Sat, 17 Sep 2022 00:00:00 GMT</lastBuildDate>
-    <webMaster>your_email (myname)</webMaster>
-    <managingEditor>your_email (myname)</managingEditor>
+    <webMaster>your_email (your name)</webMaster>
+    <managingEditor>your_email (your name)</managingEditor>
     <atom:link href="your DEPLOY URL/rss.xml" rel="self" type="application/rss+xml"/>
 
     <item>

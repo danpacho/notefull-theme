@@ -23,7 +23,7 @@ const getProfileSource = async () => {
         const profileContent = await readFile(BLOG_PROFILE_DIR, "utf-8")
         if (!profileContent)
             throw new BlogFileExtractionError({
-                errorNameDescription: "post file extraction error occured",
+                errorNameDescription: "post file extraction error occurred",
                 readingFileFormat: ".mdx",
                 readingFileLocation: BLOG_PROFILE_DIR,
                 readingFileName: "profile.mdx",
@@ -45,7 +45,7 @@ const getProfileSource = async () => {
             passedError: err,
             errorNameDescription: "profile file reading error",
             message: "",
-            customeErrorMessage: `your profile file at:\n\n   ${BLOG_PROFILE_DIR}`,
+            customErrorMessage: `your profile file at:\n\n   ${BLOG_PROFILE_DIR}`,
         })
     }
 }

@@ -4,7 +4,7 @@ interface BlogErrorConstructorProps {
     errorType: ErrorType
     errorNameDescription: string
     message: string
-    customeErrorMessage?: string
+    customErrorMessage?: string
 }
 
 class BlogError extends Error {
@@ -15,22 +15,22 @@ class BlogError extends Error {
 
     protected makeErrorMessage = (
         mainErrorMessage: string,
-        customeErrorMessage?: string
+        customErrorMessage?: string
     ) =>
-        !customeErrorMessage
-            ? `${this.messageDivider}${this.messageTab}❎ Error Occured, ${mainErrorMessage}${this.messageDivider}`
-            : `${this.messageDivider}${this.messageTab}❎ Error Occured, ${mainErrorMessage}\n${this.messageTab}❎ Check ${customeErrorMessage}${this.messageDivider}`
+        !customErrorMessage
+            ? `${this.messageDivider}${this.messageTab}❎ Error Occurred, ${mainErrorMessage}${this.messageDivider}`
+            : `${this.messageDivider}${this.messageTab}❎ Error Occurred, ${mainErrorMessage}\n${this.messageTab}❎ Check ${customErrorMessage}${this.messageDivider}`
 
     constructor({
         errorType,
         errorNameDescription,
         message,
-        customeErrorMessage,
+        customErrorMessage,
     }: BlogErrorConstructorProps) {
         super("")
         this.errorType = errorType
-        this.name = `${this.messageDivider}[ 🛠 ERROR_OCCURED: ${this.errorType} -> ${errorNameDescription} 🛠 ]`
-        this.message = this.makeErrorMessage(message, customeErrorMessage)
+        this.name = `${this.messageDivider}[ ❎ Error Occurred: ${this.errorType} -> ${errorNameDescription} 🛠 ]`
+        this.message = this.makeErrorMessage(message, customErrorMessage)
     }
 }
 
@@ -45,33 +45,33 @@ type PropertyType =
     | "symbol[]"
     | "Object"
 
-type PropertyName<CustomeProperty> =
-    | Exclude<keyof CustomeProperty, keyof Array<any>>
+type PropertyName<CustomProperty> =
+    | Exclude<keyof CustomProperty, keyof Array<any>>
     | string
-interface BlogPropertyErrorConstructorProps<CustomeProperty>
+interface BlogPropertyErrorConstructorProps<CustomProperty>
     extends Pick<
         BlogErrorConstructorProps,
-        "customeErrorMessage" | "errorNameDescription"
+        "customErrorMessage" | "errorNameDescription"
     > {
-    propertyName: PropertyName<CustomeProperty>
+    propertyName: PropertyName<CustomProperty>
     propertyType: PropertyType
     propertyDescription?: string
     errorDirectory?: string
     errorPropertyValue?: string
 }
 
-class BlogPropertyError<CustomeProperty> extends BlogError {
+class BlogPropertyError<CustomProperty> extends BlogError {
     constructor({
-        customeErrorMessage,
+        customErrorMessage,
         errorNameDescription,
         propertyName,
         propertyType,
         propertyDescription,
         errorPropertyValue,
         errorDirectory,
-    }: BlogPropertyErrorConstructorProps<CustomeProperty>) {
+    }: BlogPropertyErrorConstructorProps<CustomProperty>) {
         const makePropertyErrorMessage = (
-            propertyName: PropertyName<CustomeProperty>,
+            propertyName: PropertyName<CustomProperty>,
             propertyType: PropertyType,
             errorPropertyValue?: string
         ) => {
@@ -93,7 +93,7 @@ class BlogPropertyError<CustomeProperty> extends BlogError {
                 propertyType,
                 errorPropertyValue
             ),
-            customeErrorMessage,
+            customErrorMessage,
         })
     }
 }
@@ -108,21 +108,21 @@ class BlogErrorAdditionalInfo extends BlogError {
         passedError,
         errorNameDescription,
         message,
-        customeErrorMessage,
+        customErrorMessage,
     }: BlogErrorAdditionalInfoConstructorProps) {
         super({
             errorType: "additionalInfoError",
             errorNameDescription,
             message: "",
-            customeErrorMessage,
+            customErrorMessage,
         })
 
         this.passedError = passedError
 
         if (passedError instanceof BlogError) {
-            this.message = `${this.passedError}\n${this.messageTab}${message}\n${this.messageTab}${customeErrorMessage}${this.messageDivider}`
+            this.message = `${this.passedError}\n${this.messageTab}${message}\n${this.messageTab}${customErrorMessage}${this.messageDivider}`
         } else {
-            this.message = `${this.messageDivider}${this.messageTab}${customeErrorMessage}${this.messageDivider}${this.messageTab}Unknown ERROR😓:\n\n${this.passedError}\n${this.messageTab}\n${this.messageTab}Please Follow [ Error Call Stack ] to find error.${this.messageDivider}`
+            this.message = `${this.messageDivider}${this.messageTab}${customErrorMessage}${this.messageDivider}${this.messageTab}Unknown ERROR😓:\n\n${this.passedError}\n${this.messageTab}\n${this.messageTab}Please Follow [ Error Call Stack ] to find error.${this.messageDivider}`
         }
     }
 }
@@ -131,13 +131,13 @@ type ReadingFileFormat = ".json" | ".txt" | ".mdx" | "image"
 interface BlogFileExtractionErrorConstructorProps
     extends Omit<
         BlogErrorConstructorProps,
-        "errorType" | "customeErrorMessage" | "message"
+        "errorType" | "customErrorMessage" | "message"
     > {
     encodingFormat?: BufferEncoding
     readingFileFormat: ReadingFileFormat
     readingFileName: string
     readingFileLocation: string
-    customeErrorMessage?: string
+    customErrorMessage?: string
 }
 
 class BlogFileExtractionError extends BlogError {
@@ -149,21 +149,21 @@ class BlogFileExtractionError extends BlogError {
         readingFileFormat,
         encodingFormat = "utf-8",
         readingFileName,
-        customeErrorMessage,
+        customErrorMessage,
     }: BlogFileExtractionErrorConstructorProps) {
         const fileExtractionErrorMessage = encodingFormat
             ? `while extracting ${readingFileName}${readingFileFormat}`
             : `while extracting ${readingFileName}${readingFileFormat}, [ ✅ ENCODING FORMAT: ${encodingFormat} ]`
 
-        const fileLocationMessage = !customeErrorMessage
+        const fileLocationMessage = !customErrorMessage
             ? `file location🔎: \n\n  ${readingFileLocation}`
-            : `Read error: ${customeErrorMessage}\n\n  file location🔎: \n\n  ${readingFileLocation}`
+            : `Read error: ${customErrorMessage}\n\n  file location🔎: \n\n  ${readingFileLocation}`
 
         super({
             errorType: "fileExtractionError",
             errorNameDescription,
             message: fileExtractionErrorMessage,
-            customeErrorMessage: fileLocationMessage,
+            customErrorMessage: fileLocationMessage,
         })
 
         this.readingFileLocation = readingFileLocation

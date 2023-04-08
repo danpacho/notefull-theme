@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 
-import { TailwindFontSizeType } from "@typing/tailwind"
+import { Tw, tw$ } from "@lib/wind"
+import { mergeProps, WindVariants } from "tailwindest"
 
 const getRandBetween = (maxNum: number) => Math.floor(Math.random() * maxNum)
 
@@ -13,33 +14,99 @@ const getIndexOfSpaceCharacter = (strArr: string[]) => {
     return spaceIndex
 }
 
-const getSplitedText = (text: string) =>
+const getSplicedText = (text: string) =>
     [...new Intl.Segmenter().segment(text)].map((x) => x.segment)
 
-const skewStyle = {
-    leftEnd: "hover:skew-y-12 hover:-rotate-12",
-    left: "hover:skew-y-6 hover:-rotate-6",
-    neutral: "animate-pulse",
-    right: "hover:-skew-y-6 hover:rotate-6",
-    rightEnd: "hover:-skew-y-12 hover:rotate-12",
-} as const
-type SkewType = keyof typeof skewStyle
+const titleSkew = tw$(
+    "leftEnd",
+    "left",
+    "center",
+    "right",
+    "rightEnd"
+)(
+    {
+        display: "flex",
+        flexDirection: "flex-row",
+        flexWrap: "flex-wrap",
 
-const commonCharacterStyle =
-    "transition min-w-[0.5rem] hover:scale-110" as const
+        width: "w-fit",
+
+        paddingY: "py-4",
+
+        fontWeight: "font-bold",
+
+        transition: "transition",
+        transformOrigin: "origin-left",
+        transformGPU: "transform-gpu",
+        ":active": {
+            transformScale: "active:scale-90",
+        },
+
+        cursor: "cursor-pointer",
+        userSelect: "select-none",
+        "::before": {
+            content: "before:content-none",
+            "::after": {
+                backgroundColor: "before:after:bg-amber-200",
+            },
+        },
+    },
+    {
+        left: {
+            ":hover": {
+                transformSkewY: "hover:skew-y-12",
+                transformRotate: "hover:-rotate-12",
+            },
+        },
+        leftEnd: {
+            ":hover": {
+                transformSkewY: "hover:skew-y-6",
+                transformRotate: "hover:-rotate-6",
+            },
+        },
+        center: {
+            animation: "animate-pulse",
+        },
+        right: {
+            ":hover": {
+                transformSkewY: "hover:-skew-y-6",
+                transformRotate: "hover:rotate-6",
+            },
+        },
+        rightEnd: {
+            ":hover": {
+                transformSkewY: "hover:-skew-y-12",
+                transformRotate: "hover:rotate-12",
+            },
+        },
+    }
+)
+
+const characterStyle = tw$("capitalize")(
+    {
+        transition: "transition",
+        minWidth: "min-w-[0.5rem]",
+        ":hover": { transformScale: "hover:scale-110" },
+    },
+    {
+        capitalize: {
+            textTransform: "capitalize",
+        },
+    }
+)
 
 interface ColorTitleProps {
     title: string
     hex: string
-    size: TailwindFontSizeType
-    mdSize?: `md:${TailwindFontSizeType}`
+    size: Tw["fontSize"]
+    mdSize?: `md:${Exclude<Tw["fontSize"], undefined>}`
     href?: string
 }
-function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
-    const splitedTitle = useMemo(() => getSplitedText(title), [title])
+const ColorTitle = ({ title, hex, size, mdSize, href }: ColorTitleProps) => {
+    const splicedTitle = useMemo(() => getSplicedText(title), [title])
     const spaceIndexArr = useMemo(
-        () => getIndexOfSpaceCharacter(splitedTitle),
-        [splitedTitle]
+        () => getIndexOfSpaceCharacter(splicedTitle),
+        [splicedTitle]
     )
     const titleLength = title.length
 
@@ -50,7 +117,7 @@ function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
         setFocusNum(focusNum)
     }, [titleLength, spaceIndexArr])
 
-    const [skew, setSkew] = useState<SkewType>("neutral")
+    const [skew, setSkew] = useState<WindVariants<typeof titleSkew>>("center")
     useEffect(() => {
         const mid = titleLength / 2
         const isEven = titleLength % 2 === 0
@@ -64,7 +131,7 @@ function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
                 else setSkew("right")
                 return
             case false:
-                if (focusLocation === Math.floor(mid) + 1) setSkew("neutral")
+                if (focusLocation === Math.floor(mid) + 1) setSkew("center")
                 else if (focusLocation === 1) setSkew("leftEnd")
                 else if (focusLocation === titleLength) setSkew("rightEnd")
                 else if (focusLocation < mid) setSkew("left")
@@ -86,13 +153,14 @@ function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
     return (
         <Link passHref href={href ?? "/"}>
             <div
-                className={`${skewStyle[skew]} ${size} ${mdSize} 
-                            flex flex-row flex-wrap w-fit py-4
-                            font-bold 
-                            origin-left active:scale-90 transform-gpu
-                            cursor-pointer select-none transition`}
+                className={mergeProps(titleSkew.style(skew), {
+                    fontSize: size,
+                    "@md": {
+                        fontSize: mdSize,
+                    },
+                })}
             >
-                {splitedTitle.map((character, index) => {
+                {splicedTitle.map((character, index) => {
                     const isFirstCharacter = index === 0
                     const isFocused = index === focusNum
                     const style = isFocused
@@ -104,11 +172,9 @@ function ColorTitle({ title, hex, size, mdSize, href }: ColorTitleProps) {
                         <p
                             key={character + index}
                             style={style}
-                            className={
-                                isFirstCharacter
-                                    ? `${commonCharacterStyle} capitalize`
-                                    : commonCharacterStyle
-                            }
+                            className={characterStyle.class(
+                                isFirstCharacter ? "capitalize" : undefined
+                            )}
                             onPointerEnter={() =>
                                 onPointerFocusCharacter(index, spaceIndexArr)
                             }

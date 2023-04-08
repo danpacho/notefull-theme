@@ -31,7 +31,7 @@ function Image(props: ImageProps) {
                     quality={75}
                     loading="lazy"
                     crossOrigin="anonymous"
-                    onContextMenu={(e) => e.preventDefault()}
+                    onContextMenu={(e: any) => e.preventDefault()}
                 />
             )}
         </>

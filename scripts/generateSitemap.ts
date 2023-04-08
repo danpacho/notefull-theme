@@ -18,7 +18,7 @@ async function generateSitemap(
     const generateUrlSet = (
         url: string,
         option: {
-            changefreq?:
+            changeFrequency?:
                 | "always"
                 | "hourly"
                 | "daily"
@@ -27,17 +27,17 @@ async function generateSitemap(
                 | "yearly"
                 | "never"
             priority?: number
-            lastmod?: string
+            lastModified?: string
         }
     ) =>
         `<url><loc>${url}</loc>${
             option?.priority && `<priority>${option.priority}</priority>`
         }${
-            option?.changefreq &&
-            `<changefreq>${option.changefreq}</changefreq>`
+            option?.changeFrequency &&
+            `<changefreq>${option.changeFrequency}</changefreq>`
         }${
-            typeof option?.lastmod === "string"
-                ? `<lastmod>${option.lastmod}</lastmod>`
+            typeof option?.lastModified === "string"
+                ? `<lastmod>${option.lastModified}</lastmod>`
                 : ""
         }</url>`
 
@@ -47,7 +47,7 @@ async function generateSitemap(
 
     const allCategoryUrlSet = modifiedAllCategoryPath.map((categoryPath) =>
         generateUrlSet(categoryPath, {
-            changefreq: "monthly",
+            changeFrequency: "monthly",
             priority: URL_PRIORITY.category,
         })
     )
@@ -58,15 +58,15 @@ async function generateSitemap(
     const allCategoryPaginationUrlSet = allCategoryPaginationPath.map(
         (postPath) =>
             generateUrlSet(postPath, {
-                changefreq: "daily",
+                changeFrequency: "daily",
                 priority: URL_PRIORITY.categoryPagination,
             })
     )
     const allPostUrlSet = allPostMeta.map(({ postUrl, update }) =>
         generateUrlSet(addSiteUrlNotation(postUrl), {
-            changefreq: "daily",
+            changeFrequency: "daily",
             priority: URL_PRIORITY.post,
-            lastmod: update,
+            lastModified: update,
         })
     )
 
