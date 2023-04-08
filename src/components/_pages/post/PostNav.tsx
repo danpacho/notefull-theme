@@ -5,7 +5,7 @@ import { config } from "blog.config"
 interface PostNavProps {
     category: string
 }
-function PostNav({ category }: PostNavProps) {
+const PostNav = ({ category }: PostNavProps) => {
     return (
         <Nav>
             <Nav.Btn

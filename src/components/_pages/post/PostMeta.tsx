@@ -30,7 +30,7 @@ interface PostMetaProps {
     metaArray: MetaType[]
     hex: string
 }
-function PostMeta({ metaArray, hex }: PostMetaProps) {
+const PostMeta = ({ metaArray, hex }: PostMetaProps) => {
     return (
         <RowContainer>
             {metaArray.map((meta, order) => {
@@ -39,7 +39,8 @@ function PostMeta({ metaArray, hex }: PostMetaProps) {
                     return (
                         <ColorBox
                             hex={hex}
-                            varients="double-bg-border"
+                            style="border"
+                            layout="flexible"
                             key={meta.content}
                         >
                             <Link href={meta.path}>{meta.content}</Link>
@@ -51,7 +52,8 @@ function PostMeta({ metaArray, hex }: PostMetaProps) {
                     return (
                         <ColorBox
                             hex={hex}
-                            varients="double-bg-border"
+                            style="border"
+                            layout="flexible"
                             key={meta}
                         >
                             <a className="hover:underline" href={meta}>
@@ -61,7 +63,12 @@ function PostMeta({ metaArray, hex }: PostMetaProps) {
                     )
 
                 return (
-                    <ColorBox hex={hex} varients="double-bg-border" key={meta}>
+                    <ColorBox
+                        hex={hex}
+                        style="border"
+                        layout="flexible"
+                        key={meta}
+                    >
                         {meta}
                     </ColorBox>
                 )

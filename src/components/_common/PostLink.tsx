@@ -29,7 +29,7 @@ function PostLink({
             >
                 <RowBetween>
                     <Title>{title}</Title>
-                    <ColorBox hex={color} varients="bg-border">
+                    <ColorBox hex={color} style="border">
                         <Pencil className="fill-current" />
                     </ColorBox>
                 </RowBetween>

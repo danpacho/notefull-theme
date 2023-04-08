@@ -18,7 +18,7 @@ import { BlogErrorAdditionalInfo, BlogPropertyError } from "@core/error"
 
 import { config } from "blog.config"
 
-//* ----------------------------- 🔥 extract categoru name 🔥 -----------------------------
+//* ----------------------------- 🔥 extract category name 🔥 -----------------------------
 const getAllCategoryName = async () => {
     try {
         return (await readdir(blogContentsDir, "utf-8"))
@@ -27,13 +27,12 @@ const getAllCategoryName = async () => {
     } catch (err) {
         throw new BlogErrorAdditionalInfo({
             passedError: err,
-            errorNameDescription:
-                "blog-contents directory name 📝 incorrection",
-            message: `Check ${config.blogContentsDirectoryName} and "${config.blogContentsDirectoryName}/contens" file name 🔎`,
-            customeErrorMessage: `directory structure should match with following path ⬇️\n\n      ${blogContentsDir}\n\n      🔒 Check Post Directory Structure:\n 
+            errorNameDescription: "Incorrect blog-contents directory name",
+            message: `Check ${config.blogContentsDirectoryName} and "${config.blogContentsDirectoryName}/contents" file name 🔎`,
+            customErrorMessage: `directory structure should match with following path ⬇️\n\n      ${blogContentsDir}\n\n      🔒 Check Post Directory Structure:\n 
             🏠 ${config.blogContentsDirectoryName}
             ┣ 📦 "content"
-            ┃ ┣ 🗂 {catgory}
+            ┃ ┣ 🗂 {category}
             ┃ ┃ ┃
             ┃ ┃ ┣ 🗂 "posts"
             ┃ ┃ ┃ ┣ 📔 {post}.mdx
@@ -41,7 +40,7 @@ const getAllCategoryName = async () => {
             ┃ ┃ ┃
             ┃ ┃ ┗ 📔 "description.json"
             ┃ ┃
-            ┣ ┗ 🗂 {catgory2}...
+            ┣ ┗ 🗂 {category2}...
             ┃
             ┗ 📔 "profile.mdx"
             `,
@@ -50,7 +49,7 @@ const getAllCategoryName = async () => {
 }
 //* ----------------------------- 🔥 path, getStaticPath 🔥 -----------------------------
 /**
- * add path notaition to category names
+ * add path notation to category names
  * @returns `/{category}`
  */
 const getAllCategoryPath = async (): Promise<string[]> => {
@@ -86,20 +85,20 @@ const readAllCategoryJSONFile = async (
                 if (isDescriptionError)
                     throw new BlogPropertyError({
                         errorNameDescription:
-                            "Error Occured while extracting category description [description]",
+                            "Error Occurred while extracting category description [description]",
                         propertyName: "description",
                         propertyType: "string",
                         propertyDescription: description,
-                        customeErrorMessage: `Track file's description🔎: \n      ${descriptionFilePath}`,
+                        customErrorMessage: `Track file's description🔎: \n      ${descriptionFilePath}`,
                     })
 
                 if (isEmojiNotExists)
                     throw new BlogPropertyError({
                         errorNameDescription:
-                            "Error Occured while extracting category description [emoji]",
+                            "Error Occurred while extracting category description [emoji]",
                         propertyName: "emoji",
                         propertyType: "string",
-                        customeErrorMessage: `Track file's description🔎: \n      ${descriptionFilePath}`,
+                        customErrorMessage: `Track file's description🔎: \n      ${descriptionFilePath}`,
                     })
 
                 const categoryInfo = {
@@ -115,8 +114,8 @@ const readAllCategoryJSONFile = async (
                     passedError: err,
                     errorNameDescription: "description.json file problem",
                     message:
-                        "1. description file name incorrection \n      2. [.json] file syntax error\n",
-                    customeErrorMessage: `"description.json" in your [${category}] File at\n\n      ${descriptionFilePath}\n\n      🔒 Check description.json format example:\n
+                        "1. incorrect description file name \n      2. [.json] file syntax error\n",
+                    customErrorMessage: `"description.json" in your [${category}] File at\n\n      ${descriptionFilePath}\n\n      🔒 Check description.json format example:\n
                     {
                         "description": "my category description!",
                         "emoji": "🏠",

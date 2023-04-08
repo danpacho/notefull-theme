@@ -1,18 +1,18 @@
-import { TailwindFontSizeType } from "@typing/tailwind"
+import { Tw } from "@lib/wind"
 
 interface TextSizeProps {
     children: React.ReactNode
-    size?: TailwindFontSizeType
-    mdSize?: `md:${TailwindFontSizeType}`
+    size?: Tw["fontSize"]
+    mdSize?: `md:${Tw["fontSize"]}`
     styleClass?: string
 }
 
-function Title({
+const Title = ({
     children,
     size = "text-base",
     mdSize = "md:text-lg",
     styleClass,
-}: TextSizeProps) {
+}: TextSizeProps) => {
     return (
         <h1
             className={`font-bold capitalize truncate ${size} ${mdSize} ${styleClass}`}
@@ -22,12 +22,12 @@ function Title({
     )
 }
 
-function Description({
+const Description = ({
     children,
     size = "text-sm",
     mdSize = "md:text-sm",
     styleClass,
-}: TextSizeProps) {
+}: TextSizeProps) => {
     return (
         <div
             className={`${size} ${mdSize} w-full overflow-hidden text-ellipsis font-normal text-gray-500 dark:text-gray-300 ${styleClass}`}

@@ -1,22 +1,18 @@
+import { Tw } from "@lib/wind"
 import tw from "@styles/tailwind.util"
 
-import type {
-    TailwindBgColorType,
-    TailwindBgDarkColorType,
-    TailwindStrokeColorType,
-    TailwindStrokeDarkColorType,
-} from "@typing/tailwind"
+type TailwindStroke = Tw["stroke"]
 
 export interface NoteBackgroundProps {
-    bgLight?: TailwindBgColorType
-    bgDark?: TailwindBgDarkColorType
+    bgLight?: Tw["backgroundColor"]
+    bgDark?: `dark:${Tw["backgroundColor"]}`
     rectWidth: number
     rectHeight: number
-    rectStrokeLight?: TailwindStrokeColorType
-    rectStrokeDark?: TailwindStrokeDarkColorType
+    rectStrokeLight?: TailwindStroke
+    rectStrokeDark?: `dark:${TailwindStroke}`
     rectStrokeWidth?: number
-    outerRectStrokeLight?: TailwindStrokeColorType
-    outerRectStrokeDark?: TailwindStrokeDarkColorType
+    outerRectStrokeLight?: TailwindStroke
+    outerRectStrokeDark?: `dark:${TailwindStroke}`
     outerRectStrokeWidth?: number
 }
 /**
@@ -24,21 +20,8 @@ export interface NoteBackgroundProps {
  * @param NoteBackgroundProps  {@link NoteBackgroundProps}
  * @returns svg note grid background
  * @note see tailwind background color at [docs](https://tailwindcss.com/docs/background-color)
- * @note prop should be pass directly
- * @example
- * // 📦 Tailwind JIT can't extract class in the object
- * // 🚫 Dont pass prop as object destruct
- * const option: NoteBackgroundProps = {
- *      bgLight: "bg-amber-50",
- *      rectWidth: 100,
- *      rectHeight: 100
- * }
- * const DontDoThis = () => <NoteBackground {...options}/>
- *
- * // ✅ Do this: pass prop directly
- * const DoThis = () => <NoteBackground rectWidth={100} rectHeight={100} bgLight="bg-amber-50"/>
  */
-function NoteBackground({
+const NoteBackground = ({
     rectWidth,
     rectHeight,
     bgLight = "bg-transparent",
@@ -49,7 +32,7 @@ function NoteBackground({
     outerRectStrokeWidth = 0.75,
     outerRectStrokeLight = "stroke-gray-400",
     outerRectStrokeDark = "dark:stroke-gray-500",
-}: NoteBackgroundProps) {
+}: NoteBackgroundProps) => {
     return (
         <svg
             className={`${tw.layout} fixed top-0 -z-10 ${bgLight} ${bgDark}`}

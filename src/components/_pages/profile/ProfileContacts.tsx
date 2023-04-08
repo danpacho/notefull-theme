@@ -1,5 +1,3 @@
-import type { TailwindFillColorType } from "@typing/tailwind"
-
 import {
     Facebook,
     Github,
@@ -11,13 +9,14 @@ import {
 import { ColorBox } from "@components/_atoms"
 
 import { config } from "blog.config"
+import { Tw } from "@lib/wind"
 
 const { contacts } = config.author
 const contactArr = Object.entries(contacts)
 
 interface IconFillColor {
-    hover: `hover:${TailwindFillColorType}`
-    hoverDark: `dark:hover:${TailwindFillColorType}`
+    hover: `hover:${Tw["fill"]}`
+    hoverDark: `dark:hover:${Tw["fill"]}`
 }
 const CONTACT_ICON = (
     size: { width: string; height: string },
@@ -57,7 +56,7 @@ const ProfileContacts = ({
 
                 return (
                     <a href={contactInfo} key={contactInfo} title={contactInfo}>
-                        <ColorBox hex={config.themeColor} varients="border">
+                        <ColorBox hex={config.themeColor} style="border">
                             {
                                 CONTACT_ICON(
                                     {
@@ -74,7 +73,7 @@ const ProfileContacts = ({
                     </a>
                 )
             })}
-            <ColorBox varients="double-bg-border" hex={config.themeColor}>
+            <ColorBox style="border" layout="flexible" hex={config.themeColor}>
                 {config.author.name} 📬
             </ColorBox>
         </div>

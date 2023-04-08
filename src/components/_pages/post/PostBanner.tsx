@@ -10,7 +10,7 @@ import { config } from "blog.config"
 interface PostBannerProps
     extends MetaType,
         Partial<Omit<SeriesHeaderProps, "hex">> {}
-function PostBanner({
+const PostBanner = ({
     title,
     color,
     tags,
@@ -21,8 +21,8 @@ function PostBanner({
     seriesInfoArray,
     seriesTitle,
     seriesCount,
-}: PostBannerProps) {
-    const isSeriescExsists =
+}: PostBannerProps) => {
+    const isSeriesExists =
         seriesTitle !== undefined &&
         seriesInfoArray !== undefined &&
         seriesCount !== undefined
@@ -52,7 +52,7 @@ function PostBanner({
                     />
                 </div>
 
-                {isSeriescExsists && (
+                {isSeriesExists && (
                     <SeriesContainer
                         hex={color}
                         seriesInfoArray={seriesInfoArray}

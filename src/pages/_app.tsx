@@ -4,8 +4,6 @@ import { useEffect, useRef } from "react"
 
 import { ThemeProvider } from "next-themes"
 
-import type { AppProps } from "next/app"
-import { useRouter } from "next/router"
 import Head from "next/head"
 
 import type { PageType } from "@typing/page"
@@ -16,10 +14,12 @@ import { DefaultSEO } from "@components/SEO"
 import { GoogleAnalytics } from "@components/GoogleAnalytics"
 
 import { config } from "blog.config"
+import { useRouter } from "next/router"
+import type { AppProps } from "next/app"
 
 /**
  * - custom hook for restoring scroll position
- * - restore forward-backward navagation
+ * - restore forward-backward navigation
  */
 const useRestorePageScroll = () => {
     const router = useRouter()
@@ -57,7 +57,7 @@ const useRestorePageScroll = () => {
 }
 
 function App({ Component, pageProps }: AppProps) {
-    // distinguish page, set diffrent style or layout for each pages
+    // distinguish page, set different style or layout for each pages
     const pageType = Component?.displayName as PageType
 
     useRestorePageScroll()

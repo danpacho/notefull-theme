@@ -73,7 +73,7 @@ const splitStringByComma = (text: string) =>
 const getTagArray = (tags: string, postFileName: string): string[] => {
     if (!tags)
         throw new BlogPropertyError({
-            errorNameDescription: "Error Occured while extracting post meta",
+            errorNameDescription: "Error Occurred while extracting post meta",
             propertyName: "tags",
             propertyType: "string",
             errorDirectory: postFileName,
@@ -123,7 +123,7 @@ const extractAllPostFileName = async (
                 throw new BlogErrorAdditionalInfo({
                     passedError: err,
                     errorNameDescription:
-                        "[category -> posts] directory name 📝 incorrection",
+                        "[category -> posts] incorrect directory name",
                     message: `Track file's directory: ${postDir}`,
                 })
             }
@@ -214,20 +214,20 @@ const transformStringToSeriesMeta = (
     seriesString: string,
     postFileName: string
 ): SeriesMetaType => {
-    const splitedSeriesString = seriesString.split("-")
+    const splittedSeriesString = seriesString.split("-")
 
     // Not correct series string
-    if (splitedSeriesString.length !== 2)
+    if (splittedSeriesString.length !== 2)
         throw new BlogPropertyError({
             propertyName: "series",
             propertyType: "string",
             errorDirectory: postFileName,
             errorNameDescription: "series meta type error",
             propertyDescription: `your input -> series: ${seriesString}`,
-            customeErrorMessage:
+            customErrorMessage:
                 "Should follow format: < series: [series_title: string]-[series_order: number] >",
         })
-    const [seriesTitle, seriesOrder] = splitedSeriesString
+    const [seriesTitle, seriesOrder] = splittedSeriesString
 
     // Not correct series order
     if (isNaN(Number(seriesOrder)))
@@ -236,7 +236,7 @@ const transformStringToSeriesMeta = (
             propertyType: "string",
             errorDirectory: postFileName,
             errorNameDescription: "series meta type error",
-            customeErrorMessage:
+            customErrorMessage:
                 "Should follow format: < series: [series_title: string]-[series_order: number] >",
             propertyDescription: `series: ${seriesTitle}-${seriesOrder}`,
         })
@@ -297,7 +297,7 @@ const generateMeta = ({
             errorDirectory: postFileName,
             errorNameDescription: "extracting post meta",
             errorPropertyValue: validatedMeta[0].metaValue,
-            customeErrorMessage: "[  ⬇️ post meta info ⬇️  ]",
+            customErrorMessage: "[  ⬇️ post meta info ⬇️  ]",
         })
 
     return meta
@@ -457,7 +457,7 @@ const extractSinglePost = async ({
     const postSource = await readFile(dir, "utf-8")
     if (!postSource)
         throw new BlogFileExtractionError({
-            errorNameDescription: "post file extraction error occured",
+            errorNameDescription: "post file extraction error occurred",
             readingFileFormat: ".mdx",
             readingFileLocation: dir,
             readingFileName: fileName,
@@ -535,10 +535,10 @@ const extractAllPost = async (
                             throw new BlogErrorAdditionalInfo({
                                 passedError: err,
                                 errorNameDescription:
-                                    "Might be post meta info 🔎 incorrections",
+                                    "Might be incorrectness of post meta info",
                                 message:
                                     "Post Should include\n\n      🔒 All Value Common RULE: [ NOT empty string: '' ]\n\n      ✅ title   : Post's Title\n      ✅ preview : Post's Preview\n      ✅ author  : Post author name\n      ✅ update  : [ yyyy/mm/dd ]\n                 : [🚨WARNING: SHOULD FOLLOW FORMAT]\n      ✅ color   : Post main color, HEX | RGB | RGBA\n                 : [🚨WARNING: WRAP YOUR COLOR WITH colon or semi-colon]\n      ✅ tags    : tag1, tag2, tag3, ...\n                 : [🚨WARNING: DIVIDE TAG WITH comma ,]\n",
-                                customeErrorMessage: `your post meta info at:\n\n   ${postDir}`,
+                                customErrorMessage: `your post meta info at:\n\n   ${postDir}`,
                             })
                         }
                     },
@@ -586,7 +586,7 @@ const getSinglePost = async ({
     const post = (await getAllPost())
         .find(
             ({ category: extractedCategory }) => category === extractedCategory
-        )! //* It is definitely exsists, non-nullable
+        )! //* It is definitely exists, non-nullable
         .allCategoryPost.reduce<PostWithControllerType>(
             (post, currPost, idx, totPost) => {
                 if (
@@ -675,7 +675,7 @@ interface ExtractedSeriesMeta
     series: SeriesMetaType
 }
 const extractAllSeriesMeta = (allMeta: MetaType[]): ExtractedSeriesMeta[][] => {
-    const filterMetaBySeriesExsistance = allMeta.reduce<ExtractedSeriesMeta[]>(
+    const filterMetaBySeriesExistence = allMeta.reduce<ExtractedSeriesMeta[]>(
         (acc, { series, color, title, postUrl }) => {
             if (series === null) return acc
             return [
@@ -692,13 +692,13 @@ const extractAllSeriesMeta = (allMeta: MetaType[]): ExtractedSeriesMeta[][] => {
     )
     const seriesTitle = [
         ...new Set(
-            filterMetaBySeriesExsistance.map(
+            filterMetaBySeriesExistence.map(
                 ({ series: { seriesTitle } }) => seriesTitle
             )
         ),
     ]
     const seriesMeta: ExtractedSeriesMeta[][] = seriesTitle.map((title) =>
-        filterMetaBySeriesExsistance
+        filterMetaBySeriesExistence
             .filter(({ series: { seriesTitle } }) => seriesTitle === title)
             .sort((a, b) => a.series.order - b.series.order)
     )
