@@ -1,3 +1,4 @@
+import { NoteBackgroundProps } from "@components/_layout/NoteBackground"
 import type { ContactPlatformType } from "@core/contact"
 import getAuthorContactHref from "@core/contact"
 
@@ -15,8 +16,9 @@ const contacts: Readonly<
     linkedin: getAuthorContactHref("linkedin", "linkedin_id"),
     twitter: getAuthorContactHref("twitter", "twitter_id"),
 }
+
 const author = {
-    name: "myname",
+    name: "your name",
     introduce: "Introduce yourself",
     faviconUrl: "/favicon.ico",
     bannerImageUrl: "/banner.png",
@@ -40,11 +42,14 @@ const config = {
     postPerCategoryPage: 8,
     numberOfLatestPost: 4,
     numberOfMainPageCategory: 5,
+
     themeColor: "#73d1d7",
+
     postControllerText: {
         first: (category: string) => `Return to ${category}`, // first post ➡️ no prev post, so replace with your text
         last: (category: string) => `Last contents of ${category}`, // last post ➡️ no next post, so replace with your text
     },
+
     navigationMenu: [
         {
             name: "Home",
@@ -59,6 +64,17 @@ const config = {
             path: "/profile",
         },
     ],
+
+    noteBackgroundStyle: {
+        rectWidth: 150,
+        rectHeight: 150,
+        outerRectStrokeWidth: 2,
+        rectStrokeWidth: 1,
+        outerRectStrokeLight: "stroke-gray-400",
+        rectStrokeDark: "dark:stroke-neutral-700",
+        bgDark: "dark:bg-neutral-900",
+    } as NoteBackgroundProps,
+
     author,
     ...blog,
 } as const
