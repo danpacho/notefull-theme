@@ -1,9 +1,9 @@
-import { Tw } from "@lib/wind"
+import { Tailwind } from "@lib/wind"
 
 interface TextSizeProps {
     children: React.ReactNode
-    size?: Tw["fontSize"]
-    mdSize?: `md:${Tw["fontSize"]}`
+    size?: Tailwind["fontSize"]
+    mdSize?: `md:${Tailwind["fontSize"]}`
     styleClass?: string
 }
 

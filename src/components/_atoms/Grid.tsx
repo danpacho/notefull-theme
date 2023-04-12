@@ -1,12 +1,12 @@
-import { Tw } from "@lib/wind"
+import { Tailwind } from "@lib/wind"
 
 interface GirdProps {
     children: React.ReactNode
-    col: Tw["gridTemplateColumns"]
-    row?: Tw["gridTemplateRows"]
-    mdCol?: `md:${Tw["gridTemplateColumns"]}`
-    mdRow?: `md:${Tw["gridTemplateRows"]}`
-    gap: Tw["gap"]
+    col: Tailwind["gridTemplateColumns"]
+    row?: Tailwind["gridTemplateRows"]
+    mdCol?: `md:${Tailwind["gridTemplateColumns"]}`
+    mdRow?: `md:${Tailwind["gridTemplateRows"]}`
+    gap: Tailwind["gap"]
     styleClass?: string
 }
 

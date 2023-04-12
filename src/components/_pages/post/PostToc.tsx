@@ -1,9 +1,10 @@
 import type { TableOfContentsType } from "@lib/remark/getTableOfContents"
 
 import { useTocAction, useTocValue } from "@components/TocProvider"
-import { WindVariants, wind, wind$ } from "tailwindest"
+import { WindVariants } from "tailwindest"
+import { tw, tw$ } from "@lib/wind"
 
-const linkBtn = wind$("h1", "h2")(
+const linkBtn = tw$("h1", "h2")(
     {
         width: "w-full",
         paddingLeft: "pl-2",
@@ -29,7 +30,7 @@ const linkBtn = wind$("h1", "h2")(
     }
 )
 
-const linBtnState = wind$("active", "inactive")(
+const linBtnState = tw$("active", "inactive")(
     {
         width: "w-40",
         "@2xl": {
@@ -98,7 +99,7 @@ const LinkBtn = ({
     )
 }
 
-const tocStyle = wind({
+const tocStyle = tw({
     position: "fixed",
     top: "top-0",
     left: "left-[5%]",

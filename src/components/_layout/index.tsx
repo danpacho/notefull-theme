@@ -1,7 +1,5 @@
 import type { PageType } from "@typing/page"
 
-import tw from "@styles/tailwind.util"
-
 import { useEffect } from "react"
 import { useTheme } from "next-themes"
 
@@ -9,7 +7,9 @@ import { Nav } from "@components/_common"
 import NoteBackground from "./NoteBackground"
 
 import { config } from "blog.config"
-import { wind } from "tailwindest"
+
+import { tw } from "@lib/wind"
+import { util } from "@styles/tailwind.util"
 
 const useSetSystemTheme = () => {
     const { setTheme, systemTheme } = useTheme()
@@ -26,7 +26,7 @@ const MainNav = () => (
     </Nav>
 )
 
-const layout = wind({
+const layout = tw({
     display: "flex",
     flexDirection: "flex-col",
     justifyContent: "justify-center",
@@ -38,10 +38,10 @@ const layout = wind({
     },
     marginX: "mx-auto",
 })
-    .compose(tw.layoutStyle)
+    .compose(util.layoutStyle)
     .class()
 
-const layoutWrapper = wind({
+const layoutWrapper = tw({
     display: "flex",
     flexDirection: "flex-col",
     alignItems: "items-start",

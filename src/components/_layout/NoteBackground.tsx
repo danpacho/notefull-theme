@@ -1,11 +1,11 @@
-import { Tw } from "@lib/wind"
-import tw from "@styles/tailwind.util"
+import { Tailwind } from "@lib/wind"
+import { util } from "@styles/tailwind.util"
 
-type TailwindStroke = Tw["stroke"]
+type TailwindStroke = Tailwind["stroke"]
 
 export interface NoteBackgroundProps {
-    bgLight?: Tw["backgroundColor"]
-    bgDark?: `dark:${Tw["backgroundColor"]}`
+    bgLight?: Tailwind["backgroundColor"]
+    bgDark?: `dark:${Tailwind["backgroundColor"]}`
     rectWidth: number
     rectHeight: number
     rectStrokeLight?: TailwindStroke
@@ -35,7 +35,7 @@ const NoteBackground = ({
 }: NoteBackgroundProps) => {
     return (
         <svg
-            className={`${tw.layout} fixed top-0 -z-10 ${bgLight} ${bgDark}`}
+            className={`${util.layout} fixed top-0 -z-10 ${bgLight} ${bgDark}`}
             width="100%"
             height="100%"
             xmlns="http://www.w3.org/2000/svg"

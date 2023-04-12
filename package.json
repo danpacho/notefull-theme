@@ -47,7 +47,7 @@
         "remark-gfm": "^3.0.1",
         "remark-math": "^5.1.1",
         "sharp": "^0.30.7",
-        "tailwindest": "^1.0.5",
+        "tailwindest": "^1.1.0",
         "unified": "^10.1.2",
         "unist-util-visit": "^4.1.0"
     },

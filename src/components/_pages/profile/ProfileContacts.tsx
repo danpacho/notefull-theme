@@ -9,14 +9,14 @@ import {
 import { ColorBox } from "@components/_atoms"
 
 import { config } from "blog.config"
-import { Tw } from "@lib/wind"
+import { Tailwind } from "@lib/wind"
 
 const { contacts } = config.author
 const contactArr = Object.entries(contacts)
 
 interface IconFillColor {
-    hover: `hover:${Tw["fill"]}`
-    hoverDark: `dark:hover:${Tw["fill"]}`
+    hover: `hover:${Tailwind["fill"]}`
+    hoverDark: `dark:hover:${Tailwind["fill"]}`
 }
 const CONTACT_ICON = (
     size: { width: string; height: string },

@@ -1,4 +1,4 @@
-import { Tw } from "@lib/wind"
+import { Tailwind } from "@lib/wind"
 import type { Node } from "unist"
 import { visit } from "unist-util-visit"
 
@@ -38,8 +38,8 @@ type TokenType =
     | "class-name"
     | "generic"
 
-type TailwindFontColorType = Tw["color"]
-type TailwindFontWeightType = Tw["fontWeight"]
+type TailwindFontColorType = Tailwind["color"]
+type TailwindFontWeightType = Tailwind["fontWeight"]
 
 const tokenClassNames: {
     [key in TokenType]:

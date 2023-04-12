@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { Description, ColorBox, RowBetween, Title } from "@components/_atoms"
 
-import tw from "@styles/tailwind.util"
+import { util } from "@styles/tailwind.util"
 
 function CategoryLink({
     category,
@@ -16,7 +16,7 @@ function CategoryLink({
     return (
         <Link passHref href={categoryUrl}>
             <div
-                className={`flex flex-col gap-4 p-3 transition ${tw.border} border-b-2 cursor-pointer`}
+                className={`flex flex-col gap-4 p-3 transition ${util.border} border-b-2 cursor-pointer`}
             >
                 <RowBetween>
                     <Title>{category}</Title>

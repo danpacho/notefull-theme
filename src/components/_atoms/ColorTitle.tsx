@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 
-import { Tw, tw$ } from "@lib/wind"
-import { mergeProps, WindVariants } from "tailwindest"
+import { Tailwind, mergeProps, tw$ } from "@lib/wind"
+import { WindVariants } from "tailwindest"
 
 const getRandBetween = (maxNum: number) => Math.floor(Math.random() * maxNum)
 
@@ -98,8 +98,8 @@ const characterStyle = tw$("capitalize")(
 interface ColorTitleProps {
     title: string
     hex: string
-    size: Tw["fontSize"]
-    mdSize?: `md:${Exclude<Tw["fontSize"], undefined>}`
+    size: Tailwind["fontSize"]
+    mdSize?: `md:${Exclude<Tailwind["fontSize"], undefined>}`
     href?: string
 }
 const ColorTitle = ({ title, hex, size, mdSize, href }: ColorTitleProps) => {

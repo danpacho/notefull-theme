@@ -1,6 +1,6 @@
 import { createWind, Tailwindest } from "tailwindest"
 
-type Tw = Tailwindest<
+type TailwindCustom = Tailwindest<
     {},
     {
         listStyleType:
@@ -15,6 +15,13 @@ type Tw = Tailwindest<
     }
 >
 
-const { wind: tw, wind$: tw$ } = createWind<Tw>()
+type Tailwind = Required<TailwindCustom>
 
-export { tw, tw$, type Tw }
+const {
+    wind: tw,
+    wind$: tw$,
+    mergeProps,
+    toggle,
+} = createWind<TailwindCustom>()
+
+export { tw, tw$, type Tailwind, mergeProps, toggle }

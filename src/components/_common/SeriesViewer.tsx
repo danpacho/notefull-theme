@@ -1,5 +1,4 @@
-import tw from "@styles/tailwind.util"
-
+import { util } from "@styles/tailwind.util"
 import { useCallback, useState } from "react"
 
 import { SeriesType } from "@typing/post/series"
@@ -100,7 +99,7 @@ function SeriesViewer({ allSeriesInfo, color }: SeriesViwerProps) {
             styleClass="relative"
         >
             <div
-                className={`${tw.border} absolute -top-16 right-0 flex flex-row items-center justify-center transition border-b-2 hover:underline select-none`}
+                className={`${util.border} absolute -top-16 right-0 flex flex-row items-center justify-center transition border-b-2 hover:underline select-none`}
             >
                 <PaginationBtn
                     type="prev"

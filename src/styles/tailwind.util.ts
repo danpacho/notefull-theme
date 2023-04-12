@@ -1,6 +1,6 @@
-import { wind } from "tailwindest"
+import { tw } from "@lib/wind"
 
-const layout = wind({
+const layout = tw({
     width: "w-full",
     minHeight: "min-h-screen",
     height: "h-max",
@@ -18,7 +18,7 @@ const layout = wind({
     },
 })
 
-const border = wind({
+const border = tw({
     borderWidth: "border",
     "@dark": {
         borderColor: "dark:border-gray-500",
@@ -31,7 +31,7 @@ const border = wind({
     },
 })
 
-const tw = {
+const util = {
     layout: layout.class(),
     layoutStyle: layout.style(),
 
@@ -39,4 +39,4 @@ const tw = {
     borderStyle: border.style(),
 } as const
 
-export default tw
+export { util }
