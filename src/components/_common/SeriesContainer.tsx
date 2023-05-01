@@ -52,7 +52,7 @@ function SeriesContainer({
                     <Title size="text-sm" mdSize="md:text-base">
                         {seriesTitle}
                     </Title>
-                    <ColorBox hex={hex} style="border" layout="flexible">
+                    <ColorBox hex={hex} style="border" layout="flex">
                         <Bookmark
                             style={{
                                 fill: hex,
