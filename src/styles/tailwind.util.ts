@@ -23,9 +23,11 @@ const border = tw.style({
     transitionDuration: "duration-75",
 
     borderBottomRadius: "rounded-b-md",
+    borderTopRadius: "rounded-t-[1px]",
 
     borderWidth: "border",
     borderBottomWidth: "border-b-[0.2rem]",
+    borderColor: "border-neutral-300",
     "@dark": {
         borderColor: "dark:border-neutral-500",
         ":hover": {
@@ -36,9 +38,8 @@ const border = tw.style({
         borderColor: "hover:border-neutral-900",
     },
     ":active": {
+        borderXWidth: "active:border-x",
         borderBottomWidth: "active:border-b",
-        borderLeftWidth: "active:border-l",
-        borderRightWidth: "active:border-r",
         transformTranslateY: "active:translate-y-[0.1rem]",
     },
 })
