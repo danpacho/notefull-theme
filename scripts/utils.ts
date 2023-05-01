@@ -1,12 +1,16 @@
 import matter from "gray-matter"
 
-import { readdir, readFile } from "fs/promises"
+import { readFile } from "fs/promises"
 
-import { MAC_OS_FILE_EXCEPTION, POST_FILE_NAME } from "@constants/index"
+import { POST_FILE_NAME } from "@constants/index"
 
 import { MDXMetaType } from "@typing/post/meta"
 
-import { blogContentsDir, removeFileFormat } from "@core/loader/util"
+import {
+    blogContentsDir,
+    getFileNames,
+    removeFileFormat,
+} from "@core/loader/util"
 
 import { config } from "blog.config"
 
@@ -22,9 +26,7 @@ const sortByDate = (currDate: string, nextDate: string) => {
 const replaceSpaceToEncode = (text: string) => text.replace(/ /g, "%20")
 
 const getAllCategoryPath = async () =>
-    (await readdir(blogContentsDir, "utf-8"))
-        .filter((category) => category !== MAC_OS_FILE_EXCEPTION)
-        .map((category) => `/${category}`)
+    (await getFileNames(blogContentsDir)).map((category) => `/${category}`)
 
 const getPostPaginationUrl = (category: string, order: number) =>
     `${replaceSpaceToEncode(category)}/${Math.floor(
@@ -40,9 +42,7 @@ const extractAllCategoryPostFileName = async (categoryNameArray: string[]) => {
     const dirPostInfo = await Promise.all(
         categoryNameArray.map(async (categoryName) => {
             const postDir = `${blogContentsDir}/${categoryName}/${POST_FILE_NAME}`
-            const categoryPostFileNameArray = (
-                await readdir(postDir, "utf-8")
-            ).filter((postFileName) => postFileName !== MAC_OS_FILE_EXCEPTION)
+            const categoryPostFileNameArray = await getFileNames(postDir)
             return {
                 category: categoryName,
                 categoryPostFileNameArray,

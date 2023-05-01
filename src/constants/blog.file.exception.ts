@@ -1,3 +1,3 @@
-const MAC_OS_FILE_EXCEPTION = ".DS_Store"
+const FILE_EXCEPTION_LIST = ["DS_Store", "obsidian", "excalidraw"]
 
-export { MAC_OS_FILE_EXCEPTION }
+export { FILE_EXCEPTION_LIST }

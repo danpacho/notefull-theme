@@ -1,17 +1,14 @@
-import { readdir, readFile } from "fs/promises"
+import { readFile } from "fs/promises"
 
 import { CategoryInfoType } from "@typing/category"
 
-import {
-    DESCRIPTION_FILE_NAME,
-    FILE_FORMAT,
-    MAC_OS_FILE_EXCEPTION,
-} from "@constants/index"
+import { DESCRIPTION_FILE_NAME, FILE_FORMAT } from "@constants/index"
 
 import {
     blogContentsDir,
     addPathNotation,
     getValidateColor,
+    getFileNames,
 } from "@core/loader/util"
 
 import { BlogErrorAdditionalInfo, BlogPropertyError } from "@core/error"
@@ -21,9 +18,9 @@ import { config } from "blog.config"
 //* ----------------------------- 🔥 extract category name 🔥 -----------------------------
 const getAllCategoryName = async () => {
     try {
-        return (await readdir(blogContentsDir, "utf-8"))
-            .filter((category) => category !== MAC_OS_FILE_EXCEPTION)
-            .map((category) => category.trim())
+        return (await getFileNames(blogContentsDir)).map((category) =>
+            category.trim()
+        )
     } catch (err) {
         throw new BlogErrorAdditionalInfo({
             passedError: err,

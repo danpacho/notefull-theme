@@ -15,7 +15,7 @@ import { TableOfContentsType as PostTOCType } from "@lib/remark/getTableOfConten
 
 import { SeriesType, SeriesInfoType } from "@typing/post/series"
 
-import { POST_FILE_NAME, MAC_OS_FILE_EXCEPTION } from "@constants/index"
+import { POST_FILE_NAME } from "@constants/index"
 
 import {
     blogContentsDir,
@@ -23,6 +23,7 @@ import {
     getValidateColor,
     removeFileFormat,
     definePlugins,
+    getFileNames,
 } from "@core/loader/util"
 
 import { getAllCategoryName } from "@core/loader/category"
@@ -111,9 +112,7 @@ const extractAllPostFileName = async (
         allCategoryName.map(async (category) => {
             const postDir = `${blogContentsDir}/${category}/${POST_FILE_NAME}`
             try {
-                const allCategoryPostFileName = (
-                    await readdir(postDir, "utf-8")
-                ).filter((fileName) => fileName !== MAC_OS_FILE_EXCEPTION)
+                const allCategoryPostFileName = await getFileNames(postDir)
                 const data: CategoryPostFileNameType = {
                     category,
                     allCategoryPostFileName,

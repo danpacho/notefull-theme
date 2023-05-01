@@ -57,7 +57,7 @@ const Pre = (props: any) => {
                 setDisplayBtn(true)
             }}
             onPointerLeave={() => setHoverOut(true)}
-            className="relative w-[calc(100%+2.5rem)] ml-[-1.25rem] md:ml-[-2rem] md:w-[calc(100%+4rem)] my-2 bg-gray-700 dark:bg-neutral-950 border-t border-b border-transparent dark:border-neutral-700"
+            className="relative w-[calc(100%+2.5rem)] ml-[-1.25rem] md:ml-[-2rem] md:w-[calc(100%+4rem)] my-2 bg-gray-700 dark:bg-neutral-900 border-t border-b border-transparent dark:border-neutral-700"
         >
             <pre
                 {...props}
