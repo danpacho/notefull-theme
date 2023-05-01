@@ -14,4 +14,4 @@ const definePlugins = ({
     remarkPlugins,
 })
 
-export default definePlugins
+export { definePlugins }

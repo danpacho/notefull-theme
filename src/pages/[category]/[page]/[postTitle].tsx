@@ -13,8 +13,8 @@ import {
 } from "@core/loader/post"
 
 import { PostSEO } from "@components/SEO"
-import KatexStyleLoader from "@components/KatexStyleLoader"
-import MDXBundler from "@components/MDX/Bundler"
+import { KatexStyleLoader } from "@components/KatexStyleLoader"
+import { MDXBundler } from "@components/MDX/Bundler"
 
 import { PageLinkController } from "@components/_common"
 import { PostNav, PostBanner, PostMeta, PostToc } from "@components/_pages/post"

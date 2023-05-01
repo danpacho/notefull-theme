@@ -7,10 +7,10 @@ interface MDXBundlerProp {
     source: string
 }
 
-function MDXBundler({ source }: MDXBundlerProp) {
+const MDXBundler = ({ source }: MDXBundlerProp) => {
     const BundledComponent = useMemo(() => getMDXComponent(source), [source])
 
     return <BundledComponent components={MDXAtoms} />
 }
 
-export default MDXBundler
+export { MDXBundler }

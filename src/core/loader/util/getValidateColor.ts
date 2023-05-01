@@ -77,4 +77,4 @@ const getValidateColor = (color: string) => {
     else return transformRGBAToHEX(validationResult.rgbaArray)
 }
 
-export default getValidateColor
+export { getValidateColor }

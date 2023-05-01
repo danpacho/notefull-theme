@@ -4,7 +4,7 @@ import type { PageType } from "@typing/page"
 
 import { getProfileSource } from "@core/loader/profile"
 
-import MDXBundler from "@components/MDX/Bundler"
+import { MDXBundler } from "@components/MDX/Bundler"
 import { Banner } from "@components/_common"
 import { ProfileContacts, ProfileFooter } from "@components/_pages/profile"
 

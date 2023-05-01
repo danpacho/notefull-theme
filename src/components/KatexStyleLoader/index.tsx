@@ -1,4 +1,4 @@
-export default function KatexStyleLoader() {
+const KatexStyleLoader = () => {
     return (
         <>
             <link
@@ -38,3 +38,5 @@ export default function KatexStyleLoader() {
         </>
     )
 }
+
+export { KatexStyleLoader }
