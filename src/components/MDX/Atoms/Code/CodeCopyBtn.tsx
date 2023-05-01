@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Copy, Success } from "@components/_icons"
 import { ColorBox } from "@components/_atoms"
 import { useTimeout } from "./useTimeout"
-import { tw$ } from "@lib/wind"
+import { tw } from "@lib/wind"
 
 const useClipboard = () => {
     const copyText = async (text: string) => {
@@ -26,22 +26,20 @@ const useClipboard = () => {
     }
 }
 
-const codeCopyBtn = tw$("hide", "show")(
-    {
+const codeCopyBtn = tw.toggle({
+    base: {
         position: "absolute",
         right: "right-3",
         top: "top-3",
         transition: "transition",
     },
-    {
-        hide: {
-            opacity: "opacity-0",
-        },
-        show: {
-            opacity: "opacity-95",
-        },
-    }
-)
+    truthy: {
+        opacity: "opacity-95",
+    },
+    falsy: {
+        opacity: "opacity-0",
+    },
+})
 
 const CodeCopyBtn = ({
     code,
@@ -68,11 +66,11 @@ const CodeCopyBtn = ({
                     setIsCopySuccess(isCopySuccess)
                 }
             }}
-            className={codeCopyBtn.class(displayCondition ? "show" : "hide")}
+            className={codeCopyBtn.class(displayCondition)}
         >
             <ColorBox
                 style="border"
-                layout="flexible"
+                layout="flex"
                 hex={isCopySuccess ? "#20e898" : "#ababab"}
             >
                 {isCopySuccess && <Success className="scale-110" />}

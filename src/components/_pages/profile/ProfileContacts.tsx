@@ -73,7 +73,7 @@ const ProfileContacts = ({
                     </a>
                 )
             })}
-            <ColorBox style="border" layout="flexible" hex={config.themeColor}>
+            <ColorBox style="border" layout="flex" hex={config.themeColor}>
                 {config.author.name} 📬
             </ColorBox>
         </div>

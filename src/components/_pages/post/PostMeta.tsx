@@ -40,7 +40,7 @@ const PostMeta = ({ metaArray, hex }: PostMetaProps) => {
                         <ColorBox
                             hex={hex}
                             style="border"
-                            layout="flexible"
+                            layout="flex"
                             key={meta.content}
                         >
                             <Link href={meta.path}>{meta.content}</Link>
@@ -53,7 +53,7 @@ const PostMeta = ({ metaArray, hex }: PostMetaProps) => {
                         <ColorBox
                             hex={hex}
                             style="border"
-                            layout="flexible"
+                            layout="flex"
                             key={meta}
                         >
                             <a className="hover:underline" href={meta}>
@@ -63,12 +63,7 @@ const PostMeta = ({ metaArray, hex }: PostMetaProps) => {
                     )
 
                 return (
-                    <ColorBox
-                        hex={hex}
-                        style="border"
-                        layout="flexible"
-                        key={meta}
-                    >
+                    <ColorBox hex={hex} style="border" layout="flex" key={meta}>
                         {meta}
                     </ColorBox>
                 )

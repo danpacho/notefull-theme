@@ -1,37 +1,35 @@
 import type { TableOfContentsType } from "@lib/remark/getTableOfContents"
 
 import { useTocAction, useTocValue } from "@components/TocProvider"
-import { WindVariants } from "tailwindest"
-import { tw, tw$ } from "@lib/wind"
+import { GetVariants } from "tailwindest"
+import { tw } from "@lib/wind"
 
-const linkBtn = tw$("h1", "h2")(
-    {
+const linkBtn = tw.rotary({
+    base: {
         width: "w-full",
         paddingLeft: "pl-2",
         transition: "transition",
     },
-    {
-        h1: {
-            paddingBottom: "pb-1",
-            paddingY: "py-1",
-            borderLeftWidth: "border-l",
-            borderColor: "border-gray-300",
-            "@dark": {
-                borderColor: "dark:border-gray-400",
-                ":hover": {
-                    borderColor: "dark:hover:border-transparent",
-                },
-            },
+    h1: {
+        paddingBottom: "pb-1",
+        paddingY: "py-1",
+        borderLeftWidth: "border-l",
+        borderColor: "border-gray-300",
+        "@dark": {
+            borderColor: "dark:border-gray-400",
             ":hover": {
-                borderColor: "hover:border-black",
+                borderColor: "dark:hover:border-transparent",
             },
         },
-        h2: { paddingLeft: "pl-2", paddingTop: "pt-0.5" },
-    }
-)
+        ":hover": {
+            borderColor: "hover:border-black",
+        },
+    },
+    h2: { paddingLeft: "pl-2", paddingTop: "pt-0.5" },
+})
 
-const linBtnState = tw$("active", "inactive")(
-    {
+const linkBtnText = tw.toggle({
+    base: {
         width: "w-40",
         "@2xl": {
             width: "2xl:w-56",
@@ -49,18 +47,16 @@ const linBtnState = tw$("active", "inactive")(
             },
         },
     },
-    {
-        active: {
-            fontWeight: "font-bold",
-            color: "text-black",
-            "@dark": {
-                color: "dark:text-white",
-            },
-            transformTranslateX: "translate-x-1",
+    truthy: {
+        fontWeight: "font-bold",
+        color: "text-black",
+        "@dark": {
+            color: "dark:text-white",
         },
-        inactive: {},
-    }
-)
+        transformTranslateX: "translate-x-1",
+    },
+    falsy: {},
+})
 
 const LinkBtn = ({
     title,
@@ -72,7 +68,7 @@ const LinkBtn = ({
     title: string
     href: string
     isFocused: boolean
-    type: WindVariants<typeof linkBtn>
+    type: GetVariants<typeof linkBtn>
     children?: React.ReactNode
 }) => {
     const { setActiveTitle } = useTocAction()
@@ -86,20 +82,14 @@ const LinkBtn = ({
                 href={href}
                 onClick={() => disableParentFocus && setActiveTitle(title)}
             >
-                <p
-                    className={linBtnState.class(
-                        isFocused ? "active" : "inactive"
-                    )}
-                >
-                    {title}
-                </p>
+                <p className={linkBtnText.class(isFocused)}>{title}</p>
             </a>
             {children}
         </div>
     )
 }
 
-const tocStyle = tw({
+const tocStyle = tw.style({
     position: "fixed",
     top: "top-0",
     left: "left-[5%]",
@@ -123,7 +113,7 @@ const tocStyle = tw({
             color: "hover:dark:text-gray-200",
         },
     },
-}).class()
+})
 
 interface PostTocProps {
     toc: TableOfContentsType[]
@@ -132,7 +122,7 @@ const PostToc = ({ toc }: PostTocProps) => {
     const { activeTitle } = useTocValue()
 
     return (
-        <nav className={tocStyle}>
+        <nav className={tocStyle.class}>
             {toc.map((tocDepth1) => {
                 const { children } = tocDepth1
                 return (

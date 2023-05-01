@@ -35,7 +35,7 @@ const NoteBackground = ({
 }: NoteBackgroundProps) => {
     return (
         <svg
-            className={`${util.layout} fixed top-0 -z-10 ${bgLight} ${bgDark}`}
+            className={`${util.layout.class} fixed top-0 -z-10 ${bgLight} ${bgDark}`}
             width="100%"
             height="100%"
             xmlns="http://www.w3.org/2000/svg"

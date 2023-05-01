@@ -26,22 +26,22 @@ const MainNav = () => (
     </Nav>
 )
 
-const layout = tw({
-    display: "flex",
-    flexDirection: "flex-col",
-    justifyContent: "justify-center",
-    alignItems: "items-center",
-    padding: "p-5",
-    paddingBottom: "pb-14",
-    "@md": {
-        padding: "md:p-8",
-    },
-    marginX: "mx-auto",
-})
-    .compose(util.layoutStyle)
-    .class()
+const layout = tw
+    .style({
+        display: "flex",
+        flexDirection: "flex-col",
+        justifyContent: "justify-center",
+        alignItems: "items-center",
+        padding: "p-5",
+        paddingBottom: "pb-14",
+        "@md": {
+            padding: "md:p-8",
+        },
+        marginX: "mx-auto",
+    })
+    .compose(util.layout.style)
 
-const layoutWrapper = tw({
+const layoutWrapper = tw.style({
     display: "flex",
     flexDirection: "flex-col",
     alignItems: "items-start",
@@ -51,7 +51,7 @@ const layoutWrapper = tw({
     width: "w-full",
     height: "h-full",
     minHeight: "min-h-screen",
-}).class()
+})
 
 const Layout = ({
     children,
@@ -63,8 +63,8 @@ const Layout = ({
     useSetSystemTheme()
 
     return (
-        <main className={layout}>
-            <div className={layoutWrapper}>{children}</div>
+        <main className={layout.class}>
+            <div className={layoutWrapper.class}>{children}</div>
             {pageType !== "Post" && <MainNav />}
 
             <NoteBackground {...config.noteBackgroundStyle} />

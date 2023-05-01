@@ -28,7 +28,7 @@ const Block = (props: CodeBlockProps) => {
         return (
             <code
                 {...props}
-                className="px-1 font-medium bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-emerald-400 text-red-600 dark:text-emerald-400 rounded-sm break-words"
+                className="px-0.5 font-medium text-sm/tight bg-neutral-50 dark:bg-black border border-neutral-300 dark:border-emerald-400/50 text-red-600 dark:text-emerald-400 rounded-sm break-words"
             />
         )
 
@@ -57,7 +57,7 @@ const Pre = (props: any) => {
                 setDisplayBtn(true)
             }}
             onPointerLeave={() => setHoverOut(true)}
-            className="relative w-[calc(100%+2.5rem)] ml-[-1.25rem] md:ml-[-2rem] md:w-[calc(100%+4rem)] my-2 bg-gray-800 dark:bg-neutral-900 border border-transparent dark:border-neutral-700"
+            className="relative w-[calc(100%+2.5rem)] ml-[-1.25rem] md:ml-[-2rem] md:w-[calc(100%+4rem)] my-2 bg-gray-700 dark:bg-neutral-950 border-t border-b border-transparent dark:border-neutral-700"
         >
             <pre
                 {...props}

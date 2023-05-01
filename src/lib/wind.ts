@@ -1,6 +1,6 @@
-import { createWind, Tailwindest } from "tailwindest"
+import { createTools, Tailwindest } from "tailwindest"
 
-type TailwindCustom = Tailwindest<
+export type TailwindCustom = Tailwindest<
     {},
     {
         listStyleType:
@@ -14,14 +14,5 @@ type TailwindCustom = Tailwindest<
             | "upper-alpha"
     }
 >
-
-type Tailwind = Required<TailwindCustom>
-
-const {
-    wind: tw,
-    wind$: tw$,
-    mergeProps,
-    toggle,
-} = createWind<TailwindCustom>()
-
-export { tw, tw$, type Tailwind, mergeProps, toggle }
+export type Tailwind = Required<TailwindCustom>
+export const tw = createTools<TailwindCustom>()

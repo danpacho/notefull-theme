@@ -8,7 +8,7 @@ function ProfileFooter() {
             <p className="text-neutral-500 dark:text-neutral-400">
                 {config.copyright}
             </p>
-            <ColorBox hex={config.themeColor} style="border" layout="flexible">
+            <ColorBox hex={config.themeColor} style="border" layout="flex">
                 <a
                     className="font-mono italic font-bold text-xs hover:underline "
                     href="https://github.com/danpacho/notefull-theme"

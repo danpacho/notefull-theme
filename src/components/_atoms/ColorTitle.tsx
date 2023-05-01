@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 
-import { Tailwind, mergeProps, tw$ } from "@lib/wind"
-import { WindVariants } from "tailwindest"
+import { Tailwind, tw } from "@lib/wind"
+import { GetVariants } from "tailwindest"
 
 const getRandBetween = (maxNum: number) => Math.floor(Math.random() * maxNum)
 
@@ -17,14 +17,8 @@ const getIndexOfSpaceCharacter = (strArr: string[]) => {
 const getSplicedText = (text: string) =>
     [...new Intl.Segmenter().segment(text)].map((x) => x.segment)
 
-const titleSkew = tw$(
-    "leftEnd",
-    "left",
-    "center",
-    "right",
-    "rightEnd"
-)(
-    {
+const titleSkew = tw.rotary({
+    base: {
         display: "flex",
         flexDirection: "flex-row",
         flexWrap: "flex-wrap",
@@ -51,49 +45,47 @@ const titleSkew = tw$(
             },
         },
     },
-    {
-        left: {
-            ":hover": {
-                transformSkewY: "hover:skew-y-12",
-                transformRotate: "hover:-rotate-12",
-            },
-        },
-        leftEnd: {
-            ":hover": {
-                transformSkewY: "hover:skew-y-6",
-                transformRotate: "hover:-rotate-6",
-            },
-        },
-        center: {
-            animation: "animate-pulse",
-        },
-        right: {
-            ":hover": {
-                transformSkewY: "hover:-skew-y-6",
-                transformRotate: "hover:rotate-6",
-            },
-        },
-        rightEnd: {
-            ":hover": {
-                transformSkewY: "hover:-skew-y-12",
-                transformRotate: "hover:rotate-12",
-            },
-        },
-    }
-)
 
-const characterStyle = tw$("capitalize")(
-    {
+    left: {
+        ":hover": {
+            transformSkewY: "hover:skew-y-12",
+            transformRotate: "hover:-rotate-12",
+        },
+    },
+    leftEnd: {
+        ":hover": {
+            transformSkewY: "hover:skew-y-6",
+            transformRotate: "hover:-rotate-6",
+        },
+    },
+    center: {
+        animation: "animate-pulse",
+    },
+    right: {
+        ":hover": {
+            transformSkewY: "hover:-skew-y-6",
+            transformRotate: "hover:rotate-6",
+        },
+    },
+    rightEnd: {
+        ":hover": {
+            transformSkewY: "hover:-skew-y-12",
+            transformRotate: "hover:rotate-12",
+        },
+    },
+})
+
+const characterStyle = tw.toggle({
+    base: {
         transition: "transition",
         minWidth: "min-w-[0.5rem]",
         ":hover": { transformScale: "hover:scale-110" },
     },
-    {
-        capitalize: {
-            textTransform: "capitalize",
-        },
-    }
-)
+    truthy: {
+        textTransform: "capitalize",
+    },
+    falsy: {},
+})
 
 interface ColorTitleProps {
     title: string
@@ -117,7 +109,7 @@ const ColorTitle = ({ title, hex, size, mdSize, href }: ColorTitleProps) => {
         setFocusNum(focusNum)
     }, [titleLength, spaceIndexArr])
 
-    const [skew, setSkew] = useState<WindVariants<typeof titleSkew>>("center")
+    const [skew, setSkew] = useState<GetVariants<typeof titleSkew>>("center")
     useEffect(() => {
         const mid = titleLength / 2
         const isEven = titleLength % 2 === 0
@@ -153,7 +145,7 @@ const ColorTitle = ({ title, hex, size, mdSize, href }: ColorTitleProps) => {
     return (
         <Link passHref href={href ?? "/"}>
             <div
-                className={mergeProps(titleSkew.style(skew), {
+                className={tw.mergeProps(titleSkew.style(skew), {
                     fontSize: size,
                     "@md": {
                         fontSize: mdSize,
@@ -172,9 +164,7 @@ const ColorTitle = ({ title, hex, size, mdSize, href }: ColorTitleProps) => {
                         <p
                             key={character + index}
                             style={style}
-                            className={characterStyle.class(
-                                isFirstCharacter ? "capitalize" : undefined
-                            )}
+                            className={characterStyle.class(isFirstCharacter)}
                             onPointerEnter={() =>
                                 onPointerFocusCharacter(index, spaceIndexArr)
                             }

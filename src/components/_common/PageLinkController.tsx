@@ -23,7 +23,7 @@ const PageLink = ({ title, link, type }: PostLinkProps) => {
                         ? "flex-row border-l-2 hover:-translate-x-1"
                         : "flex-row-reverse border-r-2 hover:translate-x-1"
                 } items-center justify-center gap-2.5 ${
-                    util.border
+                    util.border.class
                 } w-full px-2.5 py-1.5 md:w-fit md:px-3 md:py-1 hover:underline transition`}
             >
                 <Arrow className={`fill-current ${isPrev && "rotate-180"}`} />

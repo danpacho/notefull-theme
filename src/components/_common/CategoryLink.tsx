@@ -16,7 +16,7 @@ function CategoryLink({
     return (
         <Link passHref href={categoryUrl}>
             <div
-                className={`flex flex-col gap-4 p-3 transition ${util.border} border-b-2 cursor-pointer`}
+                className={`flex flex-col gap-4 p-3 transition ${util.border.class} cursor-pointer`}
             >
                 <RowBetween>
                     <Title>{category}</Title>

@@ -1,7 +1,7 @@
 import { ThemeMode } from "@typing/theme"
 import { useTheme } from "next-themes"
 
-import useMounted from "@hooks/useMounted"
+import { useMounted } from "@hooks/useMounted"
 
 const ThemeBtn = ({ styleClass }: { styleClass: string }) => {
     const { theme, setTheme } = useTheme()

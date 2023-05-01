@@ -66,12 +66,13 @@ const config = {
     ],
 
     noteBackgroundStyle: {
-        rectWidth: 150,
-        rectHeight: 150,
-        outerRectStrokeWidth: 2,
+        rectWidth: 300,
+        rectHeight: 200,
+        outerRectStrokeWidth: 1.5,
         rectStrokeWidth: 1,
-        outerRectStrokeLight: "stroke-gray-400",
-        rectStrokeDark: "dark:stroke-neutral-700",
+        outerRectStrokeLight: "stroke-gray-300",
+        outerRectStrokeDark: "dark:stroke-neutral-700",
+        rectStrokeDark: "dark:stroke-teal-700/50",
         bgDark: "dark:bg-neutral-900",
     } as NoteBackgroundProps,
 

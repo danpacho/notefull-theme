@@ -8,4 +8,4 @@ const useMounted = () => {
     return { isMounted }
 }
 
-export default useMounted
+export { useMounted }
