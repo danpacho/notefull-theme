@@ -63,7 +63,7 @@ interface CategoryPageProps extends CategoryInfoType {
 function CategoryPage(props: CategoryPageProps) {
     const { latestPost, allSeries, category, description, color, emoji } = props
 
-    const isSeriesExsist = allSeries.length !== 0
+    const isSeriesExist = allSeries.length !== 0
     const title = `${category} ${emoji}`
     return (
         <>
@@ -71,7 +71,7 @@ function CategoryPage(props: CategoryPageProps) {
 
             <Banner title={title} description={description} hex={color} />
 
-            {isSeriesExsist && (
+            {isSeriesExist && (
                 <>
                     <ColorTitle
                         title="Series"
