@@ -67,7 +67,7 @@ const tokenClassNames: {
     char: "text-[#82aaff] font-semibold",
 
     // red 400
-    tag: "text-red-400 font-bold",
+    tag: "text-red-400 font-semibold",
     boolean: "text-red-400",
     // red 500
     deleted: "text-red-500 italic",
@@ -75,16 +75,16 @@ const tokenClassNames: {
     // orange 200
     atRule: "text-orange-200",
     number: "text-orange-200",
-    "maybe-class-name": "text-orange-200 font-bold",
+    "maybe-class-name": "text-orange-200 font-semibold",
     "attr-value": "text-orange-200",
     // orange 300
-    generic: "text-orange-300 font-bold",
-    "class-name": "text-orange-300 font-bold",
-    "known-class-name": "text-orange-300 font-bold",
+    generic: "text-orange-300 font-semibold",
+    "class-name": "text-orange-300 font-semibold",
+    "known-class-name": "text-orange-300 font-semibold",
     "attr-name": "text-orange-300",
 
     // neutral 100
-    important: "text-neutral-100 font-bold",
+    important: "text-neutral-100 font-semibold",
     regex: "text-neutral-100",
     variable: "text-neutral-100",
     // neutral 300
@@ -96,12 +96,12 @@ const tokenClassNames: {
     cdata: "text-neutral-500 italic",
 
     // purple #c792ea
-    keyword: "text-[#c792ea] font-bold",
-    operator: "text-[#c792ea] font-bold",
-    selector: "text-[#c792ea] font-bold",
-    doctype: "text-[#c792ea] font-bold",
+    keyword: "text-[#c792ea]",
+    operator: "text-[#c792ea]",
+    selector: "text-[#c792ea]",
+    doctype: "text-[#c792ea]",
 
-    bold: "font-bold",
+    bold: "font-semibold",
 } as const
 
 type TokenNameType = "token" | "code-line"

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 
 import CodeCopyBtn from "./CodeCopyBtn"
 import { useTimeout } from "./useTimeout"
+import { util } from "@styles/tailwind.util"
 
 const Code = () => {}
 
@@ -28,7 +29,7 @@ const Block = (props: CodeBlockProps) => {
         return (
             <code
                 {...props}
-                className="px-0.5 font-medium text-sm/tight bg-neutral-50 dark:bg-black border border-neutral-300 dark:border-emerald-400/50 text-red-600 dark:text-emerald-400 rounded-sm break-words"
+                className="p-[0.1rem] mx-[0.1rem] font-medium text-sm/tight bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-emerald-400/30 text-red-600 dark:text-emerald-400 rounded-sm break-words"
             />
         )
 
@@ -57,7 +58,7 @@ const Pre = (props: any) => {
                 setDisplayBtn(true)
             }}
             onPointerLeave={() => setHoverOut(true)}
-            className="relative w-[calc(100%+2.5rem)] ml-[-1.25rem] md:ml-[-2rem] md:w-[calc(100%+4rem)] my-2 bg-gray-700 dark:bg-neutral-900 border-t border-b border-transparent dark:border-neutral-700"
+            className={`${util.fullWidth.class} my-2 bg-gray-800 dark:bg-neutral-900 border-t border-b border-transparent dark:border-neutral-700`}
         >
             <pre
                 {...props}

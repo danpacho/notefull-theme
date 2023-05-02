@@ -43,9 +43,19 @@ const border = tw.style({
     },
 })
 
+const fullWidth = tw.style({
+    width: "w-[calc(100%+2.5rem)]",
+    marginLeft: "ml-[-1.25rem]",
+    "@md": {
+        width: "md:w-[calc(100%+4rem)]",
+        marginLeft: "md:ml-[-2rem]",
+    },
+})
+
 const util = {
     layout,
     border,
+    fullWidth,
 } as const
 
 export { util }

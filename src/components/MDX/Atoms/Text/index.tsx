@@ -3,17 +3,20 @@ import useTrackTitle from "./useTrackTitle"
 const Text = () => {}
 
 const Paragraph = (props: any) => (
-    <p {...props} className=" my-2 text-base font-normal leading-7" />
+    <p
+        {...props}
+        className=" my-2 text-base/normal font-normal text-black dark:text-gray-200"
+    />
 )
 const Italic = (props: any) => <em {...props} className="text-base italic" />
 const Link = (props: any) => (
     <a
         {...props}
-        className="mx-0.5 text-base underline font-medium text-neutral-600 dark:text-neutral-400 hover:text-green-600 dark:hover:text-green-400"
+        className="mx-0.5 text-base underline underline-offset-4 font-bold text-emerald-700 dark:text-emerald-400 hover:opacity-75"
     />
 )
 const Bold = (props: any) => (
-    <strong {...props} className="text-base font-extrabold" />
+    <strong {...props} className="text-base font-bold" />
 )
 //============================== TOC 1 ==============================
 const H1 = (props: any) => {
