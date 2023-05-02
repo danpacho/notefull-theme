@@ -42,4 +42,4 @@ const getAuthorContactHref = (
     return href
 }
 
-export default getAuthorContactHref
+export { getAuthorContactHref }

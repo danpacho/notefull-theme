@@ -22,12 +22,12 @@ export interface MarkdownNodeType extends Node {
     position: any
 }
 
-const findMarkdownElment = (tree: Node, mdElmentArray: MarkdownElement[]) => {
+const findMarkdownElement = (tree: Node, mdElementArray: MarkdownElement[]) => {
     const matchedNode: MarkdownNodeType[] = []
 
     visit(tree, (node: any) => {
         const { type } = node as MarkdownNodeType
-        if (mdElmentArray.includes(type)) {
+        if (mdElementArray.includes(type)) {
             matchedNode.push(node)
         }
     })
@@ -38,4 +38,4 @@ const findMarkdownElment = (tree: Node, mdElmentArray: MarkdownElement[]) => {
     }
 }
 
-export { findMarkdownElment }
+export { findMarkdownElement }

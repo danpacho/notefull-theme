@@ -4,7 +4,7 @@ import { promisify } from "util"
 import { visit } from "unist-util-visit"
 import type { Node } from "unist"
 
-import { findMarkdownElment, MarkdownNodeType } from "./findMarkdownElement"
+import { findMarkdownElement, MarkdownNodeType } from "./findMarkdownElement"
 
 import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "@core/error"
 
@@ -63,7 +63,7 @@ interface ImageNodeType extends MarkdownNodeType {
 }
 
 const remarkImageSizeByAlt = () => async (tree: Node) => {
-    const { matchedNode, notFound } = findMarkdownElment(tree, ["image"])
+    const { matchedNode, notFound } = findMarkdownElement(tree, ["image"])
 
     if (!notFound) {
         const isExternalUrl = (url: string) => url.startsWith("http")
@@ -93,4 +93,4 @@ const remarkImageSizeByAlt = () => async (tree: Node) => {
     }
 }
 
-export default remarkImageSizeByAlt
+export { remarkImageSizeByAlt }

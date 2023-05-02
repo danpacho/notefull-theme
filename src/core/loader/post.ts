@@ -38,7 +38,7 @@ import matter from "gray-matter"
 
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
-import { getTableOfContents, remarkImageSizeByAlt } from "@lib/remark"
+import { getTOC, remarkImageSizeByAlt } from "@lib/remark"
 
 import rehypeKatex from "rehype-katex"
 import rehypePrism from "rehype-prism-plus"
@@ -195,7 +195,7 @@ const bundlePost = async <MetaT extends MetaObjT>({
             readingFileName: "❓",
         })
 
-    const toc: PostTOCType[] = getTableOfContents(postSource) //* toc on server-side
+    const toc: PostTOCType[] = getTOC(postSource) //* toc on server-side
 
     return {
         bundledResult,

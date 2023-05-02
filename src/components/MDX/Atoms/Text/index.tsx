@@ -1,4 +1,4 @@
-import useTrackTitle from "./useTrackTitle"
+import { useTrackTitle } from "./useTrackTitle"
 
 const Text = () => {}
 

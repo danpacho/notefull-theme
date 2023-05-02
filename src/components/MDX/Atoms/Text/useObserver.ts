@@ -12,7 +12,7 @@ interface ObserveOptions {
 interface useElementObserverProps<T> {
     observerRef: React.RefObject<T>
     options: ObserveOptions
-    customeCallback?: IntersectionObserverCallback
+    customCallback?: IntersectionObserverCallback
 }
 
 function useElementObserver<T extends HTMLElement>({
@@ -25,7 +25,7 @@ function useElementObserver<T extends HTMLElement>({
         rootMarginRight = "0px",
         threshold = 0,
     },
-    customeCallback,
+    customCallback,
 }: useElementObserverProps<T>): {
     isVisible: boolean
     setIsVisible: (isVisible: boolean) => void
@@ -53,7 +53,7 @@ function useElementObserver<T extends HTMLElement>({
             ref = observerRef.current // save observer
 
             observer = new IntersectionObserver(
-                customeCallback ?? intersectionCallback,
+                customCallback ?? intersectionCallback,
                 {
                     root,
                     rootMargin,
@@ -71,7 +71,7 @@ function useElementObserver<T extends HTMLElement>({
         root,
         rootMargin,
         threshold,
-        customeCallback,
+        customCallback,
         intersectionCallback,
     ])
 
@@ -80,4 +80,4 @@ function useElementObserver<T extends HTMLElement>({
         setIsVisible,
     }
 }
-export default useElementObserver
+export { useElementObserver }

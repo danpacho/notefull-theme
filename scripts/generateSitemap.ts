@@ -6,12 +6,12 @@ const URL_PRIORITY = {
     post: 0.8,
     category: 0.4,
     categoryPagination: 0.2,
-}
+} as const
 
-async function generateSitemap(
+const generateSitemap = async (
     allCategoryPath: string[],
     allPostMeta: TempMetaType[]
-) {
+) => {
     const addSiteUrlNotation = (relativePath: string) =>
         `${config.url}${relativePath}`
 

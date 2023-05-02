@@ -117,4 +117,4 @@ const rehypeInjectCodeClassName = () => (tree: Node) => {
     })
 }
 
-export default rehypeInjectCodeClassName
+export { rehypeInjectCodeClassName }

@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react"
 import { useTocAction } from "@components/TocProvider"
 
-import useElementObserver from "./useObserver"
+import { useElementObserver } from "./useObserver"
 
 const UPDATE_CONDITION = {
     top: 50,
@@ -12,7 +12,7 @@ const OBSERVER_OPTION = {
     bottom: "0px",
     threshold: [0, 1],
 }
-function useTrackTitle<T extends HTMLHeadingElement>() {
+const useTrackTitle = <T extends HTMLHeadingElement>() => {
     const { setActiveTitle } = useTocAction()
     const observerRef = useRef<T>(null)
 
@@ -38,7 +38,7 @@ function useTrackTitle<T extends HTMLHeadingElement>() {
             rootMarginBottom: OBSERVER_OPTION.bottom,
             threshold: OBSERVER_OPTION.threshold,
         },
-        customeCallback: updateFocusTitle,
+        customCallback: updateFocusTitle,
     })
 
     return {
@@ -46,4 +46,4 @@ function useTrackTitle<T extends HTMLHeadingElement>() {
     }
 }
 
-export default useTrackTitle
+export { useTrackTitle }

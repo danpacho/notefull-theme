@@ -1,2 +1,2 @@
-export { default as rehypeInjectCodeClassName } from "./injectCodeClassName"
-export { default as rehypeHeaderId } from "./headerId"
+export * from "./injectCodeClassName"
+export * from "./headerId"

@@ -1,16 +1,13 @@
 import { remark } from "remark"
 
-import { findMarkdownElment, MarkdownNodeType } from "./findMarkdownElement"
+import { findMarkdownElement, MarkdownNodeType } from "./findMarkdownElement"
 
-type Concrete<Type> = {
-    [Property in keyof Type]-?: Type[Property]
-}
-type MarkdownHeader = Concrete<MarkdownNodeType>
+type MarkdownHeader = Required<MarkdownNodeType>
 const extractHeader = (pureMarkdownSource: string) => {
     let headerNode: MarkdownHeader[] = []
     remark()
         .use(() => (tree) => {
-            const { matchedNode, notFound } = findMarkdownElment(tree, [
+            const { matchedNode, notFound } = findMarkdownElement(tree, [
                 "heading",
             ])
             if (notFound) headerNode = []
@@ -60,19 +57,21 @@ interface H2Children extends Omit<HeaderInfo, "type"> {}
 export interface TableOfContentsType extends Omit<HeaderInfo, "type"> {
     children: H2Children[] | null
 }
-function transformTableOfContents(
-    source: MarkdownHeader[]
-): TableOfContentsType[] {
-    if (source.length === 0) return []
+const extractTOCFromMarkdownHeader = (
+    markdownHeader: MarkdownHeader[]
+): TableOfContentsType[] => {
+    if (markdownHeader.length === 0) return []
 
-    const headerInfoArray: HeaderInfo[] = source.map(({ children, depth }) => {
-        const text = children[0].value
-        return {
-            title: text,
-            href: `#${text}`,
-            type: `H${depth}` as HeaderType,
+    const headerInfoArray: HeaderInfo[] = markdownHeader.map(
+        ({ children, depth }) => {
+            const text = children[0].value
+            return {
+                title: text,
+                href: `#${text}`,
+                type: `H${depth}` as HeaderType,
+            }
         }
-    })
+    )
 
     const H1IndexArray = headerInfoArray.reduce<number[]>(
         (acc, { type }, idx) => (type === "H1" ? [...acc, idx] : acc),
@@ -87,9 +86,9 @@ function transformTableOfContents(
             const nextH1Index: number | undefined =
                 H1IndexArray[H1IndexArray.indexOf(index) + 1]
 
-            const isChildrenNotExsist = nextHeaderIndex === nextH1Index
+            const isChildrenNotExist = nextHeaderIndex === nextH1Index
 
-            if (isChildrenNotExsist) {
+            if (isChildrenNotExist) {
                 return [
                     ...acc,
                     {
@@ -122,12 +121,9 @@ function transformTableOfContents(
     return tableOfContentsArray
 }
 
-const getTableOfContents = (
-    pureMarkdownSource: string
-): TableOfContentsType[] => {
-    const sorce = extractHeader(pureMarkdownSource)
-    const tableOfContent = transformTableOfContents(sorce)
-    return tableOfContent
+const getTOC = (pureMarkdownSource: string): TableOfContentsType[] => {
+    const source = extractHeader(pureMarkdownSource)
+    return extractTOCFromMarkdownHeader(source)
 }
 
-export default getTableOfContents
+export { getTOC }

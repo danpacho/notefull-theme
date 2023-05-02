@@ -11,7 +11,7 @@
     ```bash
     🏠 ${config.blogContentsDirectoryName}
     ┣ 📦 "content"
-    ┃ ┣ 🗂 {catgory}
+    ┃ ┣ 🗂 {category}
     ┃ ┃ ┃
     ┃ ┃ ┣ 🗂 "posts"
     ┃ ┃ ┃ ┣ 📔 {post}.mdx
@@ -19,14 +19,14 @@
     ┃ ┃ ┃
     ┃ ┃ ┗ 📔 "description.json"
     ┃ ┃
-    ┣ ┗ 🗂 {catgory2}...
+    ┣ ┗ 🗂 {category2}...
     ┃
     ┗ 📔 "profile.mdx"
     ```
     1. File name and structure **must follow above**
     2. You can modify the **`blogContentsDirectoryName`** of the `blog.config.ts` file to set the name of the blog directory name
     3. `File name` is direct routed as follows
-        - File tructure: `../{category}/posts/{post}.mdx`
+        - File structure: `../{category}/posts/{post}.mdx`
         - Route result: **`https://DEPLOY_URL/{category}/{pagination}/{post}`**
 -   `NextJs` calls these api functions from `getStaticProps` and `getStaticPaths` to build blog static data
 

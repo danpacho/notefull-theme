@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useTheme } from "next-themes"
 
 import { Nav } from "@components/_common"
-import NoteBackground from "./NoteBackground"
+import { NoteBackground } from "./NoteBackground"
 
 import { config } from "blog.config"
 

@@ -36,4 +36,4 @@ const MDXAtoms = {
     hr: Divider,
 } as MDXComponents
 
-export default MDXAtoms
+export { MDXAtoms }

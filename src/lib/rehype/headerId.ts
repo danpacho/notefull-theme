@@ -43,4 +43,4 @@ const rehypeHeaderId = () => (tree: Node) => {
     })
 }
 
-export default rehypeHeaderId
+export { rehypeHeaderId }
