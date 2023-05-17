@@ -56,8 +56,8 @@ dependencies:
     specifier: ^0.30.7
     version: 0.30.7
   tailwindest:
-    specifier: 2.0.0-rc.1
-    version: 2.0.0-rc.1
+    specifier: 2.0.1
+    version: 2.0.1
   unified:
     specifier: ^10.1.2
     version: 10.1.2
@@ -4922,8 +4922,8 @@ packages:
       - ts-node
     dev: true
 
-  /tailwindest@2.0.0-rc.1:
-    resolution: {integrity: sha512-8nxOM1+S92S/9CTEL63KTLtSZ1Cx+nqw8wX1UYgPyVnpx1jpsxP7hsPfb8PeDYKlNSN7ksQxVybi5/E17f/tvw==}
+  /tailwindest@2.0.1:
+    resolution: {integrity: sha512-yK1SPAR8Jz7zbcTcjZvdMlJdNjGXSz4NKXg2VUSeivdKZgjytDnNDkK1AlrGfRPYPQDXMWBTtS6FJ/+fUACvDQ==}
     dev: false
 
   /tar-fs@2.1.1:
