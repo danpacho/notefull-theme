@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 
-import { Tailwind, tw } from "@lib/wind"
+import { Tailwind, tw } from "~/lib/wind"
 import { GetVariants } from "tailwindest"
 
 const getRandBetween = (maxNum: number) => Math.floor(Math.random() * maxNum)

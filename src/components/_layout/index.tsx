@@ -1,15 +1,15 @@
-import type { PageType } from "@typing/page"
+import type { PageType } from "src/interface/page"
 
 import { useEffect } from "react"
 import { useTheme } from "next-themes"
 
-import { Nav } from "@components/_common"
+import { Nav } from "~/components/_common"
 import { NoteBackground } from "./NoteBackground"
 
 import { config } from "blog.config"
 
-import { tw } from "@lib/wind"
-import { util } from "@styles/tailwind.util"
+import { tw } from "~/lib/wind"
+import { util } from "~/styles/tailwind.util"
 
 const useSetSystemTheme = () => {
     const { setTheme, systemTheme } = useTheme()

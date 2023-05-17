@@ -2,15 +2,15 @@ import matter from "gray-matter"
 
 import { readFile } from "fs/promises"
 
-import { POST_FILE_NAME } from "@constants/index"
+import { POST_FILE_NAME } from "~/constants/index"
 
-import { MDXMetaType } from "@typing/post/meta"
+import { MDXMetaType } from "src/interface/post/meta"
 
 import {
     blogContentsDir,
     getFileNames,
     removeFileFormat,
-} from "@core/loader/util"
+} from "~/core/loader/util"
 
 import { config } from "blog.config"
 

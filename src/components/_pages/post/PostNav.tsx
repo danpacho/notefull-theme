@@ -1,4 +1,4 @@
-import { Nav } from "@components/_common"
+import { Nav } from "~/components/_common"
 
 import { config } from "blog.config"
 

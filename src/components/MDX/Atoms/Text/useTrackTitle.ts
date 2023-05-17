@@ -1,5 +1,5 @@
 import { useCallback, useRef } from "react"
-import { useTocAction } from "@components/TocProvider"
+import { useTocAction } from "~/components/TocProvider"
 
 import { useElementObserver } from "./useObserver"
 

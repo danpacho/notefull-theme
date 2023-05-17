@@ -1,4 +1,4 @@
-import { ColorBox } from "@components/_atoms"
+import { ColorBox } from "~/components/_atoms"
 
 import { config } from "blog.config"
 

@@ -2,21 +2,21 @@ import { GetStaticPaths, GetStaticProps } from "next"
 
 import { ParsedUrlQuery } from "querystring"
 
-import type { PostControllerInfoType } from "@typing/post"
-import type { CategoryInfoType } from "@typing/category"
-import type { MetaType } from "@typing/post/meta"
-import type { PageType } from "@typing/page"
+import type { PostControllerInfoType } from "src/interface/post"
+import type { CategoryInfoType } from "src/interface/category"
+import type { MetaType } from "src/interface/post/meta"
+import type { PageType } from "src/interface/page"
 
 import {
     getCategoryPaginationPostMeta,
     getTotalPageNumberOfCategory,
     getAllPostPaginationPath,
-} from "@core/loader/post"
+} from "~/core/loader/post"
 
-import { getSingleCategoryInfo } from "@core/loader/category"
+import { getSingleCategoryInfo } from "~/core/loader/category"
 
-import { Banner, PageLinkController, PostLinkLayer } from "@components/_common"
-import { ColorTitle } from "@components/_atoms"
+import { Banner, PageLinkController, PostLinkLayer } from "~/components/_common"
+import { ColorTitle } from "~/components/_atoms"
 
 import { config } from "blog.config"
 

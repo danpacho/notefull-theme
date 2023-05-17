@@ -1,11 +1,11 @@
-import { util } from "@styles/tailwind.util"
+import { util } from "~/styles/tailwind.util"
 
 import Link from "next/link"
 
-import type { PostControllerInfoType as LinkInfo } from "@typing/post"
+import type { PostControllerInfoType as LinkInfo } from "src/interface/post"
 
-import { Description, RowBetween } from "@components/_atoms"
-import { Arrow } from "@components/_icons"
+import { Description, RowBetween } from "~/components/_atoms"
+import { Arrow } from "~/components/_icons"
 
 interface PostLinkProps extends LinkInfo {
     type: "prev" | "next"

@@ -1,15 +1,15 @@
 import { GetStaticProps } from "next"
 import { NextSeo } from "next-seo"
 
-import type { PageType } from "@typing/page"
-import type { MetaType } from "@typing/post/meta"
-import type { CategoryInfoType } from "@typing/category"
+import type { PageType } from "src/interface/page"
+import type { MetaType } from "src/interface/post/meta"
+import type { CategoryInfoType } from "src/interface/category"
 
-import { getMainCategoryInfo } from "@core/loader/category"
-import { getLatestPostMeta } from "@core/loader/post"
+import { getMainCategoryInfo } from "~/core/loader/category"
+import { getLatestPostMeta } from "~/core/loader/post"
 
-import { Banner, PostLinkLayer, CategoryLinkLayer } from "@components/_common"
-import { Title } from "@components/_atoms"
+import { Banner, PostLinkLayer, CategoryLinkLayer } from "~/components/_common"
+import { Title } from "~/components/_atoms"
 
 import { config } from "blog.config"
 

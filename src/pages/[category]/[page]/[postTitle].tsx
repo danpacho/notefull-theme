@@ -1,23 +1,28 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
-import type { PageType } from "@typing/page"
-import type { SeriesType } from "@typing/post/series"
-import type { PostWithControllerType } from "@typing/post"
+import type { PageType } from "src/interface/page"
+import type { SeriesType } from "src/interface/post/series"
+import type { PostWithControllerType } from "src/interface/post"
 
 import {
     getSpecificCategoryMeta,
     getSingleSeries,
     getSinglePost,
     getAllPostPath,
-} from "@core/loader/post"
+} from "~/core/loader/post"
 
-import { PostSEO } from "@components/SEO"
-import { KatexStyleLoader } from "@components/KatexStyleLoader"
-import { MDXBundler } from "@components/MDX/Bundler"
+import { PostSEO } from "~/components/SEO"
+import { KatexStyleLoader } from "~/components/KatexStyleLoader"
+import { MDXBundler } from "~/components/MDX/Bundler"
 
-import { PageLinkController } from "@components/_common"
-import { PostNav, PostBanner, PostMeta, PostToc } from "@components/_pages/post"
+import { PageLinkController } from "~/components/_common"
+import {
+    PostNav,
+    PostBanner,
+    PostMeta,
+    PostToc,
+} from "~/components/_pages/post"
 
 import { config } from "blog.config"
 

@@ -6,12 +6,12 @@ import { ThemeProvider } from "next-themes"
 
 import Head from "next/head"
 
-import type { PageType } from "@typing/page"
+import type { PageType } from "src/interface/page"
 
-import Layout from "@components/_layout"
-import { TocProvider } from "@components/TocProvider"
-import { DefaultSEO } from "@components/SEO"
-import { GoogleAnalytics } from "@components/GoogleAnalytics"
+import Layout from "~/components/_layout"
+import { TocProvider } from "~/components/TocProvider"
+import { DefaultSEO } from "~/components/SEO"
+import { GoogleAnalytics } from "~/components/GoogleAnalytics"
 
 import { config } from "blog.config"
 import { useRouter } from "next/router"

@@ -6,7 +6,7 @@ import type { Node } from "unist"
 
 import { findMarkdownElement, MarkdownNodeType } from "./findMarkdownElement"
 
-import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "@core/error"
+import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "~/core/error"
 
 const sizeOf = promisify(imageSize)
 

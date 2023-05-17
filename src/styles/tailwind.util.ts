@@ -1,4 +1,4 @@
-import { tw } from "@lib/wind"
+import { tw } from "~/lib/wind"
 
 const layout = tw.style({
     width: "w-full",

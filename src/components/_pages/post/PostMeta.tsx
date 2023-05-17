@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react"
 
 import Link from "next/link"
 
-import { ColorBox } from "@components/_atoms"
+import { ColorBox } from "~/components/_atoms"
 
 const RowContainer = ({ children }: PropsWithChildren<React.ReactNode>) => (
     <div className="flex flex-row flex-wrap gap-2 max-w-full">{children}</div>

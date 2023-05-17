@@ -1,12 +1,12 @@
-import { util } from "@styles/tailwind.util"
+import { util } from "~/styles/tailwind.util"
 
 import { useState } from "react"
 import Link from "next/link"
 
-import { SeriesInfoType } from "@typing/post/series"
+import { SeriesInfoType } from "src/interface/post/series"
 
-import { Description, ColorBox, RowBetween, Title } from "@components/_atoms"
-import { Bookmark } from "@components/_icons"
+import { Description, ColorBox, RowBetween, Title } from "~/components/_atoms"
+import { Bookmark } from "~/components/_icons"
 
 interface SeriesLinkProps {
     title: string

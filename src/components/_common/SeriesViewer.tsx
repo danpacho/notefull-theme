@@ -1,10 +1,10 @@
-import { util } from "@styles/tailwind.util"
+import { util } from "~/styles/tailwind.util"
 import { useCallback, useState } from "react"
 
-import { SeriesType } from "@typing/post/series"
+import { SeriesType } from "src/interface/post/series"
 
-import { Grid, Title } from "@components/_atoms"
-import { Arrow } from "@components/_icons"
+import { Grid, Title } from "~/components/_atoms"
+import { Arrow } from "~/components/_icons"
 
 import SeriesContainer from "./SeriesContainer"
 

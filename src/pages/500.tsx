@@ -1,6 +1,6 @@
-import type { PageType } from "@typing/page"
+import type { PageType } from "src/interface/page"
 
-import { Banner } from "@components/_common"
+import { Banner } from "~/components/_common"
 import { config } from "blog.config"
 
 function ErrorPage() {

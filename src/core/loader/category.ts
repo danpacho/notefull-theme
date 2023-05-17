@@ -1,17 +1,17 @@
 import { readFile } from "fs/promises"
 
-import { CategoryInfoType } from "@typing/category"
+import { CategoryInfoType } from "~/interface/category"
 
-import { DESCRIPTION_FILE_NAME, FILE_FORMAT } from "@constants/index"
+import { DESCRIPTION_FILE_NAME, FILE_FORMAT } from "~/constants/index"
 
 import {
     blogContentsDir,
     addPathNotation,
     getValidateColor,
     getFileNames,
-} from "@core/loader/util"
+} from "~/core/loader/util"
 
-import { BlogErrorAdditionalInfo, BlogPropertyError } from "@core/error"
+import { BlogErrorAdditionalInfo, BlogPropertyError } from "~/core/error"
 
 import { config } from "blog.config"
 

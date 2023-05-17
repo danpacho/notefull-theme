@@ -1,8 +1,8 @@
-import type { TableOfContentsType } from "@lib/remark/getTableOfContents"
+import type { TableOfContentsType } from "~/lib/remark/getTableOfContents"
 
-import { useTocAction, useTocValue } from "@components/TocProvider"
+import { useTocAction, useTocValue } from "~/components/TocProvider"
 import { GetVariants } from "tailwindest"
-import { tw } from "@lib/wind"
+import { tw } from "~/lib/wind"
 
 const linkBtn = tw.rotary({
     base: {

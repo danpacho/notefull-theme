@@ -5,11 +5,11 @@ import {
     Mail,
     Twitter,
     Youtube,
-} from "@components/_icons"
-import { ColorBox } from "@components/_atoms"
+} from "~/components/_icons"
+import { ColorBox } from "~/components/_atoms"
 
 import { config } from "blog.config"
-import { Tailwind } from "@lib/wind"
+import { Tailwind } from "~/lib/wind"
 
 const { contacts } = config.author
 const contactArr = Object.entries(contacts)

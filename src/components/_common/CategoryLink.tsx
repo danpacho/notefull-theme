@@ -1,10 +1,10 @@
-import { CategoryInfoType } from "@typing/category"
+import { CategoryInfoType } from "src/interface/category"
 
 import Link from "next/link"
 
-import { Description, ColorBox, RowBetween, Title } from "@components/_atoms"
+import { Description, ColorBox, RowBetween, Title } from "~/components/_atoms"
 
-import { util } from "@styles/tailwind.util"
+import { util } from "~/styles/tailwind.util"
 
 function CategoryLink({
     category,

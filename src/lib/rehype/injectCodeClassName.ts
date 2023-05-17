@@ -1,4 +1,4 @@
-import { Tailwind } from "@lib/wind"
+import { Tailwind } from "~/lib/wind"
 import type { Node } from "unist"
 import { visit } from "unist-util-visit"
 

@@ -1,4 +1,4 @@
-import { util } from "@styles/tailwind.util"
+import { util } from "~/styles/tailwind.util"
 
 function Quote(props: any) {
     return (

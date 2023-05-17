@@ -1,17 +1,17 @@
-import { BLOG_PROFILE_DIR } from "@constants/blog.dir"
+import { BLOG_PROFILE_DIR } from "~/constants/blog.dir"
 
 import { readFile } from "fs/promises"
 
-import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "@core/error"
+import { BlogErrorAdditionalInfo, BlogFileExtractionError } from "~/core/error"
 
-import { definePlugins } from "@core/loader/util"
-import { bundlePost } from "@core/loader/post"
+import { definePlugins } from "~/core/loader/util"
+import { bundlePost } from "~/core/loader/post"
 
 import remarkGfm from "remark-gfm"
-import { remarkImageSizeByAlt } from "@lib/remark"
+import { remarkImageSizeByAlt } from "~/lib/remark"
 
 import rehypePrism from "rehype-prism-plus"
-import { rehypeInjectCodeClassName } from "@lib/rehype"
+import { rehypeInjectCodeClassName } from "~/lib/rehype"
 
 /**
  * - you can set custom `remark-rehype` plugin for profile page

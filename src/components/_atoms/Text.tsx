@@ -1,4 +1,4 @@
-import { Tailwind } from "@lib/wind"
+import { Tailwind } from "~/lib/wind"
 
 interface TextSizeProps {
     children: React.ReactNode

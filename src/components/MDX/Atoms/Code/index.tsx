@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 
 import CodeCopyBtn from "./CodeCopyBtn"
 import { useTimeout } from "./useTimeout"
-import { util } from "@styles/tailwind.util"
+import { util } from "~/styles/tailwind.util"
 
 const Code = () => {}
 

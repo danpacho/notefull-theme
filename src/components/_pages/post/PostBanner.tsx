@@ -1,7 +1,7 @@
-import type { MetaType } from "@typing/post/meta"
-import type { SeriesHeaderProps } from "@components/_common/SeriesContainer"
+import type { MetaType } from "src/interface/post/meta"
+import type { SeriesHeaderProps } from "~/components/_common/SeriesContainer"
 
-import { Banner, SeriesContainer } from "@components/_common"
+import { Banner, SeriesContainer } from "~/components/_common"
 
 import PostMeta from "./PostMeta"
 

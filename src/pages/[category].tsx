@@ -1,25 +1,25 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 
-import type { CategoryInfoType } from "@typing/category"
-import type { MetaType } from "@typing/post/meta"
-import type { SeriesType } from "@typing/post/series"
-import type { PageType } from "@typing/page"
+import type { CategoryInfoType } from "src/interface/category"
+import type { MetaType } from "src/interface/post/meta"
+import type { SeriesType } from "src/interface/post/series"
+import type { PageType } from "src/interface/page"
 
 import {
     getAllCategoryPath,
     getSingleCategoryInfo,
-} from "@core/loader/category"
+} from "~/core/loader/category"
 
 import {
     getAllSeries,
     getSpecificCategoryMeta,
     getSpecificCategoryLatestMeta,
-} from "@core/loader/post"
+} from "~/core/loader/post"
 
-import { CategorySEO } from "@components/SEO"
-import { ColorTitle } from "@components/_atoms"
-import { Banner, PostLinkLayer, SeriesViewer } from "@components/_common"
+import { CategorySEO } from "~/components/SEO"
+import { ColorTitle } from "~/components/_atoms"
+import { Banner, PostLinkLayer, SeriesViewer } from "~/components/_common"
 
 interface ParamQuery extends ParsedUrlQuery {
     category: string

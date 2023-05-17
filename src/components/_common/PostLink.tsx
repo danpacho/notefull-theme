@@ -1,11 +1,11 @@
 import Link from "next/link"
 
-import { util } from "@styles/tailwind.util"
+import { util } from "~/styles/tailwind.util"
 
-import { MetaType } from "@typing/post/meta"
+import { MetaType } from "src/interface/post/meta"
 
-import { Pencil } from "@components/_icons"
-import { Description, ColorBox, RowBetween, Title } from "@components/_atoms"
+import { Pencil } from "~/components/_icons"
+import { Description, ColorBox, RowBetween, Title } from "~/components/_atoms"
 import { config } from "blog.config"
 
 interface PostLinkProps extends MetaType {

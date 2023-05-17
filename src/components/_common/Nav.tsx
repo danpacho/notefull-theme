@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from "react"
 import Link from "next/link"
 
-import ThemeBtn from "@components/ThemeBtn"
-import { tw } from "@lib/wind"
+import ThemeBtn from "~/components/ThemeBtn"
+import { tw } from "~/lib/wind"
 
 const nav = tw.style({
     position: "fixed",

@@ -1,6 +1,6 @@
-import { CategoryInfoType } from "@typing/category"
+import { CategoryInfoType } from "src/interface/category"
 
-import { Grid } from "@components/_atoms"
+import { Grid } from "~/components/_atoms"
 import CategoryLink from "./CategoryLink"
 
 interface CategoryLinkLayerProps {

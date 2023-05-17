@@ -2,15 +2,15 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@src/*": ["/src*"],
-            "@components/*": ["src/components/*"],
-            "@constants/*": ["src/constants/*"],
-            "@core/*": ["src/core/*"],
-            "@lib/*": ["src/lib/*"],
-            "@hooks/*": ["src/hooks/*"],
-            "@utils/*": ["src/utils/*"],
-            "@styles/*": ["src/styles/*"],
-            "@typing/*": ["src/types/*"]
+            "~/src/*": ["/src/*"],
+            "~/components/*": ["src/components/*"],
+            "~/constants/*": ["src/constants/*"],
+            "~/core/*": ["src/core/*"],
+            "~/lib/*": ["src/lib/*"],
+            "~/hooks/*": ["src/hooks/*"],
+            "~/utils/*": ["src/utils/*"],
+            "~/styles/*": ["src/styles/*"],
+            "~/interface/*": ["src/interface/*"]
         },
         "importHelpers": true,
         "forceConsistentCasingInFileNames": true,

@@ -1,4 +1,4 @@
-import { FILE_EXCEPTION_LIST } from "@constants/blog.file.exception"
+import { FILE_EXCEPTION_LIST } from "~/constants/blog.file.exception"
 import { readdir } from "fs/promises"
 
 const getFileNames = async (dir: string) =>

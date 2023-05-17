@@ -1,9 +1,9 @@
-import { ThemeMode } from "@typing/theme"
+import { ThemeMode } from "src/interface/theme"
 import { useTheme } from "next-themes"
 
-import { useMounted } from "@hooks/useMounted"
+import { useMounted } from "~/hooks/useMounted"
 import { GetVariants } from "tailwindest"
-import { tw } from "@lib/wind"
+import { tw } from "~/lib/wind"
 
 const useThemeHex = (hex: string) => {
     const theme = useTheme().theme as ThemeMode

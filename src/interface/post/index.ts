@@ -1,10 +1,10 @@
-import type { TableOfContentsType } from "@lib/remark/getTableOfContents"
+import type { TableOfContentsType } from "~/lib/remark/getTableOfContents"
 import type { MetaType } from "./meta"
 
 /**
  * single post type
  * @property **meta**: meta of the post. Check {@link MetaType}
- * @property **soure**: post source. this `string` will be compiled by `mdx-bundler`
+ * @property **source**: post source. this `string` will be compiled by `mdx-bundler`
  * @property **toc**: table of contents of post, `H1 ➡️ H2` nesting support. Check {@link TableOfContentsType}
  */
 export interface PostType {

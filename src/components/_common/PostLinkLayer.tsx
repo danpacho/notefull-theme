@@ -1,6 +1,6 @@
-import { MetaType } from "@typing/post/meta"
+import { MetaType } from "src/interface/post/meta"
 
-import { Grid } from "@components/_atoms"
+import { Grid } from "~/components/_atoms"
 import PostLink from "./PostLink"
 
 interface PostLinkLayerProps {

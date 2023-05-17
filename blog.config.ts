@@ -1,6 +1,6 @@
-import { NoteBackgroundProps } from "@components/_layout/NoteBackground"
-import type { ContactPlatformType } from "@core/contact"
-import getAuthorContactHref from "@core/contact"
+import type { NoteBackgroundProps } from "~/components/_layout/NoteBackground"
+import type { ContactPlatformType } from "~/core/contact"
+import { getAuthorContactHref } from "~/core/contact"
 
 const contacts: Readonly<
     {

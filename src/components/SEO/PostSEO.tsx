@@ -1,6 +1,6 @@
 import { ArticleJsonLd, NextSeo } from "next-seo"
 
-import { MetaType } from "@typing/post/meta"
+import { MetaType } from "src/interface/post/meta"
 
 import { config } from "blog.config"
 

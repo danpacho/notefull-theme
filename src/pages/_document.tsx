@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document"
 
-import { BaseSEO } from "@components/SEO"
+import { BaseSEO } from "~/components/SEO"
 
 import { config } from "blog.config"
 

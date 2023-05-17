@@ -7,7 +7,7 @@ import type { SeriesMetaType } from "./meta"
  * @property **postTitle**: `title` of a series of post
  * @property **color**: `color` of a series of post
  * @property **url**: `postUrl` of a series of post
- * @property **prevLink**: prvious post of series. If the current post is the first series, `prevLink` is `null`
+ * @property **prevLink**: previous post of series. If the current post is the first series, `prevLink` is `null`
  * @property **nextLink**: next post of series. If the current post is the last series, `nextLink` is `null`
  * @example
  * const firstSeries = {

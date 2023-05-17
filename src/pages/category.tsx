@@ -1,11 +1,11 @@
 import { GetStaticProps } from "next"
 
-import type { CategoryInfoType } from "@typing/category"
-import type { PageType } from "@typing/page"
+import type { CategoryInfoType } from "src/interface/category"
+import type { PageType } from "src/interface/page"
 
-import { getAllCategoryInfo } from "@core/loader/category"
+import { getAllCategoryInfo } from "~/core/loader/category"
 
-import { Banner, CategoryLinkLayer } from "@components/_common"
+import { Banner, CategoryLinkLayer } from "~/components/_common"
 
 import { config } from "blog.config"
 

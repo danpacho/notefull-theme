@@ -1,4 +1,4 @@
-import { ColorTitle as BannerTitle, Description } from "@components/_atoms"
+import { ColorTitle as BannerTitle, Description } from "~/components/_atoms"
 
 interface BannerProps {
     title: string

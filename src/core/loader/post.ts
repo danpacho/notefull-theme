@@ -2,7 +2,7 @@ import path from "path"
 import { cwd } from "process"
 import { readFile, readdir } from "fs/promises"
 
-import { MDXMetaType, MetaType, SeriesMetaType } from "@typing/post/meta"
+import { MDXMetaType, MetaType, SeriesMetaType } from "~/interface/post/meta"
 
 import {
     PostType,
@@ -10,12 +10,12 @@ import {
     PostControllerInfoType,
     PostWithControllerType,
     AllPostOfSpecificCategoryType,
-} from "@typing/post"
-import { TableOfContentsType as PostTOCType } from "@lib/remark/getTableOfContents"
+} from "~/interface/post"
+import { TableOfContentsType as PostTOCType } from "~/lib/remark/getTableOfContents"
 
-import { SeriesType, SeriesInfoType } from "@typing/post/series"
+import { SeriesType, SeriesInfoType } from "~/interface/post/series"
 
-import { POST_FILE_NAME } from "@constants/index"
+import { POST_FILE_NAME } from "~/constants/index"
 
 import {
     blogContentsDir,
@@ -24,25 +24,25 @@ import {
     removeFileFormat,
     definePlugins,
     getFileNames,
-} from "@core/loader/util"
+} from "~/core/loader/util"
 
-import { getAllCategoryName } from "@core/loader/category"
+import { getAllCategoryName } from "~/core/loader/category"
 
 import {
     BlogErrorAdditionalInfo,
     BlogFileExtractionError,
     BlogPropertyError,
-} from "@core/error"
+} from "~/core/error"
 
 import matter from "gray-matter"
 
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
-import { getTOC, remarkImageSizeByAlt } from "@lib/remark"
+import { getTOC, remarkImageSizeByAlt } from "~/lib/remark"
 
 import rehypeKatex from "rehype-katex"
 import rehypePrism from "rehype-prism-plus"
-import { rehypeHeaderId, rehypeInjectCodeClassName } from "@lib/rehype"
+import { rehypeHeaderId, rehypeInjectCodeClassName } from "~/lib/rehype"
 
 import { bundleMDX } from "mdx-bundler"
 import type { Pluggable } from "unified"

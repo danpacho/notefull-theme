@@ -1,5 +1,5 @@
-import { Tailwind } from "@lib/wind"
-import { util } from "@styles/tailwind.util"
+import { Tailwind } from "~/lib/wind"
+import { util } from "~/styles/tailwind.util"
 
 type TailwindStroke = Tailwind["stroke"]
 
