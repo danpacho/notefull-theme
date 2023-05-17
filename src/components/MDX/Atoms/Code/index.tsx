@@ -58,12 +58,12 @@ const Pre = (props: any) => {
                 setDisplayBtn(true)
             }}
             onPointerLeave={() => setHoverOut(true)}
-            className={`${util.fullWidth.class} my-2 bg-gray-800 dark:bg-neutral-900 border-t border-b border-transparent dark:border-neutral-700`}
+            className={`relative ${util.fullWidth.class} my-2 bg-gray-800 dark:bg-neutral-900 border-t border-b border-transparent dark:border-neutral-700`}
         >
             <pre
                 {...props}
                 ref={codeRef}
-                className=" flex flex-col overflow-x-auto py-4"
+                className="flex flex-col overflow-x-auto py-4"
             />
             <CodeCopyBtn code={code} displayCondition={displayBtn} />
         </div>

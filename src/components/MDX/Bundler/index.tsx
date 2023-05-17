@@ -1,8 +1,6 @@
 import { useMemo } from "react"
 import { getMDXComponent } from "mdx-bundler/client"
-
-import { MDXAtoms } from "@components/MDX/Atoms"
-
+import { MDXAtoms } from "../Atoms"
 interface MDXBundlerProp {
     source: string
 }
