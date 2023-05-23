@@ -1,38 +1,19 @@
 //@ts-check
-
-/**
- * @type {import('next').NextConfig}
- */
-
-const { withPlugins } = require("next-compose-plugins")
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-    enabled: process.env.ANALYZE === "true",
-})
-
-module.exports = withPlugins([withBundleAnalyzer], {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
     reactStrictMode: true,
-    pageExtensions: ["mdx", "tsx", "ts"],
-    swcMinify: true,
-    compiler: process.env.NODE_ENV === "production" && {
-        removeConsole: {
-            exclude: ["error"],
-        },
-    },
+    pageExtensions: ["md", "mdx", "tsx", "ts"],
+    compiler:
+        process.env.NODE_ENV === "production"
+            ? {
+                  removeConsole: {
+                      exclude: ["error"],
+                  },
+              }
+            : {},
     experimental: {
         nextScriptWorkers: true,
     },
-    webpack: (config, { dev, isServer }) => {
-        // Replace react with preact in production build
-        if (!dev && !isServer) {
-            Object.assign(config.resolve.alias, {
-                "react-dom": "preact/compat",
-                react: "preact/compat",
-                "react/jsx-runtime.js": "preact/compat/jsx-runtime",
-                "react-dom/test-utils": "preact/test-utils",
-            })
-        }
+}
 
-        return config
-    },
-})
+module.exports = nextConfig

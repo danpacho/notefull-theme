@@ -1,4 +1,4 @@
-import type { NoteBackgroundProps } from "~/components/_layout/NoteBackground"
+import type { NoteBackgroundProps } from "~/components/layout/NoteBackground"
 import type { ContactPlatformType } from "~/core/contact"
 import { getAuthorContactHref } from "~/core/contact"
 
@@ -26,7 +26,7 @@ const author = {
 } as const
 
 const blog = {
-    url: "your DEPLOY URL",
+    url: "https:///your.deploy.url",
     siteName: "your site name",
     subtitle: "your site subtitle",
     copyright: `${
@@ -74,7 +74,7 @@ const config = {
         outerRectStrokeDark: "dark:stroke-neutral-700",
         rectStrokeDark: "dark:stroke-teal-700/50",
         bgDark: "dark:bg-neutral-900",
-    } as NoteBackgroundProps,
+    } satisfies NoteBackgroundProps,
 
     author,
     ...blog,

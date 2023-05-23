@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>your site name</title>
-    <link>your DEPLOY URL</link>
+    <link>https:///your.deploy.url</link>
     <description>your site subtitle</description>
     <language>ko</language>
     <lastBuildDate>Sat, 17 Sep 2022 00:00:00 GMT</lastBuildDate>
     <webMaster>your_email (your name)</webMaster>
     <managingEditor>your_email (your name)</managingEditor>
-    <atom:link href="your DEPLOY URL/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https:///your.deploy.url/rss.xml" rel="self" type="application/rss+xml"/>
 
     <item>
-      <guid>your DEPLOY URL/Demo/1/Hi!-I'm-demo</guid>
+      <guid>https:///your.deploy.url/Demo/1/Hi!-I'm-demo</guid>
       <title>Hi! I'm demo</title>
-      <link>your DEPLOY URL/Demo/1/Hi!-I'm-demo</link>
+      <link>https:///your.deploy.url/Demo/1/Hi!-I'm-demo</link>
       <description>I'm generated with built in cli posting tool</description>
       <pubDate>Sat, 17 Sep 2022 00:00:00 GMT</pubDate>
       <author>your_email (danpacho)</author>

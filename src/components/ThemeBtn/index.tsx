@@ -1,9 +1,11 @@
-import { ThemeMode } from "src/interface/theme"
+"use client"
+
 import { useTheme } from "next-themes"
 
 import { useMounted } from "~/hooks/useMounted"
 
-const ThemeBtn = ({ styleClass }: { styleClass: string }) => {
+export type ThemeMode = "light" | "dark"
+export const ThemeBtn = ({ styleClass }: { styleClass: string }) => {
     const { theme, setTheme } = useTheme()
     const { isMounted } = useMounted()
     return (
@@ -22,5 +24,3 @@ const ThemeBtn = ({ styleClass }: { styleClass: string }) => {
         </>
     )
 }
-
-export default ThemeBtn

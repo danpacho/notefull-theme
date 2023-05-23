@@ -3,7 +3,6 @@
 ## remark
 
 -   Markdown preprocessing utility function using `unified` package
--   Running on build time means serverside excute, not clientside
 
 -   `findMarkdownElement`
     1. find `md` element in `md` string

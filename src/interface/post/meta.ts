@@ -1,9 +1,9 @@
 /**
- * optional meta property
- * @property `series`: `{ title }-{ Number_string }` if there is only one series, series will not displayed
+ * @description optional meta property
+ * @property `series`: `{ title }-{ series_number }` if there is only one series, series will not displayed
  * @property `bannerUrl`: nextJs static image url at [`public`](https://nextjs.org/docs/basic-features/static-file-serving}) folder
- * @property `reference`: `{ ref1 }, { ref2 }, ...`
- * @property `postpone`: `{ Boolean_string }` if `true`, post will not published
+ * @property `reference`: `{ link1 }, { link2 }, ...`
+ * @property `postpone`: `{ boolean }` if `true`, post will not published
  
  * @example
  * ---
@@ -19,7 +19,9 @@ interface OptionalMDXMetaType {
     reference?: string
     postpone?: string
 }
+
 /**
+ * @description
  * - total meta property
  * - extract with `gray-matter` package
  * - check optional meta property at {@link OptionalMDXMetaType}
@@ -52,8 +54,9 @@ export interface SeriesMetaType {
     seriesTitle: string
     order: number
 }
+
 /**
- * post meta property with {@link MDXMetaType} and {@link SeriesMetaType}
+ * @description post meta property with {@link MDXMetaType} and {@link SeriesMetaType}
  * @example
  * const postMeta = {
         title: 'say Hi',

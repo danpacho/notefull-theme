@@ -1,6 +1,8 @@
+"use client"
+
 import { useCallback, useEffect, useState } from "react"
 
-interface ObserveOptions {
+export interface ObserveOptions {
     root?: IntersectionObserverInit["root"]
     threshold?: IntersectionObserverInit["threshold"]
     rootMarginTop?: string
@@ -15,7 +17,7 @@ interface useElementObserverProps<T> {
     customCallback?: IntersectionObserverCallback
 }
 
-function useElementObserver<T extends HTMLElement>({
+function useElementObserver<Element extends HTMLElement>({
     observerRef,
     options: {
         root = null,
@@ -26,7 +28,7 @@ function useElementObserver<T extends HTMLElement>({
         threshold = 0,
     },
     customCallback,
-}: useElementObserverProps<T>): {
+}: useElementObserverProps<Element>): {
     isVisible: boolean
     setIsVisible: (isVisible: boolean) => void
 } {
@@ -44,31 +46,31 @@ function useElementObserver<T extends HTMLElement>({
     )
 
     useEffect(() => {
-        let ref: T | null = null
+        let observerRefCache: Element | null = null
         let observer: IntersectionObserver | null = null
 
         const isActivated = observerRef.current !== null
         if (!isActivated) return
-        if (isActivated) {
-            ref = observerRef.current // save observer
 
-            observer = new IntersectionObserver(
-                customCallback ?? intersectionCallback,
-                {
-                    root,
-                    rootMargin,
-                    threshold,
-                }
-            )
-            observer.observe(observerRef.current)
-        }
+        observerRefCache = observerRef.current // save observer
+
+        observer = new IntersectionObserver(
+            customCallback ?? intersectionCallback,
+            {
+                root,
+                rootMargin,
+                threshold,
+            }
+        )
+        observer.observe(observerRefCache)
 
         return () => {
-            if (observer && ref) observer.unobserve(ref)
+            if (observer && observerRefCache)
+                observer.unobserve(observerRefCache)
         }
     }, [
-        observerRef,
         root,
+        observerRef,
         rootMargin,
         threshold,
         customCallback,

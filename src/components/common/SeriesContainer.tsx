@@ -1,0 +1,87 @@
+"use client"
+
+import { util } from "~/styles/tailwind.util"
+
+import { useState } from "react"
+import Link from "next/link"
+
+import { SeriesInfoType } from "src/interface/post/series"
+
+import {
+    Description,
+    ColorBox,
+    RowBetween,
+    Title,
+} from "~/components/common/atoms"
+import { Bookmark } from "~/components/icons"
+
+interface SeriesLinkProps {
+    title: string
+    href: string
+    order: number
+}
+function SeriesLink({ title, href, order }: SeriesLinkProps) {
+    return (
+        <Link passHref href={href}>
+            <div
+                className={`w-full cursor-pointer pt-0.5 pb-1.5 transition hover:underline`}
+            >
+                <Description size="text-sm" mdSize="md:text-sm">
+                    {order}. {title}
+                </Description>
+            </div>
+        </Link>
+    )
+}
+
+export interface SeriesHeaderProps {
+    hex: string
+    seriesTitle: string
+    seriesCount: number
+    seriesInfoArray: SeriesInfoType[]
+}
+export const SeriesContainer = ({
+    seriesTitle,
+    seriesCount,
+    seriesInfoArray,
+    hex,
+}: SeriesHeaderProps) => {
+    const [headerOpen, setHeaderOpen] = useState(false)
+
+    return (
+        <>
+            <div
+                className={`w-full ${util.border.class} flex flex-col gap-1 border-b-2 p-2 cursor-pointer transition`}
+            >
+                <RowBetween
+                    onClick={() => setHeaderOpen((headerOpen) => !headerOpen)}
+                >
+                    <Title size="text-sm" mdSize="md:text-base">
+                        {seriesTitle}
+                    </Title>
+                    <ColorBox hex={hex} style="border" layout="flex">
+                        <Bookmark
+                            style={{
+                                fill: hex,
+                            }}
+                        />
+                        <p>{seriesCount}</p>
+                    </ColorBox>
+                </RowBetween>
+
+                {headerOpen && (
+                    <div className="flex flex-col justify-start items-center pt-2">
+                        {seriesInfoArray.map(({ order, postTitle, url }) => (
+                            <SeriesLink
+                                key={postTitle}
+                                title={postTitle}
+                                href={url}
+                                order={order}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
+        </>
+    )
+}

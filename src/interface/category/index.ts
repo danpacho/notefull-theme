@@ -1,5 +1,5 @@
 /**
- * category info object
+ * @description category info object
  * @property **category**: name of the category, `file name` = `category name`
  * @property **categoryUrl**: url of the category, same as `/{category}`
  * @property **description**: description of category, extracted from `description.json`

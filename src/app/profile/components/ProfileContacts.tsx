@@ -1,0 +1,81 @@
+import {
+    Facebook,
+    Github,
+    Linkedin,
+    Mail,
+    Twitter,
+    Youtube,
+} from "~/components/icons"
+import { ColorBox } from "~/components/common/atoms"
+
+import { config } from "blog.config"
+import { Tailwind } from "~/styles/tailwind"
+
+const { contacts } = config.author
+const contactArr = Object.entries(contacts)
+
+interface IconFillColor {
+    hover: `hover:${Tailwind["fill"]}`
+    hoverDark: `dark:hover:${Tailwind["fill"]}`
+}
+const CONTACT_ICON = (
+    size: { width: string; height: string },
+    fill: IconFillColor = {
+        hover: "hover:fill-neutral-300",
+        hoverDark: "dark:hover:fill-neutral-600",
+    }
+): {
+    [key in keyof typeof config.author.contacts]: React.ReactNode
+} => {
+    const style = `fill-dark dark:fill-white ${fill.hover} ${fill.hoverDark} transition`
+    const { width, height } = size
+    return {
+        email: <Mail width={width} height={height} className={style} />,
+        github: <Github width={width} height={height} className={style} />,
+        youtube: <Youtube width={width} height={height} className={style} />,
+        twitter: <Twitter width={width} height={height} className={style} />,
+        facebook: <Facebook width={width} height={height} className={style} />,
+        linkedin: <Linkedin width={width} height={height} className={style} />,
+    }
+}
+interface ContactsLinkProps extends IconFillColor {
+    iconWidth?: number
+    iconHeight?: number
+}
+export const ProfileContacts = ({
+    iconWidth = 0.75,
+    iconHeight = 0.75,
+    hover,
+    hoverDark,
+}: ContactsLinkProps) => {
+    return (
+        <div className="flex flex-row flex-wrap items-center justify-start gap-2 mt-6 mb-4">
+            {contactArr.map((contact) => {
+                const platform = contact[0] as keyof typeof contacts
+                const contactInfo = contact[1]
+
+                return (
+                    <a href={contactInfo} key={contactInfo} title={contactInfo}>
+                        <ColorBox hex={config.themeColor} style="border">
+                            {
+                                CONTACT_ICON(
+                                    {
+                                        width: `${iconWidth}rem`,
+                                        height: `${iconHeight}rem`,
+                                    },
+                                    {
+                                        hover,
+                                        hoverDark,
+                                    }
+                                )[platform]
+                            }
+                        </ColorBox>
+                    </a>
+                )
+            })}
+            <ColorBox style="border" layout="flex" hex={config.themeColor}>
+                {config.author.name} 📬
+            </ColorBox>
+        </div>
+    )
+}

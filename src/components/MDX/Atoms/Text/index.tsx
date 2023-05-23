@@ -1,6 +1,6 @@
-import { useTrackTitle } from "./useTrackTitle"
+"use client"
 
-const Text = () => {}
+import { useTrackTitle } from "./useTrackTitle"
 
 const Paragraph = (props: any) => (
     <p
@@ -44,6 +44,7 @@ const H3 = (props: any) => (
     <h1 {...props} className="text-xl font-bold my-1 py-1" />
 )
 
+const Text = () => {}
 Text.Paragraph = Paragraph
 Text.Italic = Italic
 Text.Link = Link

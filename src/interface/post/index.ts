@@ -2,7 +2,7 @@ import type { TableOfContentsType } from "~/lib/remark/getTableOfContents"
 import type { MetaType } from "./meta"
 
 /**
- * single post type
+ * @description single post type
  * @property **meta**: meta of the post. Check {@link MetaType}
  * @property **source**: post source. this `string` will be compiled by `mdx-bundler`
  * @property **toc**: table of contents of post, `H1 ➡️ H2` nesting support. Check {@link TableOfContentsType}
@@ -12,7 +12,9 @@ export interface PostType {
     source: string
     toc: TableOfContentsType[]
 }
+
 /**
+ * @description
  * - post with controller
  * - move the post back and forth using `controller` object
  * - check **controller text** option at `config.postControllerText`
@@ -45,7 +47,7 @@ export interface PostControllerType {
 }
 
 /**
- * all post type, inside of specific category
+ * @description all post type, inside of specific category
  * @property **category**: category-name of the post
  * @property **allCategoryPost**: whole post of the specific category
  * @property **postCount**: number of post in the specific category

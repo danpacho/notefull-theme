@@ -1,4 +1,4 @@
-import { tw } from "~/lib/wind"
+import { tw } from "~/styles/tailwind"
 
 const layout = tw.style({
     width: "w-full",
@@ -52,10 +52,8 @@ const fullWidth = tw.style({
     },
 })
 
-const util = {
+export const util = {
     layout,
     border,
     fullWidth,
 } as const
-
-export { util }

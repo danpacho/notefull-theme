@@ -1,7 +1,7 @@
 import type { SeriesMetaType } from "./meta"
 
 /**
- * series info
+ * @description series info
  * @property **seriesTitle**: `title` of series
  * @property **order**: `order` of a series
  * @property **postTitle**: `title` of a series of post
@@ -30,6 +30,7 @@ export interface SeriesInfoType extends SeriesMetaType {
 }
 
 /**
+ * @description
  * - total series info of specific series
  * - set of {@link SeriesInfoType}
  */

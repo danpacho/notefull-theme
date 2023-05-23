@@ -1,3 +1,5 @@
+"use client"
+
 import NextImage from "next/image"
 
 interface ImageProps {
@@ -25,8 +27,8 @@ function Image(props: ImageProps) {
             ) : (
                 <NextImage
                     {...props}
-                    width={width}
-                    height={height}
+                    width={Number(width)}
+                    height={Number(height)}
                     alt={pureAlt}
                     quality={75}
                     loading="lazy"

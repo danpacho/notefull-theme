@@ -131,7 +131,6 @@ const extractAllPostFileName = async (
     return allPostFileName
 }
 //* ----------------------------- 🔥 bundler 🔥 -----------------------------
-type Awaited<T> = T extends Promise<infer PromiseT> ? Awaited<PromiseT> : T
 type MetaObjT = { [key: string]: any }
 type BundledResult<MetaT extends MetaObjT> = Awaited<
     ReturnType<typeof bundleMDX<MetaT>>
@@ -433,9 +432,7 @@ const getCategoryPaginationPostMeta = async ({
     category: string
     page: number
 }): Promise<MetaType[]> =>
-    await (
-        await getSpecificCategoryMeta(category)
-    ).slice(
+    (await getSpecificCategoryMeta(category)).slice(
         (page - 1) * config.postPerCategoryPage,
         page * config.postPerCategoryPage
     )
@@ -661,12 +658,12 @@ const getAllPostPaginationPath = async () =>
 //* ----------------------------- 🔥 page number 🔥 -----------------------------
 const getTotalPageNumberOfCategory = async (category: string) =>
     Math.ceil(
-        (await (
+        (
             await readdir(
                 `${blogContentsDir}/${category}/${POST_FILE_NAME}`,
                 "utf-8"
             )
-        ).length) / config.postPerCategoryPage
+        ).length / config.postPerCategoryPage
     )
 //* ----------------------------- 🔥 series 🔥 -----------------------------
 interface ExtractedSeriesMeta
@@ -750,7 +747,7 @@ const getSingleSeries = async (
     postSeriesTitle: string,
     allMeta: MetaType[]
 ) => {
-    const seriesInfo = (await getAllSeries(allMeta)).find(
+    const seriesInfo = getAllSeries(allMeta).find(
         ({ seriesTitle }) => seriesTitle === postSeriesTitle
     )
     return seriesInfo ?? null
