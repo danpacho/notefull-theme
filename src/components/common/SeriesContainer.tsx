@@ -1,3 +1,5 @@
+"use client"
+
 import { util } from "~/styles/tailwind.util"
 
 import { useState } from "react"
@@ -5,8 +7,13 @@ import Link from "next/link"
 
 import { SeriesInfoType } from "src/interface/post/series"
 
-import { Description, ColorBox, RowBetween, Title } from "~/components/_atoms"
-import { Bookmark } from "~/components/_icons"
+import {
+    Description,
+    ColorBox,
+    RowBetween,
+    Title,
+} from "~/components/common/atoms"
+import { Bookmark } from "~/components/icons"
 
 interface SeriesLinkProps {
     title: string
@@ -33,12 +40,12 @@ export interface SeriesHeaderProps {
     seriesCount: number
     seriesInfoArray: SeriesInfoType[]
 }
-function SeriesContainer({
+export const SeriesContainer = ({
     seriesTitle,
     seriesCount,
     seriesInfoArray,
     hex,
-}: SeriesHeaderProps) {
+}: SeriesHeaderProps) => {
     const [headerOpen, setHeaderOpen] = useState(false)
 
     return (
@@ -78,5 +85,3 @@ function SeriesContainer({
         </>
     )
 }
-
-export default SeriesContainer

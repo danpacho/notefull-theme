@@ -1,18 +1,25 @@
+"use client"
+
 import { CategoryInfoType } from "src/interface/category"
 
 import Link from "next/link"
 
-import { Description, ColorBox, RowBetween, Title } from "~/components/_atoms"
+import {
+    Description,
+    ColorBox,
+    RowBetween,
+    Title,
+} from "~/components/common/atoms"
 
 import { util } from "~/styles/tailwind.util"
 
-function CategoryLink({
+export const CategoryLink = ({
     category,
     categoryUrl,
     color,
     description,
     emoji,
-}: CategoryInfoType) {
+}: CategoryInfoType) => {
     return (
         <Link passHref href={categoryUrl}>
             <div
@@ -28,5 +35,3 @@ function CategoryLink({
         </Link>
     )
 }
-
-export default CategoryLink

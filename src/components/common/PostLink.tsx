@@ -1,17 +1,24 @@
+"use client"
+
 import Link from "next/link"
 
 import { util } from "~/styles/tailwind.util"
 
 import { MetaType } from "src/interface/post/meta"
 
-import { Pencil } from "~/components/_icons"
-import { Description, ColorBox, RowBetween, Title } from "~/components/_atoms"
+import { Pencil } from "~/components/icons"
+import {
+    Description,
+    ColorBox,
+    RowBetween,
+    Title,
+} from "~/components/common/atoms"
 import { config } from "blog.config"
 
 interface PostLinkProps extends MetaType {
     displayAuthorInsteadCategory?: boolean
 }
-function PostLink({
+export const PostLink = ({
     title,
     preview,
     tags,
@@ -21,9 +28,9 @@ function PostLink({
     postUrl,
     author,
     displayAuthorInsteadCategory = false,
-}: PostLinkProps) {
+}: PostLinkProps) => {
     return (
-        <Link passHref href={postUrl}>
+        <Link href={postUrl} passHref legacyBehavior>
             <div
                 className={`flex flex-col gap-4 px-3 py-4 ${util.border.class} cursor-pointer`}
             >
@@ -65,5 +72,3 @@ function PostLink({
         </Link>
     )
 }
-
-export default PostLink

@@ -1,4 +1,9 @@
-import { ColorTitle as BannerTitle, Description } from "~/components/_atoms"
+"use client"
+
+import {
+    ColorTitle as BannerTitle,
+    Description,
+} from "~/components/common/atoms"
 
 interface BannerProps {
     title: string
@@ -7,13 +12,13 @@ interface BannerProps {
     containerStyleClass?: string
     href?: string
 }
-function Banner({
+export const Banner = ({
     title,
     hex,
     description,
     containerStyleClass,
     href,
-}: BannerProps) {
+}: BannerProps) => {
     return (
         <div className={containerStyleClass}>
             <BannerTitle
@@ -33,5 +38,3 @@ function Banner({
         </div>
     )
 }
-
-export default Banner

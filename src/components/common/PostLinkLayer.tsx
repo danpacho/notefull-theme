@@ -1,16 +1,18 @@
+"use client"
+
 import { MetaType } from "src/interface/post/meta"
 
-import { Grid } from "~/components/_atoms"
-import PostLink from "./PostLink"
+import { Grid } from "~/components/common/atoms"
+import { PostLink } from "./PostLink"
 
 interface PostLinkLayerProps {
     postMetaArray: MetaType[]
     displayAuthorInsteadCategory?: boolean
 }
-function PostLinkLayer({
+export const PostLinkLayer = ({
     postMetaArray,
     displayAuthorInsteadCategory = false,
-}: PostLinkLayerProps) {
+}: PostLinkLayerProps) => {
     return (
         <Grid
             col="grid-cols-1"
@@ -28,5 +30,3 @@ function PostLinkLayer({
         </Grid>
     )
 }
-
-export default PostLinkLayer

@@ -1,16 +1,18 @@
+"use client"
+
 import { CategoryInfoType } from "src/interface/category"
 
-import { Grid } from "~/components/_atoms"
-import CategoryLink from "./CategoryLink"
+import { Grid } from "~/components/common/atoms"
+import { CategoryLink } from "./CategoryLink"
 
 interface CategoryLinkLayerProps {
     categoryInfoArray: CategoryInfoType[]
     displayCategoryPageLinkBtn?: boolean
 }
-function CategoryLinkLayer({
+export const CategoryLinkLayout = ({
     categoryInfoArray,
     displayCategoryPageLinkBtn = false,
-}: CategoryLinkLayerProps) {
+}: CategoryLinkLayerProps) => {
     return (
         <Grid col="grid-cols-2" gap="gap-4" mdCol="md:grid-cols-3">
             {categoryInfoArray.map((categoryInfo) => (
@@ -28,5 +30,3 @@ function CategoryLinkLayer({
         </Grid>
     )
 }
-
-export default CategoryLinkLayer

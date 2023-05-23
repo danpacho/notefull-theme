@@ -1,12 +1,14 @@
+"use client"
+
 import { util } from "~/styles/tailwind.util"
 import { useCallback, useState } from "react"
 
 import { SeriesType } from "src/interface/post/series"
 
-import { Grid, Title } from "~/components/_atoms"
-import { Arrow } from "~/components/_icons"
+import { Grid, Title } from "~/components/common/atoms"
+import { Arrow } from "~/components/icons"
 
-import SeriesContainer from "./SeriesContainer"
+import { SeriesContainer } from "./SeriesContainer"
 
 function usePagination<T>({
     paginationMount,
@@ -74,11 +76,11 @@ const PaginationBtn = ({
     </button>
 )
 
-interface SeriesViwerProps {
+interface SeriesViewerProps {
     allSeriesInfo: SeriesType[]
     color: string
 }
-function SeriesViewer({ allSeriesInfo, color }: SeriesViwerProps) {
+export const SeriesViewer = ({ allSeriesInfo, color }: SeriesViewerProps) => {
     const {
         currentPage,
         currentArray,
@@ -132,5 +134,3 @@ function SeriesViewer({ allSeriesInfo, color }: SeriesViwerProps) {
         </Grid>
     )
 }
-
-export default SeriesViewer

@@ -1,8 +1,11 @@
+"use client"
+
 import type { PropsWithChildren } from "react"
 import Link from "next/link"
 
-import ThemeBtn from "~/components/ThemeBtn"
-import { tw } from "~/lib/wind"
+import { ThemeBtn } from "~/components/ThemeBtn"
+import { tw } from "~/styles/tailwind"
+import { config } from "blog.config"
 
 const nav = tw.style({
     position: "fixed",
@@ -89,9 +92,9 @@ const navBtn = tw.style({
     },
 })
 
-const Nav = ({ children }: PropsWithChildren<React.ReactNode>) => {
+export const Nav = ({ children, id }: PropsWithChildren<{ id?: string }>) => {
     return (
-        <nav className={nav.class}>
+        <nav className={nav.class} id={id}>
             {children}
             <ThemeBtn styleClass={navBtn.class} />
         </nav>
@@ -99,18 +102,24 @@ const Nav = ({ children }: PropsWithChildren<React.ReactNode>) => {
 }
 const Btn = ({ path, name }: { path: string; name: string }) => {
     return (
-        <Link href={path}>
-            <button
-                type="button"
-                className={navBtn.class}
-                aria-label={`Link to ${name}`}
-            >
-                {name}
-            </button>
+        <Link
+            href={path}
+            className={navBtn.class}
+            aria-label={`Link to ${name}`}
+        >
+            {name}
         </Link>
     )
 }
-
 Nav.Btn = Btn
 
-export default Nav
+export const MAIN_NAV_ID = "global-nav" as const
+export const MainNav = () => {
+    return (
+        <Nav id={MAIN_NAV_ID}>
+            {config.navigationMenu.map(({ name, path }) => (
+                <Nav.Btn key={name} name={name} path={path} />
+            ))}
+        </Nav>
+    )
+}
