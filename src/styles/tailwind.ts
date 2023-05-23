@@ -15,4 +15,5 @@ export type TailwindCustom = Tailwindest<
     }
 >
 export type Tailwind = Required<TailwindCustom>
+
 export const tw = createTools<TailwindCustom>()
