@@ -1,3 +1,5 @@
+"use client"
+
 import {
     type PropsWithChildren,
     createContext,
@@ -11,7 +13,7 @@ type TocActionType = (text: string) => void
 const TocValueContext = createContext<TocValueType>("")
 const TocSetterContext = createContext<TocActionType>(() => {})
 
-function TocProvider({ children }: PropsWithChildren<React.ReactNode>) {
+const TocProvider = ({ children }: PropsWithChildren) => {
     const [activeTitle, setActiveTitle] = useState<TocValueType>("")
     const cachedAction = useCallback((text: string) => {
         setActiveTitle(text)
