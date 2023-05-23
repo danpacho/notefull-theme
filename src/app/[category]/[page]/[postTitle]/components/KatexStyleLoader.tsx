@@ -1,4 +1,4 @@
-const KatexStyleLoader = () => {
+export const KatexStyleLoader = () => {
     return (
         <>
             <link
@@ -38,5 +38,3 @@ const KatexStyleLoader = () => {
         </>
     )
 }
-
-export { KatexStyleLoader }

@@ -1,10 +1,12 @@
+"use client"
+
 import type { PropsWithChildren } from "react"
 
 import Link from "next/link"
 
-import { ColorBox } from "~/components/_atoms"
+import { ColorBox } from "~/components/common/atoms"
 
-const RowContainer = ({ children }: PropsWithChildren<React.ReactNode>) => (
+const RowContainer = ({ children }: PropsWithChildren) => (
     <div className="flex flex-row flex-wrap gap-2 max-w-full">{children}</div>
 )
 
@@ -30,7 +32,7 @@ interface PostMetaProps {
     metaArray: MetaType[]
     hex: string
 }
-const PostMeta = ({ metaArray, hex }: PostMetaProps) => {
+export const PostMeta = ({ metaArray, hex }: PostMetaProps) => {
     return (
         <RowContainer>
             {metaArray.map((meta, order) => {
@@ -71,5 +73,3 @@ const PostMeta = ({ metaArray, hex }: PostMetaProps) => {
         </RowContainer>
     )
 }
-
-export default PostMeta

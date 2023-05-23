@@ -1,16 +1,14 @@
 import type { MetaType } from "src/interface/post/meta"
-import type { SeriesHeaderProps } from "~/components/_common/SeriesContainer"
-
-import { Banner, SeriesContainer } from "~/components/_common"
-
-import PostMeta from "./PostMeta"
+import type { SeriesHeaderProps } from "~/components/common/SeriesContainer"
+import { Banner, SeriesContainer } from "~/components/common"
+import { PostMeta } from "./PostMeta"
 
 import { config } from "blog.config"
 
 interface PostBannerProps
     extends MetaType,
         Partial<Omit<SeriesHeaderProps, "hex">> {}
-const PostBanner = ({
+export const PostBanner = ({
     title,
     color,
     tags,
@@ -64,5 +62,3 @@ const PostBanner = ({
         </div>
     )
 }
-
-export default PostBanner

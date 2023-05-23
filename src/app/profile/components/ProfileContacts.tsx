@@ -5,11 +5,11 @@ import {
     Mail,
     Twitter,
     Youtube,
-} from "~/components/_icons"
-import { ColorBox } from "~/components/_atoms"
+} from "~/components/icons"
+import { ColorBox } from "~/components/common/atoms"
 
 import { config } from "blog.config"
-import { Tailwind } from "~/lib/wind"
+import { Tailwind } from "~/styles/tailwind"
 
 const { contacts } = config.author
 const contactArr = Object.entries(contacts)
@@ -42,7 +42,7 @@ interface ContactsLinkProps extends IconFillColor {
     iconWidth?: number
     iconHeight?: number
 }
-const ProfileContacts = ({
+export const ProfileContacts = ({
     iconWidth = 0.75,
     iconHeight = 0.75,
     hover,
@@ -79,5 +79,3 @@ const ProfileContacts = ({
         </div>
     )
 }
-
-export default ProfileContacts

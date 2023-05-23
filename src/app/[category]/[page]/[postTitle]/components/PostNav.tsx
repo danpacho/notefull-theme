@@ -1,11 +1,13 @@
-import { Nav } from "~/components/_common"
+"use client"
+
+import { Nav } from "~/components/common"
 
 import { config } from "blog.config"
 
 interface PostNavProps {
     category: string
 }
-const PostNav = ({ category }: PostNavProps) => {
+export const PostNav = ({ category }: PostNavProps) => {
     return (
         <Nav>
             <Nav.Btn
@@ -16,5 +18,3 @@ const PostNav = ({ category }: PostNavProps) => {
         </Nav>
     )
 }
-
-export default PostNav

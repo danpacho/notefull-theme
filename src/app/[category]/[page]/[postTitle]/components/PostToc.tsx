@@ -1,8 +1,10 @@
+"use client"
+
 import type { TableOfContentsType } from "~/lib/remark/getTableOfContents"
 
-import { useTocAction, useTocValue } from "~/components/TocProvider"
+import { useTocAction, useTocValue } from "~/components/providers/TocProvider"
 import { GetVariants } from "tailwindest"
-import { tw } from "~/lib/wind"
+import { tw } from "~/styles/tailwind"
 
 const linkBtn = tw.rotary({
     base: {
@@ -118,7 +120,7 @@ const tocStyle = tw.style({
 interface PostTocProps {
     toc: TableOfContentsType[]
 }
-const PostToc = ({ toc }: PostTocProps) => {
+export const PostToc = ({ toc }: PostTocProps) => {
     const { activeTitle } = useTocValue()
 
     return (
@@ -146,5 +148,3 @@ const PostToc = ({ toc }: PostTocProps) => {
         </nav>
     )
 }
-
-export default PostToc
