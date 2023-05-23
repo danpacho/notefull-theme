@@ -1,9 +1,11 @@
+"use client"
+
 import { useState } from "react"
 
-import { Copy, Success } from "~/components/_icons"
-import { ColorBox } from "~/components/_atoms"
+import { Copy, Success } from "~/components/icons"
+import { ColorBox } from "~/components/common/atoms"
 import { useTimeout } from "./useTimeout"
-import { tw } from "~/lib/wind"
+import { tw } from "~/styles/tailwind"
 
 const useClipboard = () => {
     const copyText = async (text: string) => {

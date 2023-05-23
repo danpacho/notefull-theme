@@ -1,20 +1,24 @@
-import { useCallback, useRef } from "react"
-import { useTocAction } from "~/components/TocProvider"
+"use client"
 
-import { useElementObserver } from "./useObserver"
+import { useCallback, useRef } from "react"
+import { useTocAction } from "~/components/providers/TocProvider"
+
+import { ObserveOptions, useElementObserver } from "./useObserver"
 
 const UPDATE_CONDITION = {
     top: 50,
     bottom: -100,
 } as const
+
 const OBSERVER_OPTION = {
-    top: "-20px",
-    bottom: "0px",
+    rootMarginTop: "-20px",
+    rootMarginBottom: "0px",
     threshold: [0, 1],
-}
-const useTrackTitle = <T extends HTMLHeadingElement>() => {
+} satisfies ObserveOptions
+
+const useTrackTitle = <TitleElement extends HTMLHeadingElement>() => {
     const { setActiveTitle } = useTocAction()
-    const observerRef = useRef<T>(null)
+    const observerRef = useRef<TitleElement>(null)
 
     const updateFocusTitle: IntersectionObserverCallback = useCallback(
         (entries) => {
@@ -34,8 +38,8 @@ const useTrackTitle = <T extends HTMLHeadingElement>() => {
     useElementObserver({
         observerRef,
         options: {
-            rootMarginTop: OBSERVER_OPTION.top,
-            rootMarginBottom: OBSERVER_OPTION.bottom,
+            rootMarginTop: OBSERVER_OPTION.rootMarginTop,
+            rootMarginBottom: OBSERVER_OPTION.rootMarginBottom,
             threshold: OBSERVER_OPTION.threshold,
         },
         customCallback: updateFocusTitle,
