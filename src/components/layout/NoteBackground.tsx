@@ -1,4 +1,4 @@
-import { Tailwind } from "~/lib/wind"
+import { Tailwind } from "~/styles/tailwind"
 import { util } from "~/styles/tailwind.util"
 
 type TailwindStroke = Tailwind["stroke"]
@@ -15,11 +15,10 @@ export interface NoteBackgroundProps {
     outerRectStrokeDark?: `dark:${TailwindStroke}`
     outerRectStrokeWidth?: number
 }
+
 /**
- *
+ * @description Note background svg
  * @param NoteBackgroundProps  {@link NoteBackgroundProps}
- * @returns svg note grid background
- * @note see tailwind background color at [docs](https://tailwindcss.com/docs/background-color)
  */
 const NoteBackground = ({
     rectWidth,
