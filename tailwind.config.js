@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./src/**/*.{ts,tsx}", "./blog.config.ts"],
+    content: ["./blog.config.ts", "./src/**/*.{js,ts,jsx,tsx,mdx}"],
     theme: {
         extend: {
             listStyleType: {
@@ -15,6 +15,6 @@ module.exports = {
             },
         },
     },
-    plugins: [],
     darkMode: "class",
+    plugins: [],
 }
