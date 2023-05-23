@@ -1,24 +1,29 @@
 {
     "extends": "./tsconfig.path.json",
     "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "lib": ["dom", "dom.iterable", "esnext", "ES2017"],
+        "strict": true,
         "allowJs": false,
         "skipLibCheck": true,
-        "strict": true,
         "forceConsistentCasingInFileNames": true,
         "noEmit": true,
         "sourceMap": true,
-        "esModuleInterop": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "jsx": "preserve",
         "incremental": true,
         "importHelpers": true,
-        "typeRoots": ["./types", "./node_modules/@types"]
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "jsx": "preserve",
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "typeRoots": ["node_modules/@types"],
+        "lib": ["dom", "dom.iterable", "esnext", "ES2017"],
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ]
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "blog.config.ts"],
-    "exclude": ["dist", ".next", "next.config.js", "node_modules"]
+    "include": ["src", ".next/types/**/*.ts"],
+    "exclude": ["dist", ".next", "node_modules"]
 }
