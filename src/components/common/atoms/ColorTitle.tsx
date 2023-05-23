@@ -1,7 +1,9 @@
+"use client"
+
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 
-import { Tailwind, tw } from "~/lib/wind"
+import { Tailwind, tw } from "~/styles/tailwind"
 import { GetVariants } from "tailwindest"
 
 const getRandBetween = (maxNum: number) => Math.floor(Math.random() * maxNum)
@@ -134,7 +136,7 @@ const ColorTitle = ({ title, hex, size, mdSize, href }: ColorTitleProps) => {
         }
     }, [focusNum, titleLength])
 
-    const onPointerFocusCharacter = useCallback(
+    const changeFocusingCharacterNumber = useCallback(
         (index: number, spaceIndexArr: number[]) =>
             spaceIndexArr.includes(index)
                 ? setFocusNum(index + 1)
@@ -166,7 +168,10 @@ const ColorTitle = ({ title, hex, size, mdSize, href }: ColorTitleProps) => {
                             style={style}
                             className={characterStyle.class(isFirstCharacter)}
                             onPointerEnter={() =>
-                                onPointerFocusCharacter(index, spaceIndexArr)
+                                changeFocusingCharacterNumber(
+                                    index,
+                                    spaceIndexArr
+                                )
                             }
                         >
                             {character}

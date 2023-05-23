@@ -1,9 +1,11 @@
-import { ThemeMode } from "src/interface/theme"
+"use client"
+
 import { useTheme } from "next-themes"
 
 import { useMounted } from "~/hooks/useMounted"
 import { GetVariants } from "tailwindest"
-import { tw } from "~/lib/wind"
+import { tw } from "~/styles/tailwind"
+import { ThemeMode } from "~/components/ThemeBtn"
 
 const useThemeHex = (hex: string) => {
     const theme = useTheme().theme as ThemeMode

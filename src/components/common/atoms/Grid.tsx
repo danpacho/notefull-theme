@@ -1,4 +1,4 @@
-import { Tailwind } from "~/lib/wind"
+import { Tailwind } from "~/styles/tailwind"
 
 interface GirdProps {
     children: React.ReactNode
